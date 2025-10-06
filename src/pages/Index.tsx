@@ -7,6 +7,9 @@ import IntroSection from "@/components/IntroSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote } from "lucide-react";
+import pecaliProperty1 from "@/assets/pecali-property-1.png";
+import pecaliProperty2 from "@/assets/pecali-property-2.png";
+import pecaliProperty3 from "@/assets/pecali-property-3.png";
 const Index = () => {
   // Premium Property Projects - Coming Soon
   const featuredProperties = [{
@@ -18,7 +21,7 @@ const Index = () => {
     bedrooms: 2,
     bathrooms: 2,
     area: "900 sq ft",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop",
+    image: pecaliProperty1,
     featured: true,
     status: "For Sale" as const,
     description: "Exciting premium development project launching soon"
@@ -31,7 +34,7 @@ const Index = () => {
     bedrooms: 1,
     bathrooms: 1,
     area: "650 sq ft",
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
+    image: pecaliProperty2,
     status: "For Rent" as const,
     description: "Quality lifestyle apartments launching soon"
   }, {
@@ -43,7 +46,7 @@ const Index = () => {
     bedrooms: 3,
     bathrooms: 3,
     area: "1,400 sq ft",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+    image: pecaliProperty3,
     featured: true,
     status: "For Sale" as const,
     description: "Premium city-view apartments - exciting project coming soon"
