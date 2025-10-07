@@ -6,49 +6,95 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, Building2, TrendingUp, Shield, Users, Star, MapPin, ArrowRight } from "lucide-react";
+import elitzBathroom from "@/assets/elitz-bathroom.jpg";
+import elitzLounge from "@/assets/elitz-lounge.jpg";
+import elitzBedroom from "@/assets/elitz-bedroom.jpg";
+import elitzDining from "@/assets/elitz-dining.jpg";
+import elitzOpenPlan from "@/assets/elitz-openplan.jpg";
+import elitzKitchen from "@/assets/elitz-kitchen.jpg";
+import elitzPromo from "@/assets/elitz-promo.png";
 
 const Properties = () => {
   const propertiesForSale = [
     {
       id: "1",
-      title: "Premium Royal Apartments",
-      location: "Roysambu, Nairobi",
-      price: "Coming Soon",
+      title: "Elitz Residency - Master Bedroom Suite",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
       type: "Apartment",
-      bedrooms: 2,
+      bedrooms: 3,
       bathrooms: 2,
-      area: "900 sq ft",
-      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop",
+      area: "3BR+DSQ",
+      image: elitzBedroom,
       featured: true,
       status: "For Sale" as const,
-      description: "Exciting premium development project launching soon"
+      description: "Luxurious master bedroom with contemporary design, 3-year payment plan available"
     },
     {
       id: "2",
-      title: "Modern Step Up Apartments",
-      location: "Fedha, Nairobi",
-      price: "Coming Soon",
+      title: "Elitz Residency - Open-Plan Living",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
       type: "Apartment",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "650 sq ft",
-      image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
+      bedrooms: 4,
+      bathrooms: 3,
+      area: "4BR Unit",
+      image: elitzOpenPlan,
+      featured: true,
       status: "For Sale" as const,
-      description: "Quality lifestyle apartments launching soon"
+      description: "Spacious open-plan lounge and dining area with modern finishes, 3-year payment plan"
     },
     {
       id: "3",
-      title: "Skyline Premium Residences",
-      location: "Kileleshwa, Nairobi",
-      price: "Coming Soon",
-      type: "Penthouse",
+      title: "Elitz Residency - Designer Lounge",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
+      type: "Apartment",
       bedrooms: 3,
-      bathrooms: 3,
-      area: "1,400 sq ft",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-      featured: true,
+      bathrooms: 2,
+      area: "3BR+DSQ Unit B",
+      image: elitzLounge,
       status: "For Sale" as const,
-      description: "Premium city-view apartments - exciting project coming soon"
+      description: "Elegant living space with premium fixtures and city views, flexible payment terms"
+    },
+    {
+      id: "4",
+      title: "Elitz Residency - Modern Kitchen",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
+      type: "Apartment",
+      bedrooms: 3,
+      bathrooms: 2,
+      area: "3BR+DSQ",
+      image: elitzKitchen,
+      status: "For Sale" as const,
+      description: "Contemporary kitchen with marble countertops and high-end appliances"
+    },
+    {
+      id: "5",
+      title: "Elitz Residency - Dining Area",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
+      type: "Apartment",
+      bedrooms: 4,
+      bathrooms: 3,
+      area: "4BR Unit",
+      image: elitzDining,
+      status: "For Sale" as const,
+      description: "Sophisticated dining space perfect for entertaining, zero-interest payment plan"
+    },
+    {
+      id: "6",
+      title: "Elitz Residency - Luxury Bathroom",
+      location: "South C, Rumi Road, Nairobi",
+      price: "30% on Booking, 70% on Installment, 0% Interest",
+      type: "Apartment",
+      bedrooms: 3,
+      bathrooms: 2,
+      area: "3BR+DSQ",
+      image: elitzBathroom,
+      status: "For Sale" as const,
+      description: "Premium bathroom with marble finishes and walk-in shower, 3-year payment plan"
     }
   ];
 
