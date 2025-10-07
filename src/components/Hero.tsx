@@ -121,9 +121,9 @@ const Hero = () => {
             {/* Search Button */}
             <Button 
               onClick={handleSearch}
-              className="w-full h-14 bg-gradient-primary hover:bg-gradient-luxury text-lg font-semibold shadow-gold text-black"
+              className="w-full h-14 bg-gradient-primary hover:bg-gradient-luxury text-lg font-semibold shadow-gold text-foreground"
             >
-              <Search className="h-5 w-5 mr-2 text-black" />
+              <Search className="h-5 w-5 mr-2 text-foreground" />
               Find Your Dream Home
             </Button>
           </div>
@@ -131,19 +131,19 @@ const Hero = () => {
           {/* Statistics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 animate-slide-up" style={{ animationDelay: "0.6s" }}>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent">500+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent">11</div>
               <div className="text-white/80">Properties Listed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent">200+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent">100+</div>
               <div className="text-white/80">Happy Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent">5+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent">2</div>
               <div className="text-white/80">Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent">50+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent">14</div>
               <div className="text-white/80">Areas Covered</div>
             </div>
           </div>
