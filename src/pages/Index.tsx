@@ -4,6 +4,7 @@ import PropertyCard from "@/components/PropertyCard";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
 import IntroSection from "@/components/IntroSection";
+import GetStartedForm from "@/components/GetStartedForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote } from "lucide-react";
@@ -87,6 +88,7 @@ const Index = () => {
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
   }];
   return <div className="min-h-screen bg-background">
+      <LogoRain />
       <Navbar />
       <Hero />
       <IntroSection />
@@ -240,26 +242,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-luxury">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-            Ready to Find Your Dream Property?
-          </h2>
-          <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Let our expert team guide you through your real estate journey. 
-            Contact us today for a personalized consultation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gradient-gold hover:bg-gold text-foreground font-semibold text-lg px-8 py-6">
-              Browse Properties
-            </Button>
-            <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8 py-6">
-              Schedule Consultation
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Get Started Form */}
+      <GetStartedForm />
 
       <Footer />
     </div>;

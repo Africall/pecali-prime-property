@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/pecali_logo.png"
 
@@ -19,25 +19,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-card">
       <div className="container mx-auto px-2">
-        {/* Top bar with contact info */}
-        <div className="hidden md:flex items-center justify-between py-1 text-sm border-b border-border/50">
-          <div className="flex items-center space-x-4 text-muted-foreground">
-            <div className="flex items-center space-x-1">
-              <Phone className="h-4 w-4" />
-              <span>+254 758 174718</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Mail className="h-4 w-4" />
-              <span>info@pecali.co.ke</span>
-            </div>
-          </div>
-          <div className="text-muted-foreground">
-            Premier Real Estate Solutions in Kenya
-          </div>
-        </div>
-
         {/* Main navigation */}
-        <div className="flex items-center justify-between py-1">
+        <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <img 
             src={logo} 
@@ -64,7 +47,10 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold px-3 py-1">
+            <Button 
+              onClick={() => document.getElementById('get-started-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold px-3 py-1"
+            >
               Get Started
             </Button>
           </div>
@@ -94,7 +80,13 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <Button className="w-full bg-gradient-primary hover:bg-gradient-luxury shadow-gold mt-2 px-3 py-1">
+            <Button 
+              onClick={() => {
+                setIsOpen(false);
+                document.getElementById('get-started-form')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full bg-gradient-primary hover:bg-gradient-luxury shadow-gold mt-2 px-3 py-1"
+            >
               Get Started
             </Button>
           </div>
