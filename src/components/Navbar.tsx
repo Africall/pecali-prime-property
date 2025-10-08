@@ -17,7 +17,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-card">
+    <nav className="bg-background/95 backdrop-blur-md border-b border-border shadow-card">
       <div className="container mx-auto px-2">
         {/* Main navigation */}
         <div className="flex items-center justify-between py-4">

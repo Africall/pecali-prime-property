@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SmartNavbar from "@/components/SmartNavbar";
+import Navbar from "@/components/Navbar";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import Services from "./pages/Services";
@@ -19,6 +21,9 @@ const App = () => (
       <div className="site-overlay min-h-screen">
         <Toaster />
         <Sonner />
+        <SmartNavbar>
+          <Navbar />
+        </SmartNavbar>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
