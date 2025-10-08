@@ -168,12 +168,13 @@ const Properties = () => {
       <LogoRain />
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Find Your Perfect Space
-          </h1>
+      <main className="pt-nav relative z-10">
+        {/* Hero Section */}
+        <section className="scroll-offset pt-10 pb-8 bg-gradient-to-b from-primary to-primary/90 text-primary-foreground">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="scroll-offset text-5xl md:text-6xl font-bold mb-6">
+              Find Your Perfect Space
+            </h1>
           <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90 max-w-4xl mx-auto">
             Premium Lifestyle Apartments and Premier Nairobi Properties Coming Soon
           </p>
@@ -296,6 +297,7 @@ const Properties = () => {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

@@ -90,8 +90,10 @@ const Index = () => {
   return <div className="min-h-screen bg-background">
       <LogoRain />
       <Navbar />
-      <Hero />
-      <IntroSection />
+      
+      <main className="pt-nav relative z-10">
+        <Hero />
+        <IntroSection />
 
       {/* Featured Properties Section */}
       <section className="py-20 bg-secondary/30">
@@ -244,6 +246,7 @@ const Index = () => {
 
       {/* Get Started Form */}
       <GetStartedForm />
+      </main>
 
       <Footer />
     </div>;
