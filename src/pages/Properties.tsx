@@ -251,8 +251,12 @@ const Properties = () => {
                     className="group block hover:scale-105 transition-transform duration-300"
                   >
                     <Card className="overflow-hidden hover:shadow-luxury transition-all duration-300">
-                      <div className="aspect-video bg-gradient-primary flex items-center justify-center">
-                        <Building2 className="h-20 w-20 text-primary-foreground opacity-50" />
+                      <div className="aspect-video overflow-hidden">
+                        <img 
+                          src={`/properties/${property.slug}-cover.jpg`}
+                          alt={property.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
                       </div>
                       <CardContent className="p-6">
                         <h4 className="text-2xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
