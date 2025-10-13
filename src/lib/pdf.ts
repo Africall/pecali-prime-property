@@ -1,4 +1,7 @@
 import { GlobalWorkerOptions } from 'pdfjs-dist';
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
-GlobalWorkerOptions.workerSrc = pdfWorker;
+// Configure PDF.js worker for Vite
+GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.mjs',
+  import.meta.url
+).toString();
