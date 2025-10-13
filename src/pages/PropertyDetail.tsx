@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { resolvePdfUrl } from '@/lib/storage';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PropertyMediaPanel from '@/components/PropertyMediaPanel';
+import PdfDebug from '@/components/PdfDebug';
 import { ArrowLeft, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -25,29 +27,45 @@ export default function PropertyDetail() {
   const { slug } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
+  const [pdfUrl, setPdfUrl] = useState<string>('');
+  const [error, setError] = useState<any>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function fetchProperty() {
       try {
+        setLoading(true);
+        setError(null);
+
         const { data, error } = await supabase
           .from('properties')
           .select('*')
           .eq('slug', slug)
-          .single();
+          .maybeSingle();
 
         if (error) throw error;
-        setProperty(data);
-      } catch (error) {
-        console.error('Error fetching property:', error);
+        if (cancelled) return;
+
+        if (data) {
+          setProperty(data);
+          // Resolve the PDF URL to handle both storage and public paths
+          const url = await resolvePdfUrl(data.pdf_path);
+          setPdfUrl(url);
+        }
+      } catch (err) {
+        console.error('Error fetching property:', err);
+        if (!cancelled) setError(err);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
     fetchProperty();
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
-
-  const pdfUrl = property ? `/${property.pdf_path}` : '';
 
   return (
     <div className="min-h-screen">
@@ -96,13 +114,18 @@ export default function PropertyDetail() {
               </div>
             </div>
           ) : property ? (
-            <PropertyMediaPanel
-              title={property.title}
-              pdfUrl={pdfUrl}
-              coverPage={property.cover_page}
-              galleryPages={property.gallery_pages}
-              floorplanPages={property.floorplan_pages}
-            />
+            <div className="space-y-6">
+              {/* Debug banner - only shows when there's an issue */}
+              <PdfDebug label="PDF URL" value={pdfUrl} error={error} />
+              
+              <PropertyMediaPanel
+                title={property.title}
+                pdfUrl={pdfUrl}
+                coverPage={property.cover_page}
+                galleryPages={property.gallery_pages}
+                floorplanPages={property.floorplan_pages}
+              />
+            </div>
           ) : (
             <div className="text-center py-12">
               <p className="text-lg text-muted-foreground">

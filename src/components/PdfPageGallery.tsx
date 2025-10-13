@@ -23,6 +23,12 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
     let cancelled = false;
 
     async function run() {
+      if (!pdfUrl) {
+        console.error('No PDF URL provided');
+        if (!cancelled) setLoading(false);
+        return;
+      }
+
       setLoading(true);
       try {
         const pdf = await loadPdf(pdfUrl);
@@ -32,7 +38,7 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
           out[section.title] = [];
           for (const page of section.pages) {
             try {
-              const dataUrl = await renderPageToDataUrl(pdf, page, 2);
+              const dataUrl = await renderPageToDataUrl(pdf, page, 1.6);
               if (!cancelled) out[section.title].push(dataUrl);
             } catch (e) {
               console.error(`Error rendering page ${page}:`, e);

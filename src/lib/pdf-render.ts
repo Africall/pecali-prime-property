@@ -2,13 +2,14 @@ import * as pdfjs from 'pdfjs-dist';
 import './pdf';
 
 export async function loadPdf(url: string) {
-  return pdfjs.getDocument(url).promise;
+  // Let pdf.js fetch cross-origin (Supabase serves proper CORS by default)
+  return pdfjs.getDocument({ url, withCredentials: false }).promise;
 }
 
 export async function renderPageToDataUrl(
   pdf: any,
   pageNumber: number,
-  scale = 2
+  scale = 1.6
 ): Promise<string> {
   const page = await pdf.getPage(pageNumber);
   const viewport = page.getViewport({ scale });
