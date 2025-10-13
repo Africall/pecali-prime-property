@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      properties: {
+        Row: {
+          cover_page: number | null
+          created_at: string | null
+          floorplan_pages: number[] | null
+          gallery_pages: number[] | null
+          id: string
+          location: string
+          meta: Json | null
+          pdf_path: string
+          price_label: string
+          slug: string
+          title: string
+        }
+        Insert: {
+          cover_page?: number | null
+          created_at?: string | null
+          floorplan_pages?: number[] | null
+          gallery_pages?: number[] | null
+          id?: string
+          location: string
+          meta?: Json | null
+          pdf_path: string
+          price_label: string
+          slug: string
+          title: string
+        }
+        Update: {
+          cover_page?: number | null
+          created_at?: string | null
+          floorplan_pages?: number[] | null
+          gallery_pages?: number[] | null
+          id?: string
+          location?: string
+          meta?: Json | null
+          pdf_path?: string
+          price_label?: string
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

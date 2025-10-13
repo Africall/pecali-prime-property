@@ -7,6 +7,7 @@ import SmartNavbar from "@/components/SmartNavbar";
 import Navbar from "@/components/Navbar";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
+import PropertyDetail from "./pages/PropertyDetail";
 import Services from "./pages/Services";
 import Training from "./pages/Training";
 import About from "./pages/About";
@@ -28,6 +29,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/properties" element={<Properties />} />
+            <Route path="/properties/:slug" element={<PropertyDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/training" element={<Training />} />
             <Route path="/about" element={<About />} />
