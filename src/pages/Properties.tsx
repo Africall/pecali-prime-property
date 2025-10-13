@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
@@ -6,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, Building2, TrendingUp, Shield, Users, Star, MapPin, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import elitzBathroom from "@/assets/elitz-bathroom.jpg";
 import elitzLounge from "@/assets/elitz-lounge.jpg";
 import elitzBedroom from "@/assets/elitz-bedroom.jpg";
@@ -14,7 +16,23 @@ import elitzOpenPlan from "@/assets/elitz-openplan.jpg";
 import elitzKitchen from "@/assets/elitz-kitchen.jpg";
 import elitzPromo from "@/assets/elitz-promo.png";
 
+
 const Properties = () => {
+  const [dbProperties, setDbProperties] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      const { data, error } = await supabase
+        .from('properties')
+        .select('*');
+      
+      if (!error && data) {
+        setDbProperties(data);
+      }
+    };
+
+    fetchProperties();
+  }, []);
   const propertiesForSale = [
     {
       id: "1",
@@ -219,7 +237,50 @@ const Properties = () => {
             ))}
           </div>
 
+          {/* Database Properties (Azure Sky Park, etc.) */}
+          {dbProperties.length > 0 && (
+            <div className="mb-12">
+              <h3 className="text-3xl font-bold text-foreground mb-8 text-center">
+                Featured Development Projects
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {dbProperties.map((property) => (
+                  <a 
+                    key={property.id} 
+                    href={`/properties/${property.slug}`}
+                    className="group block hover:scale-105 transition-transform duration-300"
+                  >
+                    <Card className="overflow-hidden hover:shadow-luxury transition-all duration-300">
+                      <div className="aspect-video bg-gradient-primary flex items-center justify-center">
+                        <Building2 className="h-20 w-20 text-primary-foreground opacity-50" />
+                      </div>
+                      <CardContent className="p-6">
+                        <h4 className="text-2xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
+                          {property.title}
+                        </h4>
+                        <p className="text-muted-foreground mb-4 flex items-center gap-2">
+                          <MapPin className="h-4 w-4" />
+                          {property.location}
+                        </p>
+                        <p className="text-lg font-semibold text-primary mb-4">
+                          {property.price_label}
+                        </p>
+                        <Button variant="outline" className="w-full">
+                          View Details & Brochure
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Sale Properties Grid */}
+          <h3 className="text-3xl font-bold text-foreground mb-8 text-center">
+            Elitz Residency Collection
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {propertiesForSale.map(property => (
               <PropertyCard key={property.id} property={property} />

@@ -4,7 +4,6 @@ import PropertyCard from "@/components/PropertyCard";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
 import IntroSection from "@/components/IntroSection";
-import GetStartedForm from "@/components/GetStartedForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote } from "lucide-react";
@@ -244,8 +243,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Get Started Form */}
-      <GetStartedForm />
       </main>
 
       <Footer />
