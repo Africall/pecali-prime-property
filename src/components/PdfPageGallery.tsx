@@ -32,7 +32,7 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
           out[section.title] = [];
           for (const page of section.pages) {
             try {
-              const dataUrl = await renderPageToDataUrl(pdf, page, 1.6);
+              const dataUrl = await renderPageToDataUrl(pdf, page, 2);
               if (!cancelled) out[section.title].push(dataUrl);
             } catch (e) {
               console.error(`Error rendering page ${page}:`, e);
@@ -62,17 +62,17 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       {sections.map((section) => (
         <div key={section.title}>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             <h3 className="text-2xl font-semibold text-foreground">{section.title}</h3>
             <span className="text-sm text-muted-foreground">
               {section.pages.length} {section.pages.length === 1 ? 'page' : 'pages'}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
               // Loading skeletons
               section.pages.map((_, idx) => (

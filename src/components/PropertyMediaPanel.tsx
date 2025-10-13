@@ -32,10 +32,10 @@ export default function PropertyMediaPanel({
   ].filter((s) => s.pages.length > 0);
 
   return (
-    <section className="space-y-12">
+    <section className="space-y-6">
       <PdfPageGallery pdfUrl={pdfUrl} sections={sections} />
 
-      <div className="pt-8 space-y-4 border-t border-border">
+      <div className="pt-6 space-y-4 border-t border-border">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h3 className="text-xl font-semibold text-foreground">
             {title} — Full Brochure

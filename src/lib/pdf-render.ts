@@ -8,7 +8,7 @@ export async function loadPdf(url: string) {
 export async function renderPageToDataUrl(
   pdf: any,
   pageNumber: number,
-  scale = 1.5
+  scale = 2
 ): Promise<string> {
   const page = await pdf.getPage(pageNumber);
   const viewport = page.getViewport({ scale });
