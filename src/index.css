@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Remove default image spacing */
+img {
+  display: block;
+}
+
+/* Remove top margin from first children */
+.card > *:first-child,
+.section > *:first-child {
+  margin-top: 0 !important;
+}
+
 /* PECALI Real Estate - Premium Design System
 Royal Blue, Gradient Greys, Orange-Gold Luxury Palette
 */

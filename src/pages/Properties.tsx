@@ -70,10 +70,10 @@ const Properties = () => {
                     className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
                     onClick={() => navigate(`/properties/${p.slug}`)}
                   >
-                    <div className="relative h-64 overflow-hidden bg-muted">
+                    <div className="relative overflow-hidden bg-muted" style={{ aspectRatio: '3 / 2' }}>
                       <iframe
                         src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                        className="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+                        className="absolute inset-0 w-full h-full pointer-events-none"
                         title={p.title}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />

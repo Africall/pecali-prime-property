@@ -91,11 +91,12 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
                   key={idx}
                   onClick={() => openLightbox(images[section.title], idx)}
                   className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                  style={{ aspectRatio: '3 / 4' }}
                 >
                   <img
                     src={src}
                     alt={`${section.title} page ${idx + 1}`}
-                    className="w-full h-auto block"
+                    className="w-full h-full object-cover block"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">

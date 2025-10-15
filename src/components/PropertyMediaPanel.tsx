@@ -32,7 +32,7 @@ export default function PropertyMediaPanel({
   ].filter((s) => s.pages.length > 0);
 
   return (
-    <section className="space-y-4 md:space-y-6">
+    <section className="space-y-4 md:space-y-6 mt-0">
       <PdfPageGallery pdfUrl={pdfUrl} sections={sections} />
 
       <div className="pt-4 space-y-3 border-t border-border">
