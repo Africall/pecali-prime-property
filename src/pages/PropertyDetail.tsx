@@ -5,8 +5,9 @@ import { resolvePdfUrl } from '@/lib/storage';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PropertyMediaPanel from '@/components/PropertyMediaPanel';
+import ContactModal from '@/components/ContactModal';
 import PdfDebug from '@/components/PdfDebug';
-import { ArrowLeft, MapPin } from 'lucide-react';
+import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -29,6 +30,7 @@ export default function PropertyDetail() {
   const [loading, setLoading] = useState(true);
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [error, setError] = useState<any>(null);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -71,51 +73,62 @@ export default function PropertyDetail() {
     <div className="min-h-screen">
       <Navbar />
       <main className="pt-nav">
-        {/* Hero Section */}
-        <section className="scroll-offset pt-10 pb-8 bg-gradient-to-b from-[#0D47A1] to-[#0D47A1]/90 text-white">
-          <div className="container mx-auto px-4">
-            <Button asChild variant="ghost" className="text-white hover:text-white/90 mb-4">
+        {/* Compact Header */}
+        <section className="scroll-offset pt-6 pb-4 bg-gradient-to-b from-primary to-primary/90 text-primary-foreground">
+          <div className="container mx-auto px-3 sm:px-4">
+            <Button asChild variant="ghost" className="text-primary-foreground hover:text-primary-foreground/90 mb-3 -ml-2">
               <Link to="/properties">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Properties
+                Back
               </Link>
             </Button>
 
             {loading ? (
-              <div className="space-y-3">
-                <Skeleton className="h-12 w-96 bg-white/20" />
-                <Skeleton className="h-6 w-64 bg-white/20" />
-                <Skeleton className="h-8 w-48 bg-white/20" />
+              <div className="space-y-2">
+                <Skeleton className="h-8 w-80 bg-white/20" />
+                <Skeleton className="h-5 w-60 bg-white/20" />
               </div>
             ) : property ? (
-              <>
-                <h1 className="text-4xl md:text-5xl font-bold mb-3">{property.title}</h1>
-                <div className="flex items-center gap-2 text-white/90 mb-4">
-                  <MapPin className="w-5 h-5" />
-                  <span className="text-lg">{property.location}</span>
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-2">
+                    {property.title}
+                  </h1>
+                  <div className="flex items-center gap-2 text-primary-foreground/90 text-sm mb-1">
+                    <MapPin className="w-4 h-4" />
+                    <span>{property.location}</span>
+                  </div>
+                  <div className="text-lg font-semibold">{property.price_label}</div>
                 </div>
-                <div className="text-2xl font-semibold">{property.price_label}</div>
-              </>
+                <Button 
+                  onClick={() => setContactOpen(true)}
+                  variant="secondary"
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
+                  <Phone className="w-4 h-4" />
+                  Enquire Now
+                </Button>
+              </div>
             ) : (
-              <h1 className="text-4xl font-bold">Property not found</h1>
+              <h1 className="text-2xl font-bold">Property not found</h1>
             )}
           </div>
         </section>
 
-        {/* Content Section */}
-        <section className="container mx-auto px-4 py-12">
+        {/* Compact Content */}
+        <section className="container mx-auto px-3 sm:px-4 pt-4 pb-8">
           {loading ? (
-            <div className="space-y-6">
-              <Skeleton className="h-96 w-full" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="space-y-4">
+              <Skeleton className="h-80 w-full" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {[1, 2, 3].map((i) => (
-                  <Skeleton key={i} className="h-64 w-full" />
+                  <Skeleton key={i} className="h-48 w-full" />
                 ))}
               </div>
             </div>
           ) : property ? (
             <div className="space-y-6">
-              {/* Debug banner - only shows when there's an issue */}
               <PdfDebug label="PDF URL" value={pdfUrl} error={error} />
               
               <PropertyMediaPanel
@@ -138,6 +151,16 @@ export default function PropertyDetail() {
           )}
         </section>
       </main>
+
+      <ContactModal
+        open={contactOpen}
+        setOpen={setContactOpen}
+        source="property_page"
+        propertySlug={property?.slug}
+        defaultMessage={property ? `I'm interested in ${property.title}.` : ''}
+        phoneFallback="+254712345678"
+      />
+
       <Footer />
     </div>
   );

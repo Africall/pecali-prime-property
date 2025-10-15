@@ -1,56 +1,47 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import PropertyCard from "@/components/PropertyCard";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
 import IntroSection from "@/components/IntroSection";
+import ContactModal from "@/components/ContactModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote } from "lucide-react";
-import pecaliProperty1 from "@/assets/pecali-property-1.png";
-import pecaliProperty2 from "@/assets/pecali-property-2.png";
-import pecaliProperty3 from "@/assets/pecali-property-3.png";
+import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote, Eye, Phone } from "lucide-react";
+import { supabase } from '@/integrations/supabase/client';
+import { resolvePdfUrl } from '@/lib/storage';
 const Index = () => {
-  // Premium Property Projects - Coming Soon
-  const featuredProperties = [{
-    id: "1",
-    title: "Premium Royal Apartments",
-    location: "Roysambu, Nairobi",
-    price: "Coming Soon",
-    type: "Apartment",
-    bedrooms: 2,
-    bathrooms: 2,
-    area: "900 sq ft",
-    image: pecaliProperty1,
-    featured: true,
-    status: "For Sale" as const,
-    description: "Exciting premium development project launching soon"
-  }, {
-    id: "2",
-    title: "Modern Step Up Apartments",
-    location: "Fedha, Nairobi",
-    price: "Coming Soon",
-    type: "Apartment",
-    bedrooms: 1,
-    bathrooms: 1,
-    area: "650 sq ft",
-    image: pecaliProperty2,
-    status: "For Rent" as const,
-    description: "Quality lifestyle apartments launching soon"
-  }, {
-    id: "3",
-    title: "Skyline Premium Residences",
-    location: "Kileleshwa, Nairobi",
-    price: "Coming Soon",
-    type: "Penthouse",
-    bedrooms: 3,
-    bathrooms: 3,
-    area: "1,400 sq ft",
-    image: pecaliProperty3,
-    featured: true,
-    status: "For Sale" as const,
-    description: "Premium city-view apartments - exciting project coming soon"
-  }];
+  const navigate = useNavigate();
+  const [properties, setProperties] = useState<any[]>([]);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactSlug, setContactSlug] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    (async () => {
+      const slugs = ['elitz-residency', 'azure-sky-park', 'mango-tree'];
+      const { data } = await supabase
+        .from('properties')
+        .select('slug, title, location, price_label, pdf_path, cover_page')
+        .in('slug', slugs);
+
+      if (data && data.length > 0) {
+        const out: any[] = [];
+        for (const prop of data) {
+          const pdfUrl = await resolvePdfUrl(prop.pdf_path);
+          out.push({ ...prop, pdfUrl });
+        }
+        setProperties(out);
+      }
+    })();
+  }, []);
+
+  const handleView = (slug: string) => navigate(`/properties/${slug}`);
+  
+  const openEnquiry = (slug: string) => {
+    setContactSlug(slug);
+    setContactOpen(true);
+  };
   const services = [{
     icon: TrendingUp,
     title: "Property Sales & Leasing",
@@ -97,28 +88,95 @@ const Index = () => {
       {/* Featured Properties Section */}
       <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-gradient-gold text-foreground">Featured Properties</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Premium Properties Coming Soon
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Premium apartments in Nairobi's most sought-after developments with strong capital appreciation
-            </p>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <Badge className="mb-4 bg-gradient-gold text-foreground">Featured Properties</Badge>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Premium Properties
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl">
+                Explore our handpicked collection of premium developments
+              </p>
+            </div>
+            <Button 
+              onClick={() => navigate('/properties')}
+              variant="outline"
+              className="hidden md:flex items-center gap-2"
+            >
+              View all properties
+              <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {featuredProperties.map(property => <PropertyCard key={property.id} property={property} />)}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {properties.map((p) => (
+              <div 
+                key={p.slug} 
+                className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card"
+              >
+                <div className="relative h-72 overflow-hidden bg-muted">
+                  <iframe
+                    src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                    className="absolute inset-0 w-full h-full scale-110 pointer-events-none"
+                    title={p.title}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+                </div>
+                <div className="p-5 space-y-3">
+                  <h3 className="font-bold text-lg text-card-foreground line-clamp-1">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground line-clamp-1">
+                    {p.location}
+                  </p>
+                  <p className="text-base font-semibold text-primary">
+                    {p.price_label}
+                  </p>
+                  <div className="flex gap-2 pt-2">
+                    <Button
+                      onClick={() => handleView(p.slug)}
+                      className="flex-1"
+                      size="sm"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View Property
+                    </Button>
+                    <Button
+                      onClick={() => openEnquiry(p.slug)}
+                      variant="outline"
+                      className="flex-1"
+                      size="sm"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Enquire
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="text-center">
-            <Button className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold">
-              View All Properties
+          <div className="text-center md:hidden">
+            <Button 
+              onClick={() => navigate('/properties')}
+              variant="outline"
+              className="w-full"
+            >
+              View all properties
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
+
+      <ContactModal
+        open={contactOpen}
+        setOpen={setContactOpen}
+        source="home_card"
+        propertySlug={contactSlug}
+        defaultMessage={contactSlug ? `I'm interested in ${contactSlug}.` : ''}
+        phoneFallback="+254712345678"
+      />
 
       {/* Services Section */}
       <section className="py-20">

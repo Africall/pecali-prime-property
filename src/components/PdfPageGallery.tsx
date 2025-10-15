@@ -68,34 +68,34 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {sections.map((section) => (
         <div key={section.title}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-2xl font-semibold text-foreground">{section.title}</h3>
-            <span className="text-sm text-muted-foreground">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-sm md:text-base font-semibold text-foreground">
+              {section.title}
+            </h3>
+            <span className="text-[11px] md:text-xs text-muted-foreground">
               {section.pages.length} {section.pages.length === 1 ? 'page' : 'pages'}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {loading ? (
-              // Loading skeletons
               section.pages.map((_, idx) => (
                 <Skeleton key={idx} className="w-full aspect-[3/4] rounded-xl" />
               ))
             ) : (
-              // Rendered images
               (images[section.title] || []).map((src, idx) => (
                 <div
                   key={idx}
                   onClick={() => openLightbox(images[section.title], idx)}
-                  className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                  className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
                 >
                   <img
                     src={src}
                     alt={`${section.title} page ${idx + 1}`}
-                    className="w-full h-auto"
+                    className="w-full h-auto block"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">

@@ -32,30 +32,30 @@ export default function PropertyMediaPanel({
   ].filter((s) => s.pages.length > 0);
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-4 md:space-y-6">
       <PdfPageGallery pdfUrl={pdfUrl} sections={sections} />
 
-      <div className="pt-6 space-y-4 border-t border-border">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h3 className="text-xl font-semibold text-foreground">
-            {title} — Full Brochure
+      <div className="pt-4 space-y-3 border-t border-border">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <h3 className="text-base md:text-lg font-semibold text-foreground">
+            Full Brochure
           </h3>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button asChild variant="outline" size="sm">
               <a href={pdfUrl} download>
-                <Download className="w-4 h-4 mr-2" />
-                Download PDF
+                <Download className="w-4 h-4 mr-1.5" />
+                <span className="hidden sm:inline">Download</span>
               </a>
             </Button>
             <Button asChild variant="outline" size="sm">
               <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Open in new tab
+                <ExternalLink className="w-4 h-4 mr-1.5" />
+                <span className="hidden sm:inline">Open</span>
               </a>
             </Button>
           </div>
         </div>
-        <PdfInlineViewer pdfUrl={pdfUrl} />
+        <PdfInlineViewer pdfUrl={pdfUrl} height={560} />
       </div>
     </section>
   );
