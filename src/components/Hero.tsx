@@ -27,6 +27,9 @@ const Hero = () => {
           src={heroImage}
           alt="Luxury Properties"
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/90 via-primary/70 to-transparent"></div>
       </div>

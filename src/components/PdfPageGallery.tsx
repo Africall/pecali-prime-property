@@ -38,7 +38,7 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
           out[section.title] = [];
           for (const page of section.pages) {
             try {
-              const dataUrl = await renderPageToDataUrl(pdf, page, 1.6);
+              const dataUrl = await renderPageToDataUrl(pdf, page, 1.2);
               if (!cancelled) out[section.title].push(dataUrl);
             } catch (e) {
               console.error(`Error rendering page ${page}:`, e);
@@ -97,6 +97,8 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
                     src={src}
                     alt={`${section.title} page ${idx + 1}`}
                     className="w-full h-full object-cover block"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">

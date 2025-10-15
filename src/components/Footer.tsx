@@ -29,7 +29,15 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/fa8c1598-094b-41c9-94da-4e5dff4aecfe.png" alt="PECALI Real Estate" className="h-12 w-auto brightness-0 invert" />
+              <img 
+                src="/lovable-uploads/fa8c1598-094b-41c9-94da-4e5dff4aecfe.png" 
+                alt="PECALI Real Estate" 
+                className="h-12 w-auto brightness-0 invert"
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+              />
               <div>
                 <h2 className="text-xl font-bold">PECALI</h2>
                 <p className="text-sm text-primary-foreground/80">REAL ESTATE</p>

@@ -66,6 +66,8 @@ export default function ImageLightbox({ images, index, setIndex }: ImageLightbox
             exit={{ opacity: 0, scale: 0.95 }}
             onClick={(e) => e.stopPropagation()}
             alt={`Property image ${index + 1}`}
+            loading="eager"
+            decoding="async"
           />
 
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-sm">

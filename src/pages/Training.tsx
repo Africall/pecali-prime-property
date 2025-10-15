@@ -226,7 +226,9 @@ const Training = () => {
                     <img 
                       src={story.image} 
                       alt={story.name}
-                      className="w-12 h-12 rounded-full mr-4"
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div>
                       <h4 className="font-semibold text-card-foreground">{story.name}</h4>

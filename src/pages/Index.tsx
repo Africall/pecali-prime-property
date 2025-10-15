@@ -290,7 +290,13 @@ const Index = () => {
                 </div>
 
                 <div className="flex items-center">
-                  
+                  <img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div>
                     <h4 className="font-semibold text-card-foreground">{testimonial.name}</h4>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>

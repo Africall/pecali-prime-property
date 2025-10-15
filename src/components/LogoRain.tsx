@@ -57,6 +57,8 @@ const LogoRain = () => {
           src="/lovable-uploads/fa8c1598-094b-41c9-94da-4e5dff4aecfe.png"
           alt="PECALI Watermark"
           className="w-96 h-auto opacity-5 animate-spin"
+          loading="lazy"
+          decoding="async"
           style={{
             animation: "spin 20s linear infinite",
             filter: "brightness(0.6) contrast(1.5)",
@@ -82,6 +84,8 @@ const LogoRain = () => {
           <img
             src="/lovable-uploads/fa8c1598-094b-41c9-94da-4e5dff4aecfe.png"
             alt="PECALI Logo Rain"
+            loading="lazy"
+            decoding="async"
             style={{
               width: `${drop.size}px`,
               height: "auto",
@@ -112,6 +116,8 @@ const LogoRain = () => {
           <img
             src="/lovable-uploads/fa8c1598-094b-41c9-94da-4e5dff4aecfe.png"
             alt="PECALI Bouncing Logo"
+            loading="lazy"
+            decoding="async"
             style={{
               width: `${logo.size}px`,
               height: "auto",
