@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react';
 import { loadPdf, renderPageToDataUrl } from '@/lib/pdf-render';
 import ImageLightbox from './ImageLightbox';
 import { Skeleton } from './ui/skeleton';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from './ui/carousel';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Section {
   title: string;
@@ -18,6 +26,7 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     let cancelled = false;
@@ -38,7 +47,7 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
           out[section.title] = [];
           for (const page of section.pages) {
             try {
-              const dataUrl = await renderPageToDataUrl(pdf, page, 1.2);
+              const dataUrl = await renderPageToDataUrl(pdf, page, 2.0);
               if (!cancelled) out[section.title].push(dataUrl);
             } catch (e) {
               console.error(`Error rendering page ${page}:`, e);
@@ -68,10 +77,10 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {sections.map((section) => (
         <div key={section.title}>
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm md:text-base font-semibold text-foreground">
               {section.title}
             </h3>
@@ -80,35 +89,80 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            {loading ? (
-              section.pages.map((_, idx) => (
-                <Skeleton key={idx} className="w-full aspect-[3/4] rounded-xl" />
-              ))
+          {loading ? (
+            isMobile ? (
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {section.pages.map((_, idx) => (
+                  <Skeleton key={idx} className="w-[85vw] h-[480px] rounded-xl flex-shrink-0" />
+                ))}
+              </div>
             ) : (
-              (images[section.title] || []).map((src, idx) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                {section.pages.map((_, idx) => (
+                  <Skeleton key={idx} className="w-full h-[400px] rounded-xl" />
+                ))}
+              </div>
+            )
+          ) : isMobile ? (
+            // Mobile: Swipeable Carousel
+            <Carousel
+              opts={{
+                align: 'start',
+                loop: false,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {(images[section.title] || []).map((src, idx) => (
+                  <CarouselItem key={idx} className="pl-2 md:pl-4 basis-[85%]">
+                    <div
+                      onClick={() => openLightbox(images[section.title], idx)}
+                      className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-lg bg-background"
+                    >
+                      <img
+                        src={src}
+                        alt={`${section.title} page ${idx + 1}`}
+                        className="w-full h-auto object-contain block max-h-[480px]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-active:bg-black/10 transition-all duration-200 flex items-center justify-center pointer-events-none">
+                        <span className="text-white opacity-0 group-active:opacity-100 transition-opacity text-sm font-medium">
+                          Tap to zoom
+                        </span>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </Carousel>
+          ) : (
+            // Desktop: Grid with full image view
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+              {(images[section.title] || []).map((src, idx) => (
                 <div
                   key={idx}
                   onClick={() => openLightbox(images[section.title], idx)}
-                  className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                  style={{ aspectRatio: '3 / 4' }}
+                  className="group relative rounded-xl overflow-hidden border border-border cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] bg-background"
                 >
                   <img
                     src={src}
                     alt={`${section.title} page ${idx + 1}`}
-                    className="w-full h-full object-cover block"
+                    className="w-full h-auto object-contain block max-h-[500px]"
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-sm font-medium">
                       Click to view
                     </span>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
 
