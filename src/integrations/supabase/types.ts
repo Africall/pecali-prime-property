@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      get_started_leads: {
+        Row: {
+          budget_range: string | null
+          channel: string | null
+          consent: boolean
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          looking_for: string
+          message: string | null
+          page_url: string | null
+          phone: string | null
+          preferred_location: string | null
+          referrer: string | null
+          utm: Json | null
+        }
+        Insert: {
+          budget_range?: string | null
+          channel?: string | null
+          consent?: boolean
+          created_at?: string | null
+          email: string
+          full_name: string
+          id?: string
+          looking_for: string
+          message?: string | null
+          page_url?: string | null
+          phone?: string | null
+          preferred_location?: string | null
+          referrer?: string | null
+          utm?: Json | null
+        }
+        Update: {
+          budget_range?: string | null
+          channel?: string | null
+          consent?: boolean
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          looking_for?: string
+          message?: string | null
+          page_url?: string | null
+          phone?: string | null
+          preferred_location?: string | null
+          referrer?: string | null
+          utm?: Json | null
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string | null
@@ -118,6 +169,23 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      insert_get_started_lead: {
+        Args: {
+          p_budget_range: string
+          p_channel: string
+          p_consent: boolean
+          p_email: string
+          p_full_name: string
+          p_looking_for: string
+          p_message: string
+          p_page_url: string
+          p_phone: string
+          p_preferred_location: string
+          p_referrer: string
+          p_utm: Json
+        }
+        Returns: string
       }
       insert_lead: {
         Args: {
