@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { resolvePdfUrl } from '@/lib/storage';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import PropertyMediaPanel from '@/components/PropertyMediaPanel';
 import ContactModal from '@/components/ContactModal';
-import PdfDebug from '@/components/PdfDebug';
 import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -17,10 +14,6 @@ interface Property {
   title: string;
   location: string;
   price_label: string;
-  pdf_path: string;
-  cover_page: number;
-  gallery_pages: number[];
-  floorplan_pages: number[];
   meta: any;
 }
 
@@ -28,8 +21,6 @@ export default function PropertyDetail() {
   const { slug } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
-  const [pdfUrl, setPdfUrl] = useState<string>('');
-  const [error, setError] = useState<any>(null);
   const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
@@ -38,7 +29,6 @@ export default function PropertyDetail() {
     async function fetchProperty() {
       try {
         setLoading(true);
-        setError(null);
 
         const { data, error } = await supabase
           .from('properties')
@@ -51,13 +41,9 @@ export default function PropertyDetail() {
 
         if (data) {
           setProperty(data);
-          // Resolve the PDF URL to handle both storage and public paths
-          const url = await resolvePdfUrl(data.pdf_path);
-          setPdfUrl(url);
         }
       } catch (err) {
         console.error('Error fetching property:', err);
-        if (!cancelled) setError(err);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -128,16 +114,10 @@ export default function PropertyDetail() {
               </div>
             </div>
           ) : property ? (
-            <div className="space-y-6">
-              <PdfDebug label="PDF URL" value={pdfUrl} error={error} />
-              
-              <PropertyMediaPanel
-                title={property.title}
-                pdfUrl={pdfUrl}
-                coverPage={property.cover_page}
-                galleryPages={property.gallery_pages}
-                floorplanPages={property.floorplan_pages}
-              />
+            <div className="text-center py-12">
+              <p className="text-lg text-muted-foreground">
+                Property details are being updated. Please check back soon.
+              </p>
             </div>
           ) : (
             <div className="text-center py-12">

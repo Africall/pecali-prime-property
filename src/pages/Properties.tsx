@@ -6,7 +6,6 @@ import LogoRain from "@/components/LogoRain";
 import { Button } from "@/components/ui/button";
 import { MapPin, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { resolvePdfUrl } from "@/lib/storage";
 
 const Properties = () => {
   const [properties, setProperties] = useState<any[]>([]);
@@ -18,16 +17,11 @@ const Properties = () => {
       setLoading(true);
       const { data } = await supabase
         .from('properties')
-        .select('slug, title, location, price_label, pdf_path, cover_page')
+        .select('slug, title, location, price_label')
         .order('created_at', { ascending: false });
 
       if (data) {
-        const out: any[] = [];
-        for (const p of data) {
-          const pdfUrl = await resolvePdfUrl(p.pdf_path);
-          out.push({ ...p, pdfUrl });
-        }
-        setProperties(out);
+        setProperties(data);
       }
       setLoading(false);
     })();
@@ -70,13 +64,8 @@ const Properties = () => {
                     className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
                     onClick={() => navigate(`/properties/${p.slug}`)}
                   >
-                    <div className="relative overflow-hidden bg-muted" style={{ aspectRatio: '3 / 2' }}>
-                      <iframe
-                        src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                        className="absolute inset-0 w-full h-full pointer-events-none"
-                        title={p.title}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+                    <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center" style={{ aspectRatio: '3 / 2' }}>
+                      <p className="text-lg font-semibold text-muted-foreground">Coming Soon</p>
                     </div>
                     <div className="p-5 space-y-3">
                       <h3 className="font-bold text-xl text-card-foreground line-clamp-1">

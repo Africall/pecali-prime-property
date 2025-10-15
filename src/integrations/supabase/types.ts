@@ -104,7 +104,7 @@ export type Database = {
           id: string
           location: string
           meta: Json | null
-          pdf_path: string
+          pdf_path: string | null
           price_label: string
           slug: string
           title: string
@@ -117,7 +117,7 @@ export type Database = {
           id?: string
           location: string
           meta?: Json | null
-          pdf_path: string
+          pdf_path?: string | null
           price_label: string
           slug: string
           title: string
@@ -130,7 +130,7 @@ export type Database = {
           id?: string
           location?: string
           meta?: Json | null
-          pdf_path?: string
+          pdf_path?: string | null
           price_label?: string
           slug?: string
           title?: string
