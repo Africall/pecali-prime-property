@@ -50,19 +50,34 @@ export default function ContactModal({
       return;
     }
 
-    const { error: dbError } = await supabase.from('leads').insert({
-      source,
-      property_slug: propertySlug ?? null,
-      full_name: fullName,
-      phone,
-      message
-    });
+    try {
+      const { data, error: invokeError } = await supabase.functions.invoke('submit-lead', {
+        body: {
+          source,
+          property_slug: propertySlug ?? null,
+          full_name: fullName,
+          phone,
+          message
+        }
+      });
 
-    if (dbError) {
-      setError(dbError.message);
+      if (invokeError) {
+        console.error('Function invocation error:', invokeError);
+        setError('Failed to submit enquiry. Please try again.');
+        setStatus('error');
+        return;
+      }
+
+      if (data?.error) {
+        setError(data.error);
+        setStatus('error');
+      } else {
+        setStatus('success');
+      }
+    } catch (err: any) {
+      console.error('Submission error:', err);
+      setError('An unexpected error occurred. Please try again.');
       setStatus('error');
-    } else {
-      setStatus('success');
     }
   }
 

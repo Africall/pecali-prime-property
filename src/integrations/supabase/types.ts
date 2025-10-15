@@ -119,6 +119,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      insert_lead: {
+        Args: {
+          p_full_name: string
+          p_message: string
+          p_phone: string
+          p_property_slug: string
+          p_source: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
