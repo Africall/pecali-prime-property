@@ -135,8 +135,12 @@ export default function PdfPageGallery({ pdfUrl, sections }: PdfPageGalleryProps
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-2" />
-              <CarouselNext className="right-2" />
+              {(images[section.title] || []).length > 1 && (
+                <>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </>
+              )}
             </Carousel>
           ) : (
             // Desktop: Grid with full image view
