@@ -2,17 +2,20 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
+import GetStartedWizard from "@/components/GetStartedWizard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { MapPin, Phone, Mail, MessageCircle, Calendar, Clock, Users, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isGetStartedOpen, setIsGetStartedOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -261,13 +264,24 @@ const Contact = () => {
                     </h3>
                   </div>
                   <div className="space-y-4">
-                    <Button className="w-full bg-gradient-primary hover:bg-gradient-luxury shadow-gold" size="lg">
+                    <Button 
+                      className="w-full bg-gradient-primary hover:bg-gradient-luxury shadow-gold" 
+                      size="lg"
+                      onClick={() => setIsGetStartedOpen(true)}
+                    >
                       <Calendar className="h-5 w-5 mr-2" />
                       Book an Appointment Online
                     </Button>
-                    <Button variant="outline" className="w-full" size="lg">
-                      <MessageCircle className="h-5 w-5 mr-2" />
-                      Start WhatsApp Chat
+                    <Button 
+                      variant="outline" 
+                      className="w-full" 
+                      size="lg"
+                      asChild
+                    >
+                      <a href="https://wa.me/254758174718" target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="h-5 w-5 mr-2" />
+                        Start WhatsApp Chat
+                      </a>
                     </Button>
                   </div>
                 </CardContent>
@@ -309,6 +323,12 @@ const Contact = () => {
       </main>
 
       <Footer />
+      
+      <Dialog open={isGetStartedOpen} onOpenChange={setIsGetStartedOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <GetStartedWizard />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
