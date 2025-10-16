@@ -8,6 +8,7 @@ import IntroSection from "@/components/IntroSection";
 import ContactModal from "@/components/ContactModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote, Eye, Phone } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
 import { resolvePdfUrl } from '@/lib/storage';
@@ -16,6 +17,8 @@ const Index = () => {
   const [properties, setProperties] = useState<any[]>([]);
   const [contactOpen, setContactOpen] = useState(false);
   const [contactSlug, setContactSlug] = useState<string | undefined>(undefined);
+  const [serviceDialogOpen, setServiceDialogOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -42,6 +45,21 @@ const Index = () => {
     setContactSlug(slug);
     setContactOpen(true);
   };
+  const serviceDetails: Record<string, { heading: string; content: string }> = {
+    "Property Sales & Leasing": {
+      heading: "Unlock Your Dream Property with Confidence",
+      content: "At PECALI, we bridge the gap between your property aspirations and reality. Our extensive portfolio features exclusive developer partnerships, giving you first access to off-plan projects with attractive pre-launch pricing. We meticulously verify every resale unit, conducting thorough due diligence on titles, land rates, and legal documentation to protect your investment.\n\nWhether you're seeking a starter apartment in Embakasi, a luxury penthouse in Kilimani, or a commercial space in Westlands, our team provides personalized property matching based on your budget, lifestyle, and growth projections. We negotiate favorable terms on your behalf, handle all paperwork, and ensure smooth handover—making property acquisition effortless from search to keys in hand."
+    },
+    "Property Management": {
+      heading: "Maximize Returns, Minimize Hassles",
+      content: "Property ownership should build wealth, not stress. Our comprehensive management service transforms your real estate into a truly passive income stream. We handle everything: marketing vacancies across multiple platforms, conducting rigorous tenant background checks, drafting ironclad lease agreements, and ensuring timely rent collection with automated reminders and follow-ups.\n\nBeyond finances, we maintain your property's value through regular inspections, coordinated repairs with vetted contractors, and proactive maintenance scheduling. Our detailed monthly reports keep you informed of your property's performance, occupancy rates, and financial health. Whether you're in Nairobi or the diaspora, you'll have complete peace of mind knowing your investment is professionally managed and continuously appreciating."
+    },
+    "Investment Advisory": {
+      heading: "Data-Driven Strategies for Wealth Creation",
+      content: "Real estate investment requires more than capital—it demands insight. Our advisory service combines deep market intelligence with personalized financial planning to identify high-growth opportunities aligned with your goals. We analyze emerging neighborhoods, infrastructure developments, and demographic trends to pinpoint properties with superior appreciation potential.\n\nFor diaspora investors, we specialize in navigating Kenya's property landscape remotely, offering virtual tours, secure payment facilitation, and trustworthy ground representation. We calculate projected ROI, rental yields, and exit strategies for every recommendation, ensuring your capital works harder. From portfolio diversification to tax-efficient structuring, we provide the strategic framework that transforms property from expense into empire."
+    }
+  };
+
   const services = [{
     icon: TrendingUp,
     title: "Property Sales & Leasing",
@@ -58,6 +76,11 @@ const Index = () => {
     description: "Strategic guidance to maximize property returns for local and diaspora investors.",
     features: ["Market Analysis", "ROI Optimization", "Risk Assessment"]
   }];
+
+  const handleLearnMore = (serviceTitle: string) => {
+    setSelectedService(serviceTitle);
+    setServiceDialogOpen(true);
+  };
   const testimonials = [{
     name: "Sarah Mwangi",
     role: "Property Investor",
@@ -178,6 +201,37 @@ const Index = () => {
         phoneFallback="+254712345678"
       />
 
+      <Dialog open={serviceDialogOpen} onOpenChange={setServiceDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-bold text-primary mb-2">
+              {selectedService}
+            </DialogTitle>
+          </DialogHeader>
+          {selectedService && serviceDetails[selectedService] && (
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold text-foreground">
+                {serviceDetails[selectedService].heading}
+              </h3>
+              <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                {serviceDetails[selectedService].content}
+              </div>
+              <div className="pt-4">
+                <Button 
+                  onClick={() => {
+                    setServiceDialogOpen(false);
+                    navigate('/contact');
+                  }}
+                  className="w-full"
+                >
+                  Get in Touch
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
       {/* Services Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -214,7 +268,11 @@ const Index = () => {
                     </li>)}
                 </ul>
 
-                <Button variant="ghost" className="mt-6 p-0 h-auto text-primary hover:text-accent">
+                <Button 
+                  variant="ghost" 
+                  className="mt-6 p-0 h-auto text-primary hover:text-accent"
+                  onClick={() => handleLearnMore(service.title)}
+                >
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>)}
