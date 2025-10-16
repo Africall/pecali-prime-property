@@ -111,8 +111,17 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Our Services</h3>
             <ul className="space-y-3">
-              {["Property Sales & Leasing", "Property Management", "Real Estate Consulting", "Investment Advisory", "Property Valuation", "Legal Documentation"].map(service => <li key={service} className="text-primary-foreground/80">
-                  {service}
+              {[
+                { label: "Property Sales & Leasing", href: "/services#sales" },
+                { label: "Property Management", href: "/services#management" },
+                { label: "Real Estate Consulting", href: "/services#consulting" },
+                { label: "Investment Advisory", href: "/services#advisory" },
+                { label: "Property Valuation", href: "/services#valuation" },
+                { label: "Legal Documentation", href: "/services#legal" }
+              ].map(service => <li key={service.label}>
+                  <a href={service.href} className="text-primary-foreground/80 hover:text-accent transition-colors duration-200">
+                    {service.label}
+                  </a>
                 </li>)}
             </ul>
           </div>
