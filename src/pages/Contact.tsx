@@ -276,12 +276,10 @@ const Contact = () => {
                       variant="outline" 
                       className="w-full" 
                       size="lg"
-                      asChild
+                      onClick={() => window.open('https://wa.me/254758174718', '_blank')}
                     >
-                      <a href="https://wa.me/254758174718" target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="h-5 w-5 mr-2" />
-                        Start WhatsApp Chat
-                      </a>
+                      <MessageCircle className="h-5 w-5 mr-2" />
+                      Start WhatsApp Chat
                     </Button>
                   </div>
                 </CardContent>
