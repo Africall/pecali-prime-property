@@ -65,8 +65,8 @@ const Hero = () => {
 
               {/* Price Range */}
               <Select value={searchData.priceRange} onValueChange={(value) => setSearchData({ ...searchData, priceRange: value })}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary">
-                  <SelectValue placeholder="Price Range" />
+                <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
+                  <SelectValue placeholder="Price Range" className="text-foreground" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0-5m">Under 5M KES</SelectItem>
@@ -79,9 +79,9 @@ const Hero = () => {
 
               {/* Property Type */}
               <Select value={searchData.propertyType} onValueChange={(value) => setSearchData({ ...searchData, propertyType: value })}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary">
-                  <Home className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Property Type" />
+                <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
+                  <Home className="h-4 w-4 mr-2 text-muted-foreground" />
+                  <SelectValue placeholder="Property Type" className="text-foreground" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="apartment">Apartment</SelectItem>
@@ -94,9 +94,9 @@ const Hero = () => {
 
               {/* Bedrooms */}
               <Select value={searchData.bedrooms} onValueChange={(value) => setSearchData({ ...searchData, bedrooms: value })}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary">
-                  <BedDouble className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Bedrooms" />
+                <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
+                  <BedDouble className="h-4 w-4 mr-2 text-muted-foreground" />
+                  <SelectValue placeholder="Bedrooms" className="text-foreground" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1">1 Bedroom</SelectItem>
@@ -109,9 +109,9 @@ const Hero = () => {
 
               {/* Bathrooms */}
               <Select value={searchData.bathrooms} onValueChange={(value) => setSearchData({ ...searchData, bathrooms: value })}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary">
-                  <Bath className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Bathrooms" />
+                <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
+                  <Bath className="h-4 w-4 mr-2 text-muted-foreground" />
+                  <SelectValue placeholder="Bathrooms" className="text-foreground" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="1">1 Bathroom</SelectItem>
