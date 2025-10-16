@@ -368,7 +368,12 @@ const Services = () => {
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Need Legal Support?</h3>
               <p className="mb-6">Our legal partners are ready to assist</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => {
+                  window.location.href = '/#get-started-form';
+                }}
+              >
                 Contact Legal Team
               </Button>
             </div>
@@ -385,7 +390,12 @@ const Services = () => {
               Let our expert team provide you with personalized real estate solutions tailored to your needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6">
+              <Button 
+                className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6"
+                onClick={() => {
+                  window.location.href = '/#get-started-form';
+                }}
+              >
                 Consult with Experts
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
