@@ -157,7 +157,7 @@ export default function PropertyDetail() {
                     <img 
                       src={elitzCover} 
                       alt="Elitz Residency - Rumi Rd Nairobi" 
-                      className="w-full h-auto max-h-[500px] object-cover"
+                      className="w-full h-auto"
                     />
                   </div>
                   
