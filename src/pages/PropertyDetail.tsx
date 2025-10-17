@@ -28,6 +28,16 @@ import mangoTreeFloorplan2brF from '@/assets/mango-tree-floorplan-2br-f.jpg';
 import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
 import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
 import mangoTreeLocation from '@/assets/mango-tree-location.jpg';
+import appleTreeCover from '@/assets/apple-tree-cover.jpg';
+import appleTreeFloorplan3brA from '@/assets/apple-tree-floorplan-3br-a.jpg';
+import appleTreeFloorplan3brD from '@/assets/apple-tree-floorplan-3br-d.jpg';
+import appleTreeFloorplan2brB from '@/assets/apple-tree-floorplan-2br-b.jpg';
+import appleTreeFloorplan2brC from '@/assets/apple-tree-floorplan-2br-c.jpg';
+import appleTreeFloorplan3brPenthouse from '@/assets/apple-tree-floorplan-3br-penthouse.jpg';
+import appleTreeFloorplan4brPenthouse from '@/assets/apple-tree-floorplan-4br-penthouse.jpg';
+import appleTreeFloorplan5brPenthouse from '@/assets/apple-tree-floorplan-5br-penthouse.jpg';
+import appleTreeFloorplan6brPenthouse from '@/assets/apple-tree-floorplan-6br-penthouse.jpg';
+import appleTreeInteriors from '@/assets/apple-tree-interiors.jpg';
 
 interface Property {
   id: string;
@@ -69,6 +79,19 @@ export default function PropertyDetail() {
     mangoTreeFloorplan1brE,
     mangoTreeAmenities,
     mangoTreeLocation,
+  ];
+
+  const appleTreeImages = [
+    appleTreeCover,
+    appleTreeFloorplan3brA,
+    appleTreeFloorplan3brD,
+    appleTreeFloorplan2brB,
+    appleTreeFloorplan2brC,
+    appleTreeFloorplan3brPenthouse,
+    appleTreeFloorplan4brPenthouse,
+    appleTreeFloorplan5brPenthouse,
+    appleTreeFloorplan6brPenthouse,
+    appleTreeInteriors,
   ];
 
   useEffect(() => {
@@ -410,6 +433,126 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.slug === 'apple-tree-phase-3' ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={appleTreeCover} 
+                      alt="Apple Tree Apartments Phase 3 - Nairobi" 
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Large feature - spans 2 columns */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan3brA} 
+                        alt="Apple Tree 3 Bedroom Floor Plan Type A" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Standard grid items */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan3brD} 
+                        alt="Apple Tree 3 Bedroom Floor Plan Type D" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan2brB} 
+                        alt="Apple Tree 2 Bedroom Floor Plan Type B" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan2brC} 
+                        alt="Apple Tree 2 Bedroom Floor Plan Type C" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan3brPenthouse} 
+                        alt="Apple Tree 3 Bedroom Penthouse Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Tall feature - spans 2 rows */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan4brPenthouse} 
+                        alt="Apple Tree 4 Bedroom Penthouse Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan5brPenthouse} 
+                        alt="Apple Tree 5 Bedroom Penthouse Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={appleTreeFloorplan6brPenthouse} 
+                        alt="Apple Tree 6 Bedroom Penthouse Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Wide feature - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={appleTreeInteriors} 
+                        alt="Apple Tree Apartments Exquisite Interiors" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -451,6 +594,14 @@ export default function PropertyDetail() {
       {property?.slug === 'mango-tree' && (
         <ImageLightbox 
           images={mangoTreeImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {property?.slug === 'apple-tree-phase-3' && (
+        <ImageLightbox 
+          images={appleTreeImages} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
