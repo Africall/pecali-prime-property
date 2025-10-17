@@ -7,16 +7,8 @@ import ContactModal from '@/components/ContactModal';
 import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import elitzCover from '@/assets/elitz-cover.jpg';
-import elitzExterior1 from '@/assets/elitz-exterior-1.jpg';
-import elitzExterior2 from '@/assets/elitz-exterior-2.jpg';
-import elitzLivingRoom from '@/assets/elitz-living-room.jpg';
-import elitzDiningArea from '@/assets/elitz-dining-area.jpg';
-import elitzWallTexture from '@/assets/elitz-wall-texture.jpg';
-import elitzEntrance from '@/assets/elitz-entrance.jpg';
-import elitzKitchen2 from '@/assets/elitz-kitchen-2.jpg';
-import elitzBathroom2 from '@/assets/elitz-bathroom-2.jpg';
-import elitzRooftop from '@/assets/elitz-rooftop.jpg';
+import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
+import pecaliLogo from '@/assets/pecali-logo-placeholder.jpg';
 
 interface Property {
   id: string;
@@ -124,70 +116,18 @@ export default function PropertyDetail() {
               </div>
             </div>
           ) : property ? (
-            <>
-              {property.slug === 'elitz-residency' ? (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <img 
-                      src={elitzCover} 
-                      alt="Elitz Residency" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzExterior1} 
-                      alt="Elitz Residency Exterior" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzExterior2} 
-                      alt="Elitz Residency at Night" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzLivingRoom} 
-                      alt="Elitz Residency Living Room" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzDiningArea} 
-                      alt="Elitz Residency Dining Area" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzWallTexture} 
-                      alt="Elitz Residency Interior Design" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzEntrance} 
-                      alt="Elitz Residency Entrance" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzKitchen2} 
-                      alt="Elitz Residency Kitchen" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzBathroom2} 
-                      alt="Elitz Residency Bathroom" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                    <img 
-                      src={elitzRooftop} 
-                      alt="Elitz Residency Rooftop Lounge" 
-                      className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-lg text-muted-foreground">
-                    Property details are being updated. Please check back soon.
-                  </p>
-                </div>
-              )}
-            </>
+            <div className="space-y-4">
+              <img 
+                src={property.slug === 'elitz-residency' ? elitzMainBuilding : pecaliLogo} 
+                alt={property.slug === 'elitz-residency' ? 'Elitz Residency Building' : 'Pecali Real Estate'} 
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+              <div className="text-center py-6">
+                <p className="text-lg text-muted-foreground">
+                  More property details coming soon.
+                </p>
+              </div>
+            </div>
           ) : (
             <div className="text-center py-12">
               <p className="text-lg text-muted-foreground">
