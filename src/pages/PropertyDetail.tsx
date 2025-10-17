@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ContactModal from '@/components/ContactModal';
+import ImageLightbox from '@/components/ImageLightbox';
 import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -32,6 +33,20 @@ export default function PropertyDetail() {
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
   const [contactOpen, setContactOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
+  const elitzImages = [
+    elitzCover,
+    elitzExterior1,
+    elitzExterior2,
+    elitzLiving,
+    elitzDining,
+    elitzTexture,
+    elitzEntrance,
+    elitzKitchen,
+    elitzBathroom,
+    elitzRooftop,
+  ];
 
   useEffect(() => {
     let cancelled = false;
@@ -135,89 +150,119 @@ export default function PropertyDetail() {
               {property.slug === 'elitz-residency' ? (
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
-                  <div className="relative overflow-hidden rounded-xl shadow-luxury group cursor-zoom-in max-w-5xl mx-auto">
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    onClick={() => setLightboxIndex(0)}
+                  >
                     <img 
                       src={elitzCover} 
                       alt="Elitz Residency - Rumi Rd Nairobi" 
-                      className="w-full h-auto transform transition-all duration-500 group-hover:scale-150 origin-center"
+                      className="w-full h-auto max-h-[500px] object-cover"
                     />
                   </div>
                   
                   {/* Dynamic Grid Layout */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                     {/* Large feature - spans 2 columns */}
-                    <div className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(1)}
+                    >
                       <img 
                         src={elitzExterior1} 
                         alt="Elitz Residency Building Exterior" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
                     {/* Standard grid items */}
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(2)}
+                    >
                       <img 
                         src={elitzExterior2} 
                         alt="Elitz Residency Architecture" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(3)}
+                    >
                       <img 
                         src={elitzLiving} 
                         alt="Elitz Residency Living Room" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(4)}
+                    >
                       <img 
                         src={elitzDining} 
                         alt="Elitz Residency Dining Area" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(5)}
+                    >
                       <img 
                         src={elitzTexture} 
                         alt="Elitz Residency Interior Design" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
                     {/* Tall feature - spans 2 rows */}
-                    <div className="row-span-2 relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(6)}
+                    >
                       <img 
                         src={elitzEntrance} 
                         alt="Elitz Residency Entrance" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(7)}
+                    >
                       <img 
                         src={elitzKitchen} 
                         alt="Elitz Residency Modern Kitchen" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
-                    <div className="relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(8)}
+                    >
                       <img 
                         src={elitzBathroom} 
                         alt="Elitz Residency Bathroom" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
                     {/* Wide feature - spans 2 columns */}
-                    <div className="col-span-2 relative overflow-hidden rounded-lg shadow-card group cursor-zoom-in">
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(9)}
+                    >
                       <img 
                         src={elitzRooftop} 
                         alt="Elitz Residency Rooftop Lounge" 
-                        className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-150 origin-center"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
@@ -251,6 +296,14 @@ export default function PropertyDetail() {
         defaultMessage={property ? `I'm interested in ${property.title}.` : ''}
         phoneFallback="+254712345678"
       />
+
+      {property?.slug === 'elitz-residency' && (
+        <ImageLightbox 
+          images={elitzImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
 
       <Footer />
     </div>
