@@ -133,57 +133,94 @@ export default function PropertyDetail() {
           ) : property ? (
             <>
               {property.slug === 'elitz-residency' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <img 
-                    src={elitzCover} 
-                    alt="Elitz Residency - Rumi Rd Nairobi" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzExterior1} 
-                    alt="Elitz Residency Building Exterior" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzExterior2} 
-                    alt="Elitz Residency Architecture" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzLiving} 
-                    alt="Elitz Residency Living Room" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzDining} 
-                    alt="Elitz Residency Dining Area" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzTexture} 
-                    alt="Elitz Residency Interior Design" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzEntrance} 
-                    alt="Elitz Residency Entrance" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzKitchen} 
-                    alt="Elitz Residency Modern Kitchen" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzBathroom} 
-                    alt="Elitz Residency Bathroom" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <img 
-                    src={elitzRooftop} 
-                    alt="Elitz Residency Rooftop Lounge" 
-                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                  />
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div className="relative overflow-hidden rounded-xl shadow-luxury group">
+                    <img 
+                      src={elitzCover} 
+                      alt="Elitz Residency - Rumi Rd Nairobi" 
+                      className="w-full h-auto transform transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Large feature - spans 2 columns */}
+                    <div className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzExterior1} 
+                        alt="Elitz Residency Building Exterior" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Standard grid items */}
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzExterior2} 
+                        alt="Elitz Residency Architecture" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzLiving} 
+                        alt="Elitz Residency Living Room" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzDining} 
+                        alt="Elitz Residency Dining Area" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzTexture} 
+                        alt="Elitz Residency Interior Design" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Tall feature - spans 2 rows */}
+                    <div className="row-span-2 relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzEntrance} 
+                        alt="Elitz Residency Entrance" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzKitchen} 
+                        alt="Elitz Residency Modern Kitchen" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div className="relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzBathroom} 
+                        alt="Elitz Residency Bathroom" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Wide feature - spans 2 columns */}
+                    <div className="col-span-2 relative overflow-hidden rounded-lg shadow-card group">
+                      <img 
+                        src={elitzRooftop} 
+                        alt="Elitz Residency Rooftop Lounge" 
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="text-center py-12">
