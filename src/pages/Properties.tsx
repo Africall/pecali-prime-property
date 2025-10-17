@@ -6,11 +6,20 @@ import LogoRain from "@/components/LogoRain";
 import { Button } from "@/components/ui/button";
 import { MapPin, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import elitzCover from "@/assets/elitz-main-building.jpg";
 
 const Properties = () => {
   const [properties, setProperties] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Map of property slugs to their cover images
+  const coverImages: Record<string, string> = {
+    'elitz-residency': elitzCover,
+    'apple-tree-phase-3': '/properties/apple-tree-phase-3-cover.jpg',
+    'azure-sky-park': '/properties/azure-sky-park-cover.jpg',
+    'mango-tree': '/properties/mango-tree-cover.jpg',
+  };
 
   useEffect(() => {
     (async () => {
@@ -58,14 +67,27 @@ const Properties = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {properties.map((p) => (
+                {properties.map((p) => {
+                  const coverImage = coverImages[p.slug];
+                  
+                  return (
                   <div 
                     key={p.slug} 
                     className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
                     onClick={() => navigate(`/properties/${p.slug}`)}
                   >
-                    <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center" style={{ aspectRatio: '3 / 2' }}>
-                      <p className="text-lg font-semibold text-muted-foreground">Coming Soon</p>
+                    <div className="relative overflow-hidden" style={{ aspectRatio: '3 / 2' }}>
+                      {coverImage ? (
+                        <img 
+                          src={coverImage} 
+                          alt={p.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                          <p className="text-lg font-semibold text-muted-foreground">Coming Soon</p>
+                        </div>
+                      )}
                     </div>
                     <div className="p-5 space-y-3">
                       <h3 className="font-bold text-xl text-card-foreground line-clamp-1">
@@ -84,7 +106,7 @@ const Properties = () => {
                       </Button>
                     </div>
                   </div>
-                ))}
+                )})}
               </div>
             )}
           </div>
