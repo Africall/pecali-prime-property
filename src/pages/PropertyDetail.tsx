@@ -7,7 +7,16 @@ import ContactModal from '@/components/ContactModal';
 import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
+import elitzCover from '@/assets/elitz-cover.jpg';
+import elitzExterior1 from '@/assets/elitz-exterior-1.jpg';
+import elitzExterior2 from '@/assets/elitz-exterior-2.jpg';
+import elitzLiving from '@/assets/elitz-living.jpg';
+import elitzDining from '@/assets/elitz-dining.jpg';
+import elitzTexture from '@/assets/elitz-texture.jpg';
+import elitzEntrance from '@/assets/elitz-entrance.jpg';
+import elitzKitchen from '@/assets/elitz-kitchen.jpg';
+import elitzBathroom from '@/assets/elitz-bathroom.jpg';
+import elitzRooftop from '@/assets/elitz-rooftop.jpg';
 
 interface Property {
   id: string;
@@ -117,17 +126,57 @@ export default function PropertyDetail() {
           ) : property ? (
             <>
               {property.slug === 'elitz-residency' ? (
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <img 
-                    src={elitzMainBuilding} 
-                    alt="Elitz Residency Building" 
-                    className="w-full h-auto rounded-lg shadow-lg"
+                    src={elitzCover} 
+                    alt="Elitz Residency - Rumi Rd Nairobi" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
                   />
-                  <div className="text-center py-6">
-                    <p className="text-lg text-muted-foreground">
-                      More property details coming soon.
-                    </p>
-                  </div>
+                  <img 
+                    src={elitzExterior1} 
+                    alt="Elitz Residency Building Exterior" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzExterior2} 
+                    alt="Elitz Residency Architecture" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzLiving} 
+                    alt="Elitz Residency Living Room" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzDining} 
+                    alt="Elitz Residency Dining Area" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzTexture} 
+                    alt="Elitz Residency Interior Design" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzEntrance} 
+                    alt="Elitz Residency Entrance" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzKitchen} 
+                    alt="Elitz Residency Modern Kitchen" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzBathroom} 
+                    alt="Elitz Residency Bathroom" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <img 
+                    src={elitzRooftop} 
+                    alt="Elitz Residency Rooftop Lounge" 
+                    className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  />
                 </div>
               ) : (
                 <div className="text-center py-12">
