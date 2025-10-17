@@ -185,107 +185,107 @@ export default function PropertyDetail() {
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
                     {/* Large feature - spans 2 columns */}
                     <div 
-                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
                       onClick={() => setLightboxIndex(1)}
                     >
                       <img 
                         src={elitzExterior1} 
                         alt="Elitz Residency Building Exterior" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Standard grid items */}
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(2)}
                     >
                       <img 
                         src={elitzExterior2} 
                         alt="Elitz Residency Architecture" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(3)}
                     >
                       <img 
                         src={elitzLiving} 
                         alt="Elitz Residency Living Room" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(4)}
                     >
                       <img 
                         src={elitzDining} 
                         alt="Elitz Residency Dining Area" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(5)}
                     >
                       <img 
                         src={elitzTexture} 
                         alt="Elitz Residency Interior Design" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Tall feature - spans 2 rows */}
                     <div 
-                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
                       onClick={() => setLightboxIndex(6)}
                     >
                       <img 
                         src={elitzEntrance} 
                         alt="Elitz Residency Entrance" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(7)}
                     >
                       <img 
                         src={elitzKitchen} 
                         alt="Elitz Residency Modern Kitchen" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(8)}
                     >
                       <img 
                         src={elitzBathroom} 
                         alt="Elitz Residency Bathroom" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Wide feature - spans 2 columns */}
                     <div 
-                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(9)}
                     >
                       <img 
                         src={elitzRooftop} 
                         alt="Elitz Residency Rooftop Lounge" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                   </div>
@@ -305,107 +305,107 @@ export default function PropertyDetail() {
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
                     {/* Large feature - spans 2 columns */}
                     <div 
-                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
                       onClick={() => setLightboxIndex(1)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brA} 
                         alt="Mango Tree 3 Bedroom Floor Plan Type A" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Standard grid items */}
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(2)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brB} 
                         alt="Mango Tree 3 Bedroom Floor Plan Type B" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(3)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brD} 
                         alt="Mango Tree 3 Bedroom Floor Plan Type D" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(4)}
                     >
                       <img 
                         src={mangoTreeFloorplan2brC} 
                         alt="Mango Tree 2 Bedroom Floor Plan Type C" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(5)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brG} 
                         alt="Mango Tree 3 Bedroom Floor Plan Type G" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Tall feature - spans 2 rows */}
                     <div 
-                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
                       onClick={() => setLightboxIndex(6)}
                     >
                       <img 
                         src={mangoTreeFloorplan2brF} 
                         alt="Mango Tree 2 Bedroom Floor Plan Type F" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(7)}
                     >
                       <img 
                         src={mangoTreeFloorplan1brE} 
                         alt="Mango Tree 1 Bedroom Floor Plan Type E" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(8)}
                     >
                       <img 
                         src={mangoTreeAmenities} 
                         alt="Mango Tree Residence Amenities" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     {/* Wide feature - spans 2 columns */}
                     <div 
-                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(9)}
                     >
                       <img 
                         src={mangoTreeLocation} 
                         alt="Mango Tree Residence Location & Surroundings" 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                   </div>
