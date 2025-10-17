@@ -185,7 +185,7 @@ export default function PropertyDetail() {
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                     {/* Large feature - spans 2 columns */}
                     <div 
                       className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
@@ -305,7 +305,7 @@ export default function PropertyDetail() {
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                     {/* Large feature - spans 2 columns */}
                     <div 
                       className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
