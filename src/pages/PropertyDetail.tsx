@@ -77,9 +77,9 @@ export default function PropertyDetail() {
       <Navbar />
       <main className="pt-nav">
         {/* Compact Header */}
-        <section className="scroll-offset pt-6 pb-4 bg-gradient-to-b from-primary to-primary/90 text-primary-foreground">
+        <section className="scroll-offset pt-6 pb-4 bg-gradient-to-b from-[hsl(220,91%,37%)] to-[hsl(220,91%,37%)]/90 text-white dark:from-[hsl(220,91%,37%)] dark:to-[hsl(220,91%,37%)]/90 dark:text-white">
           <div className="container mx-auto px-3 sm:px-4">
-            <Button asChild variant="ghost" className="text-primary-foreground hover:text-primary-foreground/90 mb-3 -ml-2">
+            <Button asChild variant="ghost" className="text-white hover:text-white/90 mb-3 -ml-2">
               <Link to="/properties">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
@@ -97,7 +97,7 @@ export default function PropertyDetail() {
                   <h1 className="text-2xl md:text-3xl font-bold leading-tight mb-2">
                     {property.title}
                   </h1>
-                  <div className="flex items-center gap-2 text-primary-foreground/90 text-sm mb-1">
+                  <div className="flex items-center gap-2 text-white/90 text-sm mb-1">
                     <MapPin className="w-4 h-4" />
                     <span>{property.location}</span>
                   </div>
