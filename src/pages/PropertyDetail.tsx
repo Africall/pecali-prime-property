@@ -18,6 +18,16 @@ import elitzEntrance from '@/assets/elitz-entrance.jpg';
 import elitzKitchen from '@/assets/elitz-kitchen.jpg';
 import elitzBathroom from '@/assets/elitz-bathroom.jpg';
 import elitzRooftop from '@/assets/elitz-rooftop.jpg';
+import mangoTreeCover from '@/assets/mango-tree-cover.jpg';
+import mangoTreeFloorplan3brA from '@/assets/mango-tree-floorplan-3br-a.jpg';
+import mangoTreeFloorplan3brB from '@/assets/mango-tree-floorplan-3br-b.jpg';
+import mangoTreeFloorplan3brD from '@/assets/mango-tree-floorplan-3br-d.jpg';
+import mangoTreeFloorplan2brC from '@/assets/mango-tree-floorplan-2br-c.jpg';
+import mangoTreeFloorplan3brG from '@/assets/mango-tree-floorplan-3br-g.jpg';
+import mangoTreeFloorplan2brF from '@/assets/mango-tree-floorplan-2br-f.jpg';
+import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
+import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
+import mangoTreeLocation from '@/assets/mango-tree-location.jpg';
 
 interface Property {
   id: string;
@@ -46,6 +56,19 @@ export default function PropertyDetail() {
     elitzKitchen,
     elitzBathroom,
     elitzRooftop,
+  ];
+
+  const mangoTreeImages = [
+    mangoTreeCover,
+    mangoTreeFloorplan3brA,
+    mangoTreeFloorplan3brB,
+    mangoTreeFloorplan3brD,
+    mangoTreeFloorplan2brC,
+    mangoTreeFloorplan3brG,
+    mangoTreeFloorplan2brF,
+    mangoTreeFloorplan1brE,
+    mangoTreeAmenities,
+    mangoTreeLocation,
   ];
 
   useEffect(() => {
@@ -267,6 +290,126 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.slug === 'mango-tree' ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={mangoTreeCover} 
+                      alt="Mango Tree Residence - Nairobi National Park" 
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Large feature - spans 2 columns */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan3brA} 
+                        alt="Mango Tree 3 Bedroom Floor Plan Type A" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Standard grid items */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan3brB} 
+                        alt="Mango Tree 3 Bedroom Floor Plan Type B" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan3brD} 
+                        alt="Mango Tree 3 Bedroom Floor Plan Type D" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan2brC} 
+                        alt="Mango Tree 2 Bedroom Floor Plan Type C" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan3brG} 
+                        alt="Mango Tree 3 Bedroom Floor Plan Type G" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Tall feature - spans 2 rows */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan2brF} 
+                        alt="Mango Tree 2 Bedroom Floor Plan Type F" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={mangoTreeFloorplan1brE} 
+                        alt="Mango Tree 1 Bedroom Floor Plan Type E" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={mangoTreeAmenities} 
+                        alt="Mango Tree Residence Amenities" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Wide feature - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={mangoTreeLocation} 
+                        alt="Mango Tree Residence Location & Surroundings" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -300,6 +443,14 @@ export default function PropertyDetail() {
       {property?.slug === 'elitz-residency' && (
         <ImageLightbox 
           images={elitzImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {property?.slug === 'mango-tree' && (
+        <ImageLightbox 
+          images={mangoTreeImages} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
