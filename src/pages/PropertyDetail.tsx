@@ -8,7 +8,6 @@ import { ArrowLeft, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
-import pecaliLogo from '@/assets/pecali-logo-placeholder.jpg';
 
 interface Property {
   id: string;
@@ -116,18 +115,28 @@ export default function PropertyDetail() {
               </div>
             </div>
           ) : property ? (
-            <div className="space-y-4">
-              <img 
-                src={property.slug === 'elitz-residency' ? elitzMainBuilding : pecaliLogo} 
-                alt={property.slug === 'elitz-residency' ? 'Elitz Residency Building' : 'Pecali Real Estate'} 
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
-              <div className="text-center py-6">
-                <p className="text-lg text-muted-foreground">
-                  More property details coming soon.
-                </p>
-              </div>
-            </div>
+            <>
+              {property.slug === 'elitz-residency' ? (
+                <div className="space-y-4">
+                  <img 
+                    src={elitzMainBuilding} 
+                    alt="Elitz Residency Building" 
+                    className="w-full h-auto rounded-lg shadow-lg"
+                  />
+                  <div className="text-center py-6">
+                    <p className="text-lg text-muted-foreground">
+                      More property details coming soon.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-lg text-muted-foreground">
+                    Property details are being updated. Please check back soon.
+                  </p>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-12">
               <p className="text-lg text-muted-foreground">

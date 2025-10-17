@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { MapPin, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import elitzCover from "@/assets/elitz-main-building.jpg";
-import pecaliLogo from "@/assets/pecali-logo-placeholder.jpg";
 
 const Properties = () => {
   const [properties, setProperties] = useState<any[]>([]);
@@ -17,9 +16,9 @@ const Properties = () => {
   // Map of property slugs to their cover images
   const coverImages: Record<string, string> = {
     'elitz-residency': elitzCover,
-    'apple-tree-phase-3': pecaliLogo,
-    'azure-sky-park': pecaliLogo,
-    'mango-tree': pecaliLogo,
+    'apple-tree-phase-3': '/properties/apple-tree-phase-3-cover.jpg',
+    'azure-sky-park': '/properties/azure-sky-park-cover.jpg',
+    'mango-tree': '/properties/mango-tree-cover.jpg',
   };
 
   useEffect(() => {
