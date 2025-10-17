@@ -38,6 +38,8 @@ import appleTreeFloorplan4brPenthouse from '@/assets/apple-tree-floorplan-4br-pe
 import appleTreeFloorplan5brPenthouse from '@/assets/apple-tree-floorplan-5br-penthouse.jpg';
 import appleTreeFloorplan6brPenthouse from '@/assets/apple-tree-floorplan-6br-penthouse.jpg';
 import appleTreeInteriors from '@/assets/apple-tree-interiors.jpg';
+import appleTreeExternalViews from '@/assets/apple-tree-external-views.jpg';
+import appleTreeAmenities from '@/assets/apple-tree-amenities.jpg';
 
 interface Property {
   id: string;
@@ -92,6 +94,8 @@ export default function PropertyDetail() {
     appleTreeFloorplan5brPenthouse,
     appleTreeFloorplan6brPenthouse,
     appleTreeInteriors,
+    appleTreeExternalViews,
+    appleTreeAmenities,
   ];
 
   useEffect(() => {
@@ -548,6 +552,29 @@ export default function PropertyDetail() {
                       <img 
                         src={appleTreeInteriors} 
                         alt="Apple Tree Apartments Exquisite Interiors" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Additional images */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={appleTreeExternalViews} 
+                        alt="Apple Tree Apartments External Views & Scenic Beauty" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={appleTreeAmenities} 
+                        alt="Apple Tree Apartments Amenities & Location" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
