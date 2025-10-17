@@ -39,6 +39,7 @@ export default function PropertyDetail() {
     async function fetchProperty() {
       try {
         setLoading(true);
+        console.log('Fetching property with slug:', slug);
 
         const { data, error } = await supabase
           .from('properties')
@@ -50,12 +51,18 @@ export default function PropertyDetail() {
         if (cancelled) return;
 
         if (data) {
+          console.log('Property data loaded:', data);
           setProperty(data);
+        } else {
+          console.log('No property found for slug:', slug);
         }
       } catch (err) {
         console.error('Error fetching property:', err);
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+          console.log('Loading complete. Property:', property);
+        }
       }
     }
 
