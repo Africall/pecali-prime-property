@@ -28,6 +28,9 @@ import elitzFloorplan3brD from '@/assets/elitz-floorplan-3br-d.jpg';
 import elitzFloorplan4brE from '@/assets/elitz-floorplan-4br-e.jpg';
 import elitzPlayground from '@/assets/elitz-playground.jpg';
 import elitzAmenitiesLobby from '@/assets/elitz-amenities-lobby.jpg';
+import elitzLounge from '@/assets/elitz-lounge.jpg';
+import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
+import elitzLocation from '@/assets/elitz-location.jpg';
 import mangoTreeCover from '@/assets/mango-tree-cover.jpg';
 import mangoTreeFloorplan3brA from '@/assets/mango-tree-floorplan-3br-a.jpg';
 import mangoTreeFloorplan3brB from '@/assets/mango-tree-floorplan-3br-b.jpg';
@@ -88,6 +91,9 @@ export default function PropertyDetail() {
     elitzFloorplan4brE,
     elitzPlayground,
     elitzAmenitiesLobby,
+    elitzLounge,
+    elitzMainBuilding,
+    elitzLocation,
   ];
 
   const mangoTreeImages = [
