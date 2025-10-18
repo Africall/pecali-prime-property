@@ -42,7 +42,7 @@ import mangoTreeFloorplan2brF from '@/assets/mango-tree-floorplan-2br-f.jpg';
 import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
 import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
 import mangoTreeLocation from '@/assets/mango-tree-location.jpg';
-import appleTreeCover from '@/assets/apple-tree-cover.jpg';
+import appleTreeCover from '@/assets/apple-tree-cover-new.jpg';
 import appleTreeFloorplan3brA from '@/assets/apple-tree-floorplan-3br-a.jpg';
 import appleTreeFloorplan3brD from '@/assets/apple-tree-floorplan-3br-d.jpg';
 import appleTreeFloorplan2brB from '@/assets/apple-tree-floorplan-2br-b.jpg';
@@ -53,7 +53,7 @@ import appleTreeFloorplan5brPenthouse from '@/assets/apple-tree-floorplan-5br-pe
 import appleTreeFloorplan6brPenthouse from '@/assets/apple-tree-floorplan-6br-penthouse.jpg';
 import appleTreeInteriors from '@/assets/apple-tree-interiors.jpg';
 import appleTreeExternalViews from '@/assets/apple-tree-external-views.jpg';
-import appleTreeAmenities from '@/assets/apple-tree-amenities.jpg';
+import appleTreeAmenities from '@/assets/apple-tree-amenities-new.jpg';
 
 interface Property {
   id: string;
