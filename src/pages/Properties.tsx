@@ -19,6 +19,7 @@ const Properties = () => {
     'apple-tree-phase-3': '/properties/apple-tree-phase-3-cover.jpg',
     'azure-sky-park': '/properties/azure-sky-park-cover.jpg',
     'mango-tree': '/properties/mango-tree-cover.jpg',
+    'gemini-residency': '/properties/gemini-residency-cover.jpg',
   };
 
   useEffect(() => {
