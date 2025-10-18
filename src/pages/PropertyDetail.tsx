@@ -89,6 +89,10 @@ import urbanParkBedroom2 from '@/assets/urban-park-bedroom-2.jpg';
 import urbanParkExteriorFront from '@/assets/urban-park-exterior-front.jpg';
 import urbanParkLivingOpen from '@/assets/urban-park-living-open.jpg';
 import urbanParkExteriorFinal from '@/assets/urban-park-exterior-final.jpg';
+import urbanParkBathroom from '@/assets/urban-park-bathroom.jpg';
+import urbanParkExteriorStreet from '@/assets/urban-park-exterior-street.jpg';
+import urbanParkLivingModern from '@/assets/urban-park-living-modern.jpg';
+import urbanParkBedroom3 from '@/assets/urban-park-bedroom-3.jpg';
 
 interface Property {
   id: string;
@@ -200,7 +204,11 @@ export default function PropertyDetail() {
     urbanParkLivingDining,
     urbanParkBedroom1,
     urbanParkBedroom2,
+    urbanParkBathroom,
     urbanParkExteriorFront,
+    urbanParkExteriorStreet,
+    urbanParkLivingModern,
+    urbanParkBedroom3,
     urbanParkLivingOpen,
     urbanParkExteriorFinal,
   ];
@@ -1226,7 +1234,7 @@ export default function PropertyDetail() {
                     
                     {/* Bedroom 2 */}
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(6)}
                     >
                       <img 
@@ -1236,10 +1244,22 @@ export default function PropertyDetail() {
                       />
                     </div>
                     
-                    {/* Exterior Front View */}
+                    {/* Bathroom */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={urbanParkBathroom} 
+                        alt="Urban Park Modern Bathroom Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Exterior Front View */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(8)}
                     >
                       <img 
                         src={urbanParkExteriorFront} 
@@ -1248,10 +1268,46 @@ export default function PropertyDetail() {
                       />
                     </div>
                     
+                    {/* Exterior Street View - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={urbanParkExteriorStreet} 
+                        alt="Urban Park Street View & Entrance" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Living Room - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={urbanParkLivingModern} 
+                        alt="Urban Park Contemporary Living & Dining Space" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 3 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={urbanParkBedroom3} 
+                        alt="Urban Park Master Suite with City Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
                     {/* Living Room Open Plan */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(8)}
+                      onClick={() => setLightboxIndex(12)}
                     >
                       <img 
                         src={urbanParkLivingOpen} 
@@ -1263,7 +1319,7 @@ export default function PropertyDetail() {
                     {/* Final Exterior View - Wide feature */}
                     <div 
                       className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(9)}
+                      onClick={() => setLightboxIndex(13)}
                     >
                       <img 
                         src={urbanParkExteriorFinal} 
