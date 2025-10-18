@@ -40,8 +40,9 @@ import mangoTreeFloorplan2brC from '@/assets/mango-tree-floorplan-2br-c.jpg';
 import mangoTreeFloorplan3brG from '@/assets/mango-tree-floorplan-3br-g.jpg';
 import mangoTreeFloorplan2brF from '@/assets/mango-tree-floorplan-2br-f.jpg';
 import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
+import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
 import mangoTreeLocation from '@/assets/mango-tree-location-new.jpg';
-import mangoTreeAmenities from '@/assets/mango-tree-amenities-new.jpg';
+import mangoTreeAmenitiesNew from '@/assets/mango-tree-amenities-new.jpg';
 import appleTreeCover from '@/assets/apple-tree-cover-new.jpg';
 import appleTreeFloorplan3brA from '@/assets/apple-tree-floorplan-3br-a.jpg';
 import appleTreeFloorplan3brD from '@/assets/apple-tree-floorplan-3br-d.jpg';
@@ -107,8 +108,9 @@ export default function PropertyDetail() {
     mangoTreeFloorplan3brG,
     mangoTreeFloorplan2brF,
     mangoTreeFloorplan1brE,
-    mangoTreeLocation,
     mangoTreeAmenities,
+    mangoTreeLocation,
+    mangoTreeAmenitiesNew,
   ];
 
   const appleTreeImages = [
@@ -601,8 +603,8 @@ export default function PropertyDetail() {
                       onClick={() => setLightboxIndex(8)}
                     >
                       <img 
-                        src={mangoTreeLocation} 
-                        alt="Mango Tree Residence Location & Surroundings" 
+                        src={mangoTreeAmenities} 
+                        alt="Mango Tree Residence Amenities" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
@@ -613,7 +615,19 @@ export default function PropertyDetail() {
                       onClick={() => setLightboxIndex(9)}
                     >
                       <img 
-                        src={mangoTreeAmenities} 
+                        src={mangoTreeLocation} 
+                        alt="Mango Tree Residence Location & Surroundings" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* New last item */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={mangoTreeAmenitiesNew} 
                         alt="Mango Tree Residence Amenities & Features" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
