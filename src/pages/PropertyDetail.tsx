@@ -69,6 +69,16 @@ import geminiFloorplan4br from '@/assets/gemini-floorplan-4br.jpg';
 import geminiCourtyardGarden from '@/assets/gemini-courtyard-garden.jpg';
 import geminiCourtyardParking from '@/assets/gemini-courtyard-parking.jpg';
 import geminiExteriorBuildings from '@/assets/gemini-exterior-buildings.jpg';
+import azureSkyCover from '@/assets/azure-sky-cover.jpg';
+import azureSkyOverview from '@/assets/azure-sky-overview.jpg';
+import azureSkyAmenities from '@/assets/azure-sky-amenities.jpg';
+import azureSkyFloorplansOverview from '@/assets/azure-sky-floorplans-overview.jpg';
+import azureSky1br from '@/assets/azure-sky-1br.jpg';
+import azureSky2br from '@/assets/azure-sky-2br.jpg';
+import azureSky3br from '@/assets/azure-sky-3br.jpg';
+import azureSky4br from '@/assets/azure-sky-4br.jpg';
+import azureSkyFeatures from '@/assets/azure-sky-features.jpg';
+import azureSkyLocation from '@/assets/azure-sky-location.jpg';
 
 interface Property {
   id: string;
@@ -157,6 +167,19 @@ export default function PropertyDetail() {
     geminiCourtyardGarden,
     geminiCourtyardParking,
     geminiExteriorBuildings,
+  ];
+
+  const azureSkyParkImages = [
+    azureSkyCover,
+    azureSkyOverview,
+    azureSkyAmenities,
+    azureSky1br,
+    azureSky2br,
+    azureSky3br,
+    azureSky4br,
+    azureSkyFloorplansOverview,
+    azureSkyFeatures,
+    azureSkyLocation,
   ];
 
   useEffect(() => {
@@ -977,6 +1000,131 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.slug === 'azure-sky-park' ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={azureSkyCover} 
+                      alt="Azure Sky Park - Premium Apartments" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Overview - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={azureSkyOverview} 
+                        alt="Azure Sky Park Overview & Property Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Amenities - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={azureSkyAmenities} 
+                        alt="Azure Sky Park Amenities & Features" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 1 Bedroom Floor Plan - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={azureSky1br} 
+                        alt="Azure Sky Park 1 Bedroom 58.05m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 2 Bedroom Floor Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={azureSky2br} 
+                        alt="Azure Sky Park 2 Bedroom 76.08m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 3 Bedroom Floor Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={azureSky3br} 
+                        alt="Azure Sky Park 3 Bedroom 123.9m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 4 Bedroom Floor Plan - Tall feature */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={azureSky4br} 
+                        alt="Azure Sky Park 4 Bedroom 189.64m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Floor Plans Overview */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={azureSkyFloorplansOverview} 
+                        alt="Azure Sky Park All Floor Plans Overview" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Features - Wide feature */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={azureSkyFeatures} 
+                        alt="Azure Sky Park Premium Features & Services" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Location Map - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={azureSkyLocation} 
+                        alt="Azure Sky Park Location Map - Near Nairobi National Park" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -1034,6 +1182,14 @@ export default function PropertyDetail() {
       {property?.slug === 'gemini-residency' && (
         <ImageLightbox 
           images={geminiImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {property?.slug === 'azure-sky-park' && (
+        <ImageLightbox 
+          images={azureSkyParkImages} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
