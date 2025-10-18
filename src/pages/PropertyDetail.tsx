@@ -31,6 +31,7 @@ import elitzAmenitiesLobby from '@/assets/elitz-amenities-lobby.jpg';
 import elitzLounge from '@/assets/elitz-lounge.jpg';
 import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
 import elitzLocation from '@/assets/elitz-location.jpg';
+import elitzBrochureCover from '@/assets/elitz-brochure-cover.jpg';
 import mangoTreeCover from '@/assets/mango-tree-cover.jpg';
 import mangoTreeFloorplan3brA from '@/assets/mango-tree-floorplan-3br-a.jpg';
 import mangoTreeFloorplan3brB from '@/assets/mango-tree-floorplan-3br-b.jpg';
@@ -94,6 +95,7 @@ export default function PropertyDetail() {
     elitzLounge,
     elitzMainBuilding,
     elitzLocation,
+    elitzBrochureCover,
   ];
 
   const mangoTreeImages = [
@@ -482,6 +484,17 @@ export default function PropertyDetail() {
                       <img 
                         src={elitzLocation} 
                         alt="Elitz Residency Location Map - Rumi Rd" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
+                      onClick={() => setLightboxIndex(23)}
+                    >
+                      <img 
+                        src={elitzBrochureCover} 
+                        alt="Elitz Residency - Rumi Rd Nairobi" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
