@@ -66,6 +66,9 @@ import geminiFloorplanSuper2br from '@/assets/gemini-floorplan-super-2br.jpg';
 import geminiFloorplan3br from '@/assets/gemini-floorplan-3br.jpg';
 import geminiFloorplanSuper3br from '@/assets/gemini-floorplan-super-3br.jpg';
 import geminiFloorplan4br from '@/assets/gemini-floorplan-4br.jpg';
+import geminiCourtyardGarden from '@/assets/gemini-courtyard-garden.jpg';
+import geminiCourtyardParking from '@/assets/gemini-courtyard-parking.jpg';
+import geminiExteriorBuildings from '@/assets/gemini-exterior-buildings.jpg';
 
 interface Property {
   id: string;
@@ -151,6 +154,9 @@ export default function PropertyDetail() {
     geminiFloorplan3br,
     geminiFloorplanSuper3br,
     geminiFloorplan4br,
+    geminiCourtyardGarden,
+    geminiCourtyardParking,
+    geminiExteriorBuildings,
   ];
 
   useEffect(() => {
@@ -933,6 +939,40 @@ export default function PropertyDetail() {
                         src={geminiFloorplan4br} 
                         alt="Gemini Residency 4 Bedroom 216m² Floor Plan" 
                         className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Additional exterior views - spanning full width */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={geminiCourtyardGarden} 
+                        alt="Gemini Residency Courtyard Garden View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={geminiCourtyardParking} 
+                        alt="Gemini Residency Courtyard & Parking Area" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(12)}
+                    >
+                      <img 
+                        src={geminiExteriorBuildings} 
+                        alt="Gemini Residency Exterior Buildings View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                   </div>
