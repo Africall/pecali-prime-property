@@ -318,13 +318,13 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
                       src={elitzCover} 
                       alt="Elitz Residency - Rumi Rd Nairobi" 
-                      className="w-full h-auto"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   
@@ -593,13 +593,13 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
                       src={mangoTreeCover} 
                       alt="Mango Tree Residence - Nairobi National Park" 
-                      className="w-full h-auto"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   
@@ -748,13 +748,13 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
                       src={appleTreeCover} 
                       alt="Apple Tree Apartments Phase 3 - Nairobi" 
-                      className="w-full h-auto"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   
@@ -891,7 +891,7 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
@@ -1049,7 +1049,7 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
@@ -1174,7 +1174,7 @@ export default function PropertyDetail() {
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
                   <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
