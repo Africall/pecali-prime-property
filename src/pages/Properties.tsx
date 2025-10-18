@@ -20,6 +20,7 @@ const Properties = () => {
     'azure-sky-park': '/properties/azure-sky-park-cover.jpg',
     'mango-tree': '/properties/mango-tree-cover.jpg',
     'gemini-residency': '/properties/gemini-residency-cover.jpg',
+    'urban-park': '/properties/urban-park-cover.jpg',
   };
 
   useEffect(() => {
