@@ -140,7 +140,6 @@ export default function PropertyDetail() {
 
   const mangoTreeImages = [
     mangoTreeCover,
-    mangoTreeCoverOriginal,
     mangoTreeFloorplan3brA,
     mangoTreeFloorplan3brB,
     mangoTreeFloorplan3brD,
@@ -605,22 +604,10 @@ export default function PropertyDetail() {
                   
                   {/* Dynamic Grid Layout */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-                    {/* Large feature - spans 2 columns - Original Cover */}
-                    <div 
-                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(1)}
-                    >
-                      <img 
-                        src={mangoTreeCoverOriginal} 
-                        alt="Mango Tree Residence Cover" 
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      />
-                    </div>
-                    
                     {/* Standard grid items */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(2)}
+                      onClick={() => setLightboxIndex(1)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brA} 
@@ -631,7 +618,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(3)}
+                      onClick={() => setLightboxIndex(2)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brB} 
@@ -642,7 +629,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(4)}
+                      onClick={() => setLightboxIndex(3)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brD} 
@@ -653,7 +640,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(5)}
+                      onClick={() => setLightboxIndex(4)}
                     >
                       <img 
                         src={mangoTreeFloorplan2brC} 
@@ -664,7 +651,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(6)}
+                      onClick={() => setLightboxIndex(5)}
                     >
                       <img 
                         src={mangoTreeFloorplan3brG} 
@@ -676,7 +663,7 @@ export default function PropertyDetail() {
                     {/* Tall feature - spans 2 rows */}
                     <div 
                       className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(7)}
+                      onClick={() => setLightboxIndex(6)}
                     >
                       <img 
                         src={mangoTreeFloorplan2brF} 
@@ -687,7 +674,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(8)}
+                      onClick={() => setLightboxIndex(7)}
                     >
                       <img 
                         src={mangoTreeFloorplan1brE} 
@@ -698,7 +685,7 @@ export default function PropertyDetail() {
                     
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(9)}
+                      onClick={() => setLightboxIndex(8)}
                     >
                       <img 
                         src={mangoTreeAmenities} 
@@ -710,7 +697,7 @@ export default function PropertyDetail() {
                     {/* National Park View - Third last */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(10)}
+                      onClick={() => setLightboxIndex(9)}
                     >
                       <img 
                         src={mangoTreeNationalParkView} 
@@ -722,7 +709,7 @@ export default function PropertyDetail() {
                     {/* Wide feature - spans 2 columns - Second last */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(11)}
+                      onClick={() => setLightboxIndex(10)}
                     >
                       <img 
                         src={mangoTreeLocation} 
@@ -734,7 +721,7 @@ export default function PropertyDetail() {
                     {/* Last item */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(12)}
+                      onClick={() => setLightboxIndex(11)}
                     >
                       <img 
                         src={mangoTreeAmenitiesNew} 
