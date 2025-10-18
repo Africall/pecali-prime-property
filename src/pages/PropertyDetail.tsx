@@ -32,7 +32,7 @@ import elitzLounge from '@/assets/elitz-lounge.jpg';
 import elitzMainBuilding from '@/assets/elitz-main-building.jpg';
 import elitzLocation from '@/assets/elitz-location.jpg';
 import elitzBrochureCover from '@/assets/elitz-brochure-cover.jpg';
-import mangoTreeCover from '@/assets/mango-tree-cover.jpg';
+import mangoTreeCover from '@/assets/mango-tree-cover-new.jpg';
 import mangoTreeFloorplan3brA from '@/assets/mango-tree-floorplan-3br-a.jpg';
 import mangoTreeFloorplan3brB from '@/assets/mango-tree-floorplan-3br-b.jpg';
 import mangoTreeFloorplan3brD from '@/assets/mango-tree-floorplan-3br-d.jpg';
@@ -40,8 +40,8 @@ import mangoTreeFloorplan2brC from '@/assets/mango-tree-floorplan-2br-c.jpg';
 import mangoTreeFloorplan3brG from '@/assets/mango-tree-floorplan-3br-g.jpg';
 import mangoTreeFloorplan2brF from '@/assets/mango-tree-floorplan-2br-f.jpg';
 import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
-import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
-import mangoTreeLocation from '@/assets/mango-tree-location.jpg';
+import mangoTreeLocation from '@/assets/mango-tree-location-new.jpg';
+import mangoTreeAmenities from '@/assets/mango-tree-amenities-new.jpg';
 import appleTreeCover from '@/assets/apple-tree-cover-new.jpg';
 import appleTreeFloorplan3brA from '@/assets/apple-tree-floorplan-3br-a.jpg';
 import appleTreeFloorplan3brD from '@/assets/apple-tree-floorplan-3br-d.jpg';
@@ -107,8 +107,8 @@ export default function PropertyDetail() {
     mangoTreeFloorplan3brG,
     mangoTreeFloorplan2brF,
     mangoTreeFloorplan1brE,
-    mangoTreeAmenities,
     mangoTreeLocation,
+    mangoTreeAmenities,
   ];
 
   const appleTreeImages = [
@@ -601,8 +601,8 @@ export default function PropertyDetail() {
                       onClick={() => setLightboxIndex(8)}
                     >
                       <img 
-                        src={mangoTreeAmenities} 
-                        alt="Mango Tree Residence Amenities" 
+                        src={mangoTreeLocation} 
+                        alt="Mango Tree Residence Location & Surroundings" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
@@ -613,8 +613,8 @@ export default function PropertyDetail() {
                       onClick={() => setLightboxIndex(9)}
                     >
                       <img 
-                        src={mangoTreeLocation} 
-                        alt="Mango Tree Residence Location & Surroundings" 
+                        src={mangoTreeAmenities} 
+                        alt="Mango Tree Residence Amenities & Features" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
