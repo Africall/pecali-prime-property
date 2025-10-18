@@ -456,7 +456,7 @@ export default function PropertyDetail() {
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(20)}
                     >
                       <img 
@@ -467,7 +467,7 @@ export default function PropertyDetail() {
                     </div>
                     
                     <div 
-                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(21)}
                     >
                       <img 
@@ -489,7 +489,7 @@ export default function PropertyDetail() {
                     </div>
                     
                     <div 
-                      className="col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(23)}
                     >
                       <img 
