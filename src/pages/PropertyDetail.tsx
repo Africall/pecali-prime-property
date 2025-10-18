@@ -44,6 +44,7 @@ import mangoTreeFloorplan1brE from '@/assets/mango-tree-floorplan-1br-e.jpg';
 import mangoTreeAmenities from '@/assets/mango-tree-amenities.jpg';
 import mangoTreeLocation from '@/assets/mango-tree-location-new.jpg';
 import mangoTreeAmenitiesNew from '@/assets/mango-tree-amenities-new.jpg';
+import mangoTreeNationalParkView from '@/assets/mango-tree-national-park-view.jpg';
 import appleTreeCover from '@/assets/apple-tree-cover-new.jpg';
 import appleTreeFloorplan3brA from '@/assets/apple-tree-floorplan-3br-a.jpg';
 import appleTreeFloorplan3brD from '@/assets/apple-tree-floorplan-3br-d.jpg';
@@ -148,6 +149,7 @@ export default function PropertyDetail() {
     mangoTreeFloorplan2brF,
     mangoTreeFloorplan1brE,
     mangoTreeAmenities,
+    mangoTreeNationalParkView,
     mangoTreeLocation,
     mangoTreeAmenitiesNew,
   ];
@@ -705,10 +707,22 @@ export default function PropertyDetail() {
                       />
                     </div>
                     
-                    {/* Wide feature - spans 2 columns */}
+                    {/* National Park View - Third last */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={mangoTreeNationalParkView} 
+                        alt="Be A Neighbour to Nairobi National Park" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Wide feature - spans 2 columns - Second last */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(11)}
                     >
                       <img 
                         src={mangoTreeLocation} 
@@ -717,10 +731,10 @@ export default function PropertyDetail() {
                       />
                     </div>
                     
-                    {/* New last item */}
+                    {/* Last item */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(11)}
+                      onClick={() => setLightboxIndex(12)}
                     >
                       <img 
                         src={mangoTreeAmenitiesNew} 
