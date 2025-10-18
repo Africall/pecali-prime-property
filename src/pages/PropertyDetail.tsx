@@ -79,6 +79,16 @@ import azureSky3br from '@/assets/azure-sky-3br.jpg';
 import azureSky4br from '@/assets/azure-sky-4br.jpg';
 import azureSkyFeatures from '@/assets/azure-sky-features.jpg';
 import azureSkyLocation from '@/assets/azure-sky-location.jpg';
+import urbanParkExteriorEntrance from '@/assets/urban-park-exterior-entrance.jpg';
+import urbanParkAerial1 from '@/assets/urban-park-aerial-1.jpg';
+import urbanParkAerial2 from '@/assets/urban-park-aerial-2.jpg';
+import urbanParkKitchen from '@/assets/urban-park-kitchen.jpg';
+import urbanParkLivingDining from '@/assets/urban-park-living-dining.jpg';
+import urbanParkBedroom1 from '@/assets/urban-park-bedroom-1.jpg';
+import urbanParkBedroom2 from '@/assets/urban-park-bedroom-2.jpg';
+import urbanParkExteriorFront from '@/assets/urban-park-exterior-front.jpg';
+import urbanParkLivingOpen from '@/assets/urban-park-living-open.jpg';
+import urbanParkExteriorFinal from '@/assets/urban-park-exterior-final.jpg';
 
 interface Property {
   id: string;
@@ -180,6 +190,19 @@ export default function PropertyDetail() {
     azureSkyFloorplansOverview,
     azureSkyFeatures,
     azureSkyLocation,
+  ];
+
+  const urbanParkImages = [
+    urbanParkExteriorEntrance,
+    urbanParkAerial1,
+    urbanParkAerial2,
+    urbanParkKitchen,
+    urbanParkLivingDining,
+    urbanParkBedroom1,
+    urbanParkBedroom2,
+    urbanParkExteriorFront,
+    urbanParkLivingOpen,
+    urbanParkExteriorFinal,
   ];
 
   useEffect(() => {
@@ -1125,6 +1148,131 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.slug === 'urban-park' ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={urbanParkExteriorEntrance} 
+                      alt="Urban Park - Modern Living For A Modern City" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Aerial View 1 - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={urbanParkAerial1} 
+                        alt="Urban Park Aerial View - Complete Development" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Aerial View 2 */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={urbanParkAerial2} 
+                        alt="Urban Park Aerial View - Pool & Amenities" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Kitchen */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={urbanParkKitchen} 
+                        alt="Urban Park Modern Kitchen Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living & Dining - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={urbanParkLivingDining} 
+                        alt="Urban Park Living & Dining Room" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 1 - Tall feature */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={urbanParkBedroom1} 
+                        alt="Urban Park Master Bedroom Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 2 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={urbanParkBedroom2} 
+                        alt="Urban Park Bedroom Interior Design" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Exterior Front View */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={urbanParkExteriorFront} 
+                        alt="Urban Park Front Facade Architecture" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living Room Open Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={urbanParkLivingOpen} 
+                        alt="Urban Park Open Plan Living Space" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Final Exterior View - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={urbanParkExteriorFinal} 
+                        alt="Urban Park Complete Development View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -1190,6 +1338,14 @@ export default function PropertyDetail() {
       {property?.slug === 'azure-sky-park' && (
         <ImageLightbox 
           images={azureSkyParkImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {property?.slug === 'urban-park' && (
+        <ImageLightbox 
+          images={urbanParkImages} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
