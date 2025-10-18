@@ -18,6 +18,16 @@ import elitzEntrance from '@/assets/elitz-entrance.jpg';
 import elitzKitchen from '@/assets/elitz-kitchen.jpg';
 import elitzBathroom from '@/assets/elitz-bathroom.jpg';
 import elitzRooftop from '@/assets/elitz-rooftop.jpg';
+import elitzBedroom2 from '@/assets/elitz-bedroom-2.jpg';
+import elitzLiving2 from '@/assets/elitz-living-2.jpg';
+import elitzDiningKitchen from '@/assets/elitz-dining-kitchen.jpg';
+import elitzFloorplan2brA from '@/assets/elitz-floorplan-2br-a.jpg';
+import elitzFloorplan2brB from '@/assets/elitz-floorplan-2br-b.jpg';
+import elitzFloorplan3brC from '@/assets/elitz-floorplan-3br-c.jpg';
+import elitzFloorplan3brD from '@/assets/elitz-floorplan-3br-d.jpg';
+import elitzFloorplan4brE from '@/assets/elitz-floorplan-4br-e.jpg';
+import elitzPlayground from '@/assets/elitz-playground.jpg';
+import elitzAmenitiesLobby from '@/assets/elitz-amenities-lobby.jpg';
 import mangoTreeCover from '@/assets/mango-tree-cover.jpg';
 import mangoTreeFloorplan3brA from '@/assets/mango-tree-floorplan-3br-a.jpg';
 import mangoTreeFloorplan3brB from '@/assets/mango-tree-floorplan-3br-b.jpg';
@@ -68,6 +78,16 @@ export default function PropertyDetail() {
     elitzKitchen,
     elitzBathroom,
     elitzRooftop,
+    elitzBedroom2,
+    elitzLiving2,
+    elitzDiningKitchen,
+    elitzFloorplan2brA,
+    elitzFloorplan2brB,
+    elitzFloorplan3brC,
+    elitzFloorplan3brD,
+    elitzFloorplan4brE,
+    elitzPlayground,
+    elitzAmenitiesLobby,
   ];
 
   const mangoTreeImages = [
@@ -312,6 +332,117 @@ export default function PropertyDetail() {
                       <img 
                         src={elitzRooftop} 
                         alt="Elitz Residency Rooftop Lounge" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Additional images - continuation */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={elitzBedroom2} 
+                        alt="Elitz Residency Modern Bedroom" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={elitzLiving2} 
+                        alt="Elitz Residency Living Area" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(12)}
+                    >
+                      <img 
+                        src={elitzDiningKitchen} 
+                        alt="Elitz Residency Dining & Kitchen" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(13)}
+                    >
+                      <img 
+                        src={elitzFloorplan2brA} 
+                        alt="Elitz Residency 2 Bedroom Floor Plan Unit A" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(14)}
+                    >
+                      <img 
+                        src={elitzFloorplan2brB} 
+                        alt="Elitz Residency 2 Bedroom Floor Plan Unit B" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(15)}
+                    >
+                      <img 
+                        src={elitzFloorplan3brC} 
+                        alt="Elitz Residency 3 Bedroom Floor Plan Unit C" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(16)}
+                    >
+                      <img 
+                        src={elitzFloorplan3brD} 
+                        alt="Elitz Residency 3 Bedroom Floor Plan Unit D" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(17)}
+                    >
+                      <img 
+                        src={elitzFloorplan4brE} 
+                        alt="Elitz Residency 4 Bedroom Floor Plan Unit E" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(18)}
+                    >
+                      <img 
+                        src={elitzPlayground} 
+                        alt="Elitz Residency Kids Play Area" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(19)}
+                    >
+                      <img 
+                        src={elitzAmenitiesLobby} 
+                        alt="Elitz Residency Entrance Lobby & Amenities" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
