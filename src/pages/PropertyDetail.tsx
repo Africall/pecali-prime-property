@@ -452,6 +452,39 @@ export default function PropertyDetail() {
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(20)}
+                    >
+                      <img 
+                        src={elitzLounge} 
+                        alt="Elitz Residency Elevator Lounge" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(21)}
+                    >
+                      <img 
+                        src={elitzMainBuilding} 
+                        alt="Elitz Residency Building - 3KM from Wilson Airport" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(22)}
+                    >
+                      <img 
+                        src={elitzLocation} 
+                        alt="Elitz Residency Location Map - Rumi Rd" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
               ) : property.slug === 'mango-tree' ? (
