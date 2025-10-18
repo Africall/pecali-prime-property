@@ -17,10 +17,10 @@ const Properties = () => {
   const coverImages: Record<string, string> = {
     'elitz-residency': elitzCover,
     'apple-tree-phase-3': '/properties/apple-tree-phase-3-cover.jpg',
-    'azure-sky-park': '/properties/azure-sky-park-cover.jpg',
+    'azure-sky-park': `/properties/azure-sky-park-cover.jpg?v=${Date.now()}`,
     'mango-tree': '/properties/mango-tree-cover.jpg',
-    'gemini-residency': '/properties/gemini-residency-cover.jpg',
-    'urban-park': '/properties/urban-park-cover.jpg',
+    'gemini-residency': `/properties/gemini-residency-cover.jpg?v=${Date.now()}`,
+    'urban-park': `/properties/urban-park-cover.jpg?v=${Date.now()}`,
   };
 
   useEffect(() => {
