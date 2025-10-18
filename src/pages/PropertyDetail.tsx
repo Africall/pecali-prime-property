@@ -70,9 +70,6 @@ import geminiCourtyardGarden from '@/assets/gemini-courtyard-garden.jpg';
 import geminiCourtyardParking from '@/assets/gemini-courtyard-parking.jpg';
 import geminiExteriorBuildings from '@/assets/gemini-exterior-buildings.jpg';
 import azureSkyCover from '@/assets/azure-sky-cover.jpg';
-import azureSkyCoverNew from '@/assets/azure-sky-cover-new.jpg';
-import geminiCoverNew from '@/assets/gemini-cover-new.jpg';
-import urbanParkCoverNew from '@/assets/urban-park-cover-new.jpg';
 import azureSkyOverview from '@/assets/azure-sky-overview.jpg';
 import azureSkyAmenities from '@/assets/azure-sky-amenities.jpg';
 import azureSkyFloorplansOverview from '@/assets/azure-sky-floorplans-overview.jpg';
@@ -157,7 +154,7 @@ export default function PropertyDetail() {
   ];
 
   const geminiImages = [
-    geminiCoverNew,
+    geminiExteriorCourtyard,
     geminiPool1,
     geminiPool2,
     geminiFloorplanStudio,
@@ -173,7 +170,7 @@ export default function PropertyDetail() {
   ];
 
   const azureSkyParkImages = [
-    azureSkyCoverNew,
+    azureSkyCover,
     azureSkyOverview,
     azureSkyAmenities,
     azureSky1br,
@@ -183,10 +180,6 @@ export default function PropertyDetail() {
     azureSkyFloorplansOverview,
     azureSkyFeatures,
     azureSkyLocation,
-  ];
-
-  const urbanParkImages = [
-    urbanParkCoverNew,
   ];
 
   useEffect(() => {
@@ -857,7 +850,7 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={geminiCoverNew} 
+                      src={geminiExteriorCourtyard} 
                       alt="Gemini Residency - Exterior Courtyard View" 
                       className="w-full h-full object-cover"
                     />
@@ -1015,7 +1008,7 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={azureSkyCoverNew} 
+                      src={azureSkyCover} 
                       alt="Azure Sky Park - Premium Apartments" 
                       className="w-full h-full object-cover"
                     />
@@ -1132,20 +1125,6 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
-              ) : property.slug === 'urban-park' ? (
-                <div className="space-y-4">
-                  {/* Featured Hero Image */}
-                  <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[500px]"
-                    onClick={() => setLightboxIndex(0)}
-                  >
-                    <img 
-                      src={urbanParkCoverNew} 
-                      alt="Urban Park - Modern Living for a Modern City" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -1211,14 +1190,6 @@ export default function PropertyDetail() {
       {property?.slug === 'azure-sky-park' && (
         <ImageLightbox 
           images={azureSkyParkImages} 
-          index={lightboxIndex} 
-          setIndex={setLightboxIndex} 
-        />
-      )}
-
-      {property?.slug === 'urban-park' && (
-        <ImageLightbox 
-          images={urbanParkImages} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
