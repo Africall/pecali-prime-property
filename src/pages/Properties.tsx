@@ -83,7 +83,7 @@ const Properties = () => {
                         <img 
                           src={coverImage} 
                           alt={p.title}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="w-full h-full object-contain bg-muted transition-transform duration-300 group-hover:scale-105"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">

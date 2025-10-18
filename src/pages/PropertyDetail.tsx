@@ -324,7 +324,7 @@ export default function PropertyDetail() {
                     <img 
                       src={elitzCover} 
                       alt="Elitz Residency - Rumi Rd Nairobi" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
@@ -599,7 +599,7 @@ export default function PropertyDetail() {
                     <img 
                       src={mangoTreeCover} 
                       alt="Mango Tree Residence - Nairobi National Park" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
@@ -754,7 +754,7 @@ export default function PropertyDetail() {
                     <img 
                       src={appleTreeCover} 
                       alt="Apple Tree Apartments Phase 3 - Nairobi" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
@@ -897,7 +897,7 @@ export default function PropertyDetail() {
                     <img 
                       src={geminiExteriorCourtyard} 
                       alt="Gemini Residency - Exterior Courtyard View" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
@@ -1055,7 +1055,7 @@ export default function PropertyDetail() {
                     <img 
                       src={azureSkyCover} 
                       alt="Azure Sky Park - Premium Apartments" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
@@ -1180,7 +1180,7 @@ export default function PropertyDetail() {
                     <img 
                       src={urbanParkExteriorEntrance} 
                       alt="Urban Park - Modern Living For A Modern City" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
