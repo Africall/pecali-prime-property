@@ -1,8 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Session, User } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
+
+interface AuthContextType {
+  user: User;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within AuthGuard");
+  }
+  return context;
+};
 
 interface AuthGuardProps {
   children: React.ReactNode;
@@ -10,24 +24,27 @@ interface AuthGuardProps {
 
 export const AuthGuard = ({ children }: AuthGuardProps) => {
   const navigate = useNavigate();
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
       if (!session) {
         navigate("/auth", { replace: true });
+        setLoading(false);
+      } else {
+        setUser(session.user);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     // Listen to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
       if (!session) {
         navigate("/auth", { replace: true });
+      } else {
+        setUser(session.user);
       }
     });
 
@@ -42,9 +59,13 @@ export const AuthGuard = ({ children }: AuthGuardProps) => {
     );
   }
 
-  if (!session) {
+  if (!user) {
     return null;
   }
 
-  return <>{children}</>;
+  return (
+    <AuthContext.Provider value={{ user }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

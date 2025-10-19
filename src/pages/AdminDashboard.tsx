@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -11,25 +10,19 @@ import LogoRain from "@/components/LogoRain";
 import AdminView from "@/components/admin/AdminView";
 import ProjectManagerView from "@/components/admin/ProjectManagerView";
 import SalesTeamView from "@/components/admin/SalesTeamView";
-import { AuthGuard } from "@/components/AuthGuard";
+import { AuthGuard, useAuth } from "@/components/AuthGuard";
 
 type UserRole = 'admin' | 'project_manager' | 'sales_team';
 
-const AdminDashboard = () => {
+const AdminDashboardContent = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
+  const { user } = useAuth();
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get current user once on mount
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        setUser(user);
-        checkUserRole(user.id);
-      }
-    });
-  }, []);
+    checkUserRole(user.id);
+  }, [user]);
 
   const checkUserRole = async (userId: string) => {
     try {
@@ -98,19 +91,25 @@ const AdminDashboard = () => {
   }
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <LogoRain />
-        
-        <div className="container mx-auto px-4 py-8">
-          {userRole === 'admin' && <AdminView user={user!} onLogout={handleLogout} />}
-          {userRole === 'project_manager' && <ProjectManagerView user={user!} onLogout={handleLogout} />}
-          {userRole === 'sales_team' && <SalesTeamView user={user!} onLogout={handleLogout} />}
-        </div>
-
-        <Footer />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <LogoRain />
+      
+      <div className="container mx-auto px-4 py-8">
+        {userRole === 'admin' && <AdminView user={user} onLogout={handleLogout} />}
+        {userRole === 'project_manager' && <ProjectManagerView user={user} onLogout={handleLogout} />}
+        {userRole === 'sales_team' && <SalesTeamView user={user} onLogout={handleLogout} />}
       </div>
+
+      <Footer />
+    </div>
+  );
+};
+
+const AdminDashboard = () => {
+  return (
+    <AuthGuard>
+      <AdminDashboardContent />
     </AuthGuard>
   );
 };
