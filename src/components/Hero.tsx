@@ -3,7 +3,7 @@ import heroImage from "@/assets/hero-luxury-properties.jpg";
 const Hero = () => {
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img
@@ -18,7 +18,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 pt-24">
+      <div className="relative z-10 container mx-auto px-4 pt-16">
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 animate-slide-up leading-tight">

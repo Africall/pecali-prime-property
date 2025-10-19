@@ -139,7 +139,7 @@ const Index = () => {
             <div className="text-center group">
               <div className="bg-gradient-gold rounded-2xl p-8 hover:shadow-luxury transition-all duration-300">
                 <div className="text-5xl md:text-6xl font-bold text-foreground mb-3">
-                  200+
+                  100+
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
                   Happy Clients
