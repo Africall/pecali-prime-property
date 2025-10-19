@@ -108,6 +108,76 @@ const Index = () => {
         <Hero />
         <IntroSection />
 
+      {/* Proven Track Record Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-accent/10 text-accent">Proven Track Record</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Numbers that speak to our commitment and success in the real estate industry.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center group">
+              <div className="bg-gradient-primary rounded-2xl p-8 hover:shadow-luxury transition-all duration-300">
+                <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3">
+                  100+
+                </div>
+                <h3 className="text-xl font-semibold text-primary-foreground mb-2">
+                  Properties Sold
+                </h3>
+                <p className="text-primary-foreground/80">
+                  Successfully facilitated property transactions across Nairobi and beyond
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-gradient-gold rounded-2xl p-8 hover:shadow-luxury transition-all duration-300">
+                <div className="text-5xl md:text-6xl font-bold text-foreground mb-3">
+                  200+
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  Happy Clients
+                </h3>
+                <p className="text-foreground/80">
+                  Satisfied customers who trust us with their real estate needs
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-gradient-primary rounded-2xl p-8 hover:shadow-luxury transition-all duration-300">
+                <div className="text-5xl md:text-6xl font-bold text-primary-foreground mb-3">
+                  5+
+                </div>
+                <h3 className="text-xl font-semibold text-primary-foreground mb-2">
+                  Years Experience
+                </h3>
+                <p className="text-primary-foreground/80">
+                  Proven track record in the Kenyan real estate market
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-gradient-gold rounded-2xl p-8 hover:shadow-luxury transition-all duration-300">
+                <div className="text-5xl md:text-6xl font-bold text-foreground mb-3">
+                  10+
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  Areas Covered
+                </h3>
+                <p className="text-foreground/80">
+                  Extensive coverage across prime locations in Kenya
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Properties Section */}
       <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
