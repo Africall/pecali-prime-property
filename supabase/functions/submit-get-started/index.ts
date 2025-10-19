@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.75.0";
+import { Resend } from "npm:resend@2.0.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -133,6 +134,56 @@ serve(async (req) => {
     }
 
     console.log('Get-started lead created successfully:', result);
+    
+    // Send email notification
+    try {
+      const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
+      
+      const emailHtml = `
+        <h1>🎉 New Get Started Lead!</h1>
+        <p>A new client has submitted the Get Started form:</p>
+        
+        <h2>Contact Information:</h2>
+        <ul>
+          <li><strong>Name:</strong> ${data.full_name}</li>
+          <li><strong>Email:</strong> ${data.email}</li>
+          <li><strong>Phone:</strong> ${data.phone || 'Not provided'}</li>
+          <li><strong>Preferred Contact:</strong> ${data.channel}</li>
+        </ul>
+        
+        <h2>Requirements:</h2>
+        <ul>
+          <li><strong>Looking For:</strong> ${data.looking_for}</li>
+          <li><strong>Budget Range:</strong> ${data.budget_range || 'Not specified'}</li>
+          <li><strong>Preferred Location:</strong> ${data.preferred_location || 'Not specified'}</li>
+        </ul>
+        
+        ${data.message ? `<h2>Additional Message:</h2><p>${data.message}</p>` : ''}
+        
+        <h2>Source Information:</h2>
+        <ul>
+          <li><strong>Page URL:</strong> ${data.page_url || 'Not available'}</li>
+          <li><strong>Referrer:</strong> ${data.referrer || 'Direct visit'}</li>
+          <li><strong>Submitted:</strong> ${new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}</li>
+        </ul>
+        
+        <p style="margin-top: 30px; padding: 15px; background: #f0f9ff; border-left: 4px solid #0284c7;">
+          <strong>⏰ Action Required:</strong> Contact this lead within 24 hours via ${data.channel}
+        </p>
+      `;
+      
+      await resend.emails.send({
+        from: 'Pecali Property <onboarding@resend.dev>',
+        to: ['your-email@example.com'], // TODO: Replace with your actual email
+        subject: `🔔 New Lead: ${data.full_name} - ${data.looking_for}`,
+        html: emailHtml,
+      });
+      
+      console.log('Notification email sent successfully');
+    } catch (emailError) {
+      console.error('Failed to send notification email:', emailError);
+      // Don't fail the request if email fails
+    }
     
     return new Response(
       JSON.stringify({ 
