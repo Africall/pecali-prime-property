@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Session, User } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
@@ -48,25 +49,26 @@ const AdminDashboard = () => {
         .from('user_roles')
         .select('role')
         .eq('user_id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error("Error fetching user role:", error);
-        toast.error("Access denied. No role assigned.");
-        navigate("/");
+        toast.error("Error checking permissions: " + error.message);
+        setLoading(false);
         return;
       }
 
-      if (roles) {
+      if (roles && roles.role) {
         setUserRole(roles.role as UserRole);
       } else {
-        toast.error("Access denied. No role assigned.");
-        navigate("/");
+        console.log("No role found for user:", userId);
+        toast.error("Access denied. Please contact an administrator to assign you a role.");
+        setTimeout(() => navigate("/"), 3000);
       }
     } catch (error) {
       console.error("Error checking role:", error);
-      toast.error("Error checking permissions");
-      navigate("/");
+      toast.error("Unexpected error checking permissions");
+      setTimeout(() => navigate("/"), 3000);
     } finally {
       setLoading(false);
     }
@@ -89,9 +91,19 @@ const AdminDashboard = () => {
   if (!userRole) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Access Denied</h2>
-          <p className="mb-4">You don't have permission to access this area.</p>
+        <div className="text-center space-y-4 max-w-md mx-auto p-8 bg-card rounded-lg border">
+          <h2 className="text-2xl font-bold">Access Denied</h2>
+          <p className="text-muted-foreground">
+            You don't have permission to access this area. Please contact an administrator to assign you a role.
+          </p>
+          <div className="flex gap-2 justify-center">
+            <Button onClick={() => navigate("/")} variant="outline">
+              Go Home
+            </Button>
+            <Button onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
     );
