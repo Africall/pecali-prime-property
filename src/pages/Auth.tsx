@@ -17,7 +17,9 @@ const passwordSchema = z.string().min(8, "Password must be at least 8 characters
 const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [signupLoading, setSignupLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("login");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
@@ -49,7 +51,7 @@ const Auth = () => {
       return;
     }
 
-    setLoading(true);
+    setLoginLoading(true);
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -94,7 +96,7 @@ const Auth = () => {
         variant: "destructive",
       });
     } finally {
-      setLoading(false);
+      setLoginLoading(false);
     }
   };
 
@@ -123,7 +125,7 @@ const Auth = () => {
       return;
     }
 
-    setLoading(true);
+    setSignupLoading(true);
 
     try {
       const redirectUrl = `${window.location.origin}/admin`;
@@ -162,6 +164,7 @@ const Auth = () => {
         setSignupEmail("");
         setSignupPassword("");
         setSignupConfirmPassword("");
+        setActiveTab("login");
       }
     } catch (error: any) {
       toast({
@@ -170,7 +173,7 @@ const Auth = () => {
         variant: "destructive",
       });
     } finally {
-      setLoading(false);
+      setSignupLoading(false);
     }
   };
 
@@ -192,7 +195,7 @@ const Auth = () => {
         </CardHeader>
         
         <CardContent>
-          <Tabs defaultValue="login" className="w-full">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="login">Login</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
@@ -209,7 +212,7 @@ const Auth = () => {
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     required
-                    disabled={loading}
+                    disabled={loginLoading}
                   />
                 </div>
 
@@ -222,16 +225,16 @@ const Auth = () => {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     required
-                    disabled={loading}
+                    disabled={loginLoading}
                   />
                 </div>
 
                 <Button
                   type="submit"
                   className="w-full"
-                  disabled={loading}
+                  disabled={loginLoading}
                 >
-                  {loading ? (
+                  {loginLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Signing in...
@@ -254,7 +257,7 @@ const Auth = () => {
                     value={signupEmail}
                     onChange={(e) => setSignupEmail(e.target.value)}
                     required
-                    disabled={loading}
+                    disabled={signupLoading}
                   />
                 </div>
 
@@ -267,7 +270,7 @@ const Auth = () => {
                     value={signupPassword}
                     onChange={(e) => setSignupPassword(e.target.value)}
                     required
-                    disabled={loading}
+                    disabled={signupLoading}
                   />
                   <p className="text-xs text-muted-foreground">
                     At least 8 characters
@@ -283,16 +286,16 @@ const Auth = () => {
                     value={signupConfirmPassword}
                     onChange={(e) => setSignupConfirmPassword(e.target.value)}
                     required
-                    disabled={loading}
+                    disabled={signupLoading}
                   />
                 </div>
 
                 <Button
                   type="submit"
                   className="w-full"
-                  disabled={loading}
+                  disabled={signupLoading}
                 >
-                  {loading ? (
+                  {signupLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Creating account...
@@ -309,7 +312,7 @@ const Auth = () => {
             <Button
               variant="ghost"
               onClick={() => navigate("/")}
-              disabled={loading}
+              disabled={loginLoading || signupLoading}
             >
               ← Back to Home
             </Button>
