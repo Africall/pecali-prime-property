@@ -9,7 +9,10 @@ import { supabase } from '@/integrations/supabase/client';
  *  - "https://.../azure-sky-park.pdf" (already public URL)
  * Returns a fully usable public URL for iframe/pdf.js.
  */
-export async function resolvePdfUrl(pdf_path: string): Promise<string> {
+export async function resolvePdfUrl(pdf_path: string | null | undefined): Promise<string | null> {
+  // Handle null or undefined paths
+  if (!pdf_path) return null;
+  
   // If it's already a full URL, just return it
   if (/^https?:\/\//i.test(pdf_path)) return pdf_path;
 

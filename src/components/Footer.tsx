@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Instagram, Facebook, Twitter, Linkedin, Clock, Send } from "lucide-react";
 const Footer = () => {
   return <footer className="relative z-10 bg-gradient-primary text-primary-foreground">
@@ -100,9 +101,9 @@ const Footer = () => {
               label: "Market Reports",
               href: "/reports"
             }].map(link => <li key={link.label}>
-                  <a href={link.href} className="text-primary-foreground/80 hover:text-accent transition-colors duration-200">
+                  <Link to={link.href} className="text-primary-foreground/80 hover:text-accent transition-colors duration-200">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>)}
             </ul>
           </div>
@@ -119,9 +120,9 @@ const Footer = () => {
                 { label: "Property Valuation", href: "/services#valuation" },
                 { label: "Legal Documentation", href: "/services#legal" }
               ].map(service => <li key={service.label}>
-                  <a href={service.href} className="text-primary-foreground/80 hover:text-accent transition-colors duration-200">
+                  <Link to={service.href} className="text-primary-foreground/80 hover:text-accent transition-colors duration-200">
                     {service.label}
-                  </a>
+                  </Link>
                 </li>)}
             </ul>
           </div>
@@ -174,15 +175,15 @@ const Footer = () => {
             © 2025 PECALI Real Estate. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="/privacy" className="text-primary-foreground/80 hover:text-accent transition-colors">
+            <Link to="/privacy" className="text-primary-foreground/80 hover:text-accent transition-colors">
               Privacy Policy
-            </a>
-            <a href="/terms" className="text-primary-foreground/80 hover:text-accent transition-colors">
+            </Link>
+            <Link to="/terms" className="text-primary-foreground/80 hover:text-accent transition-colors">
               Terms of Service
-            </a>
-            <a href="/cookies" className="text-primary-foreground/80 hover:text-accent transition-colors">
+            </Link>
+            <Link to="/cookies" className="text-primary-foreground/80 hover:text-accent transition-colors">
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

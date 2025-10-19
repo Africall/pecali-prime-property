@@ -31,7 +31,7 @@ const Index = () => {
       if (data && data.length > 0) {
         const out: any[] = [];
         for (const prop of data) {
-          const pdfUrl = await resolvePdfUrl(prop.pdf_path);
+          const pdfUrl = prop.pdf_path ? await resolvePdfUrl(prop.pdf_path) : null;
           out.push({ ...prop, pdfUrl });
         }
         setProperties(out);

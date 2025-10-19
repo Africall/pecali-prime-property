@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,26 +26,28 @@ const Navbar = () => {
         {/* Main navigation */}
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <img 
-            src={logo} 
-            alt="PECALI Real Estate" 
-            className="
-              h-10 w-auto hover:scale-105 transition-transform duration-200
-              md:h-32
-              p-0 m-0
-            "
-          />
+          <Link to="/">
+            <img 
+              src={logo} 
+              alt="PECALI Real Estate" 
+              className="
+                h-10 w-auto hover:scale-105 transition-transform duration-200
+                md:h-32
+                p-0 m-0
+              "
+            />
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className="text-foreground hover:text-primary transition-colors duration-200 font-medium px-1"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -74,14 +77,14 @@ const Navbar = () => {
         )}>
           <div className="space-y-2 pt-2 border-t border-border">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.href}
+                to={item.href}
                 className="block text-foreground hover:text-primary transition-colors duration-200 font-medium px-1"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <Button
               onClick={() => {
