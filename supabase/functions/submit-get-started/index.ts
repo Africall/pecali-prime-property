@@ -174,7 +174,7 @@ serve(async (req) => {
       
       await resend.emails.send({
         from: 'Pecali Property <onboarding@resend.dev>',
-        to: ['your-email@example.com'], // TODO: Replace with your actual email
+        to: ['melwishjamo2805@gmail.com'],
         subject: `🔔 New Lead: ${data.full_name} - ${data.looking_for}`,
         html: emailHtml,
       });
