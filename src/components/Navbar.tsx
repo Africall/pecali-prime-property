@@ -17,7 +17,6 @@ const Navbar = () => {
     { label: "Training", href: "/training" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
-    { label: "Admin", href: "/admin" },
   ];
 
   return (
@@ -49,6 +48,14 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+            <Link to="/auth">
+              <Button 
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                Login
+              </Button>
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -86,6 +93,14 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+            <Link to="/auth" onClick={() => setIsOpen(false)}>
+              <Button
+                variant="outline"
+                className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground mb-2"
+              >
+                Login
+              </Button>
+            </Link>
             <Button
               onClick={() => {
                 setIsOpen(false);
