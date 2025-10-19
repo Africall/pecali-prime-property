@@ -85,6 +85,7 @@ const Navbar = () => {
     { label: "Training", href: "/training" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
+    { label: "Admin", href: "/admin" },
   ];
 
   return (
