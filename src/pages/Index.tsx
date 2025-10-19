@@ -12,8 +12,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote, Eye, Phone } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
-import { resolvePdfUrl } from '@/lib/storage';
 import Autoplay from "embla-carousel-autoplay";
+import elitzCover from "@/assets/elitz-cover.jpg";
+import azureSky from "@/assets/azure-sky-cover.jpg";
+import mangoTree from "@/assets/mango-tree-cover.jpg";
 const Index = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState<any[]>([]);
@@ -26,23 +28,25 @@ const Index = () => {
     Autoplay({ delay: 4000, stopOnInteraction: true })
   );
 
+  const imageMap: Record<string, string> = {
+    'elitz-residency': elitzCover,
+    'azure-sky-park': azureSky,
+    'mango-tree': mangoTree
+  };
+
   useEffect(() => {
     (async () => {
       const slugs = ['elitz-residency', 'azure-sky-park', 'mango-tree'];
       const { data } = await supabase
         .from('properties')
-        .select('slug, title, location, price_label, pdf_path, cover_page')
+        .select('slug, title, location, price_label')
         .in('slug', slugs);
 
-      console.log('Fetched properties:', data);
-
       if (data && data.length > 0) {
-        const out: any[] = [];
-        for (const prop of data) {
-          const pdfUrl = prop.pdf_path ? await resolvePdfUrl(prop.pdf_path) : null;
-          out.push({ ...prop, pdfUrl });
-        }
-        console.log('Properties with PDF URLs:', out);
+        const out = data.map(prop => ({
+          ...prop,
+          image: imageMap[prop.slug] || elitzCover
+        }));
         setProperties(out);
       }
     })();
@@ -213,15 +217,15 @@ const Index = () => {
                 {properties.map((p) => (
                   <CarouselItem key={p.slug} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                     <div className="group rounded-2xl overflow-hidden border border-border hover:shadow-luxury transition-all duration-500 bg-card h-full">
-                      <div className="relative overflow-hidden bg-muted" style={{ aspectRatio: '3 / 2' }}>
-                        <iframe
-                          src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                          className="absolute inset-0 w-full h-full pointer-events-none"
-                          title={p.title}
+                      <div className="relative overflow-hidden" style={{ aspectRatio: '3 / 2' }}>
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-500" />
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <Badge className="mb-2 bg-accent/90 text-accent-foreground backdrop-blur-sm">Featured</Badge>
+                        <div className="absolute top-4 left-4">
+                          <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm">Featured</Badge>
                         </div>
                       </div>
                       <div className="p-6 space-y-3">
