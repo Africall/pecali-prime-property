@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, MapPin, BedDouble, Bath, Square, Eye, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PropertyCardProps {
   property: {
@@ -24,6 +25,7 @@ interface PropertyCardProps {
 const PropertyCard = ({ property }: PropertyCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <Card 
@@ -81,10 +83,10 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           <Heart className={cn("h-4 w-4", isLiked && "fill-current")} />
         </button>
 
-        {/* Action Buttons (shown on hover) */}
+        {/* Action Buttons (always shown on mobile, shown on hover for desktop) */}
         <div className={cn(
           "absolute bottom-4 left-4 right-4 flex gap-2 transition-all duration-300",
-          isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          isMobile || isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         )}>
           <Button size="sm" variant="secondary" className="flex-1 bg-white/90 hover:bg-white text-foreground">
             <Eye className="h-4 w-4 mr-1" />

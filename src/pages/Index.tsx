@@ -253,8 +253,8 @@ const Index = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
-              <CarouselNext className="hidden md:flex -right-4 lg:-right-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+              <CarouselPrevious className="-left-2 md:-left-4 lg:-left-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+              <CarouselNext className="-right-2 md:-right-4 lg:-right-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
             </Carousel>
           </div>
 
@@ -412,25 +412,41 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => <div key={testimonial.name} className="bg-card rounded-xl p-8 shadow-card hover:shadow-luxury transition-all duration-300 animate-scale-in" style={{
-            animationDelay: `${index * 0.2}s`
-          }}>
-                <Quote className="h-8 w-8 text-accent mb-4" />
-                
-                <p className="text-card-foreground mb-6 leading-relaxed">
-                  "{testimonial.content}"
-                </p>
+          <div className="relative max-w-6xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={testimonial.name} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="bg-card rounded-xl p-8 shadow-card hover:shadow-luxury transition-all duration-300 h-full">
+                      <Quote className="h-8 w-8 text-accent mb-4" />
+                      
+                      <p className="text-card-foreground mb-6 leading-relaxed">
+                        "{testimonial.content}"
+                      </p>
 
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 text-accent fill-current" />)}
-                </div>
+                      <div className="flex items-center mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-accent fill-current" />
+                        ))}
+                      </div>
 
-                <div>
-                  <h4 className="font-semibold text-card-foreground">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>)}
+                      <div>
+                        <h4 className="font-semibold text-card-foreground">{testimonial.name}</h4>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-2 md:-left-4 lg:-left-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+              <CarouselNext className="-right-2 md:-right-4 lg:-right-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+            </Carousel>
           </div>
         </div>
       </section>
