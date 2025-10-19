@@ -94,6 +94,11 @@ import urbanParkBathroom from '@/assets/urban-park-bathroom.jpg';
 import urbanParkExteriorStreet from '@/assets/urban-park-exterior-street.jpg';
 import urbanParkLivingModern from '@/assets/urban-park-living-modern.jpg';
 import urbanParkBedroom3 from '@/assets/urban-park-bedroom-3.jpg';
+import urbanParkLighting1 from '@/assets/urban-park-lighting-1.jpg';
+import urbanParkLivingBalcony from '@/assets/urban-park-living-balcony.jpg';
+import urbanParkLivingFurnished from '@/assets/urban-park-living-furnished.jpg';
+import urbanParkBedroomWardrobe from '@/assets/urban-park-bedroom-wardrobe.jpg';
+import urbanParkLighting2 from '@/assets/urban-park-lighting-2.jpg';
 
 interface Property {
   id: string;
@@ -212,6 +217,11 @@ export default function PropertyDetail() {
     urbanParkBedroom3,
     urbanParkLivingOpen,
     urbanParkExteriorFinal,
+    urbanParkLighting1,
+    urbanParkLivingBalcony,
+    urbanParkLivingFurnished,
+    urbanParkBedroomWardrobe,
+    urbanParkLighting2,
   ];
 
   useEffect(() => {
@@ -1325,6 +1335,66 @@ export default function PropertyDetail() {
                       <img 
                         src={urbanParkExteriorFinal} 
                         alt="Urban Park Complete Development View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Lighting 1 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(14)}
+                    >
+                      <img 
+                        src={urbanParkLighting1} 
+                        alt="Urban Park Modern Ceiling Fixture & Interior Design" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living with Balcony */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(15)}
+                    >
+                      <img 
+                        src={urbanParkLivingBalcony} 
+                        alt="Urban Park Living Space with Balcony & City Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Furnished Living Room - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(16)}
+                    >
+                      <img 
+                        src={urbanParkLivingFurnished} 
+                        alt="Urban Park Furnished Living Room with Modern Amenities" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom with Wardrobe */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(17)}
+                    >
+                      <img 
+                        src={urbanParkBedroomWardrobe} 
+                        alt="Urban Park Bedroom with Built-in Wardrobes" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Lighting 2 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(18)}
+                    >
+                      <img 
+                        src={urbanParkLighting2} 
+                        alt="Urban Park LED Ceiling Fixture & Modern Interior" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
