@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, MapPin, Home, BedDouble, Bath } from "lucide-react";
 import heroImage from "@/assets/hero-luxury-properties.jpg";
+import { locationOptions, priceRangeOptions, propertyTypeOptions, bedroomOptions, bathroomOptions } from "@/data/properties";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -17,8 +17,11 @@ const Hero = () => {
   });
 
   const handleSearch = () => {
-    console.log("Search data:", searchData);
-    navigate("/properties");
+    const params = new URLSearchParams();
+    Object.entries(searchData).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    navigate(`/properties?${params.toString()}`);
   };
 
   return (
@@ -53,27 +56,27 @@ const Hero = () => {
           <div className="bg-white/95 backdrop-blur-md rounded-xl p-6 shadow-luxury animate-scale-in" style={{ animationDelay: "0.4s" }}>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
               {/* Location */}
-              <div className="relative">
-                <MapPin className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
-                <Input
-                  placeholder="Location (e.g., Nairobi, Mombasa)"
-                  value={searchData.location}
-                  onChange={(e) => setSearchData({ ...searchData, location: e.target.value })}
-                  className="pl-10 h-12 border-2 focus:border-primary"
-                />
-              </div>
+              <Select value={searchData.location} onValueChange={(value) => setSearchData({ ...searchData, location: value })}>
+                <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
+                  <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
+                  <SelectValue placeholder="Location" className="text-foreground" />
+                </SelectTrigger>
+                <SelectContent className="bg-background">
+                  {locationOptions.map((loc) => (
+                    <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
               {/* Price Range */}
               <Select value={searchData.priceRange} onValueChange={(value) => setSearchData({ ...searchData, priceRange: value })}>
                 <SelectTrigger className="h-12 border-2 focus:border-primary text-foreground">
                   <SelectValue placeholder="Price Range" className="text-foreground" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-5m">Under 5M KES</SelectItem>
-                  <SelectItem value="5m-10m">5M - 10M KES</SelectItem>
-                  <SelectItem value="10m-20m">10M - 20M KES</SelectItem>
-                  <SelectItem value="20m-50m">20M - 50M KES</SelectItem>
-                  <SelectItem value="50m+">50M+ KES</SelectItem>
+                <SelectContent className="bg-background">
+                  {priceRangeOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 
@@ -83,12 +86,10 @@ const Hero = () => {
                   <Home className="h-4 w-4 mr-2 text-muted-foreground" />
                   <SelectValue placeholder="Property Type" className="text-foreground" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="apartment">Apartment</SelectItem>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="villa">Villa</SelectItem>
-                  <SelectItem value="land">Land</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
+                <SelectContent className="bg-background">
+                  {propertyTypeOptions.map((type) => (
+                    <SelectItem key={type} value={type}>{type}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 
@@ -98,12 +99,10 @@ const Hero = () => {
                   <BedDouble className="h-4 w-4 mr-2 text-muted-foreground" />
                   <SelectValue placeholder="Bedrooms" className="text-foreground" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1 Bedroom</SelectItem>
-                  <SelectItem value="2">2 Bedrooms</SelectItem>
-                  <SelectItem value="3">3 Bedrooms</SelectItem>
-                  <SelectItem value="4">4 Bedrooms</SelectItem>
-                  <SelectItem value="5+">5+ Bedrooms</SelectItem>
+                <SelectContent className="bg-background">
+                  {bedroomOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value.toString()}>{option.label}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 
@@ -113,12 +112,10 @@ const Hero = () => {
                   <Bath className="h-4 w-4 mr-2 text-muted-foreground" />
                   <SelectValue placeholder="Bathrooms" className="text-foreground" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1 Bathroom</SelectItem>
-                  <SelectItem value="2">2 Bathrooms</SelectItem>
-                  <SelectItem value="3">3 Bathrooms</SelectItem>
-                  <SelectItem value="4">4 Bathrooms</SelectItem>
-                  <SelectItem value="5+">5+ Bathrooms</SelectItem>
+                <SelectContent className="bg-background">
+                  {bathroomOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value.toString()}>{option.label}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
