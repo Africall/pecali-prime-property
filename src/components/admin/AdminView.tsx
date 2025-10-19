@@ -4,11 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { LogOut, Users, Briefcase, FolderKanban, BarChart3, Settings, FileText } from "lucide-react";
+import { LogOut, Users, Briefcase, FolderKanban, BarChart3, Settings, FileText, Building2, GraduationCap } from "lucide-react";
 import UserManagement from "./UserManagement";
 import LeadsManagement from "./LeadsManagement";
 import ProjectsManagement from "./ProjectsManagement";
 import ActivityLogs from "./ActivityLogs";
+import { PropertyManagement } from "./PropertyManagement";
+import { ServiceInquiries } from "./ServiceInquiries";
+import { TrainingEnrollments } from "./TrainingEnrollments";
 
 interface AdminViewProps {
   user: User;
@@ -103,32 +106,56 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
         </div>
       </div>
 
-      <Tabs defaultValue="users" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="users">
-            <Users className="mr-2 h-4 w-4" />
-            User Management
+      <Tabs defaultValue="inquiries" className="space-y-4">
+        <TabsList className="grid grid-cols-3 lg:grid-cols-7 w-full">
+          <TabsTrigger value="inquiries">
+            <Briefcase className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Inquiries</span>
+          </TabsTrigger>
+          <TabsTrigger value="training">
+            <GraduationCap className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Training</span>
           </TabsTrigger>
           <TabsTrigger value="leads">
-            <Briefcase className="mr-2 h-4 w-4" />
-            Leads & Appointments
+            <Users className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Leads</span>
+          </TabsTrigger>
+          <TabsTrigger value="properties">
+            <Building2 className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Properties</span>
+          </TabsTrigger>
+          <TabsTrigger value="users">
+            <Users className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Users</span>
           </TabsTrigger>
           <TabsTrigger value="projects">
             <FolderKanban className="mr-2 h-4 w-4" />
-            Projects
+            <span className="hidden sm:inline">Projects</span>
           </TabsTrigger>
           <TabsTrigger value="logs">
             <FileText className="mr-2 h-4 w-4" />
-            Activity Logs
+            <span className="hidden sm:inline">Logs</span>
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="users">
-          <UserManagement />
+        <TabsContent value="inquiries">
+          <ServiceInquiries />
+        </TabsContent>
+
+        <TabsContent value="training">
+          <TrainingEnrollments />
         </TabsContent>
 
         <TabsContent value="leads">
           <LeadsManagement userRole="admin" userId={user.id} />
+        </TabsContent>
+
+        <TabsContent value="properties">
+          <PropertyManagement />
+        </TabsContent>
+
+        <TabsContent value="users">
+          <UserManagement />
         </TabsContent>
 
         <TabsContent value="projects">

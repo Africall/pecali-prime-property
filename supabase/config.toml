@@ -2,3 +2,12 @@ project_id = "rmxxjrpohlqobcsuwbhv"
 
 [functions.submit-lead]
 verify_jwt = false
+
+[functions.submit-get-started]
+verify_jwt = false
+
+[functions.submit-training-enrollment]
+verify_jwt = false
+
+[functions.submit-service-inquiry]
+verify_jwt = false

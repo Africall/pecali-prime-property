@@ -73,14 +73,15 @@ export const AppointmentBookingModal = ({
     setIsSubmitting(true);
 
     try {
-      // Call the submit-lead edge function
-      const { data, error } = await supabase.functions.invoke("submit-lead", {
+      // Call the submit-service-inquiry edge function
+      const { data, error } = await supabase.functions.invoke("submit-service-inquiry", {
         body: {
-          source: `appointment_${source}`,
-          property_slug: null,
+          service_type: serviceType,
+          source: source,
           full_name: fullName.trim(),
+          email: email.trim(),
           phone: phone.trim(),
-          message: `Service Type: ${serviceType}\nPreferred Date: ${format(date, "PPP")}\n\nMessage: ${message.trim() || "No additional message"}`,
+          message: `Preferred Date: ${format(date, "PPP")}\n\nMessage: ${message.trim() || "No additional message"}`,
         },
       });
 

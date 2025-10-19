@@ -422,7 +422,13 @@ const Services = () => {
                 Consult with Experts
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
+              <Button 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6"
+                onClick={() => {
+                  window.location.href = '/properties';
+                }}
+              >
                 View Our Properties
               </Button>
             </div>

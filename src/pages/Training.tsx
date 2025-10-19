@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
@@ -5,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, Users, Target, Brain, Globe, FileText, CheckCircle, Star, ArrowRight, Award, TrendingUp } from "lucide-react";
+import { TrainingEnrollmentModal } from "@/components/TrainingEnrollmentModal";
 
 const Training = () => {
+  const [enrollmentOpen, setEnrollmentOpen] = useState(false);
   const trainingModules = [
     {
       icon: Brain,
@@ -222,18 +225,9 @@ const Training = () => {
                     "{story.story}"
                   </p>
 
-                  <div className="flex items-center">
-                    <img 
-                      src={story.image} 
-                      alt={story.name}
-                      className="w-12 h-12 rounded-full mr-4 object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div>
-                      <h4 className="font-semibold text-card-foreground">{story.name}</h4>
-                      <p className="text-sm text-muted-foreground">{story.role}</p>
-                    </div>
+                  <div>
+                    <h4 className="font-semibold text-card-foreground">{story.name}</h4>
+                    <p className="text-sm text-muted-foreground">{story.role}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -282,13 +276,13 @@ const Training = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Transform your career with our comprehensive real estate training program.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6">
+          <div className="flex justify-center">
+            <Button 
+              className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6"
+              onClick={() => setEnrollmentOpen(true)}
+            >
               Enroll Now — Seats Fill Up Fast!
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-6">
-              Download Curriculum
             </Button>
           </div>
         </div>
@@ -296,6 +290,11 @@ const Training = () => {
       </main>
 
       <Footer />
+      
+      <TrainingEnrollmentModal
+        open={enrollmentOpen}
+        setOpen={setEnrollmentOpen}
+      />
     </div>
   );
 };

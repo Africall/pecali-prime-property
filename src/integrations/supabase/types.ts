@@ -325,6 +325,78 @@ export type Database = {
         }
         Relationships: []
       }
+      service_inquiries: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string
+          id: string
+          message: string | null
+          phone: string | null
+          service_type: string
+          source: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          service_type: string
+          source: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          service_type?: string
+          source?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      training_enrollments: {
+        Row: {
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          phone: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -382,6 +454,26 @@ export type Database = {
           p_phone: string
           p_property_slug: string
           p_source: string
+        }
+        Returns: string
+      }
+      insert_service_inquiry: {
+        Args: {
+          p_email: string
+          p_full_name: string
+          p_message: string
+          p_phone: string
+          p_service_type: string
+          p_source: string
+        }
+        Returns: string
+      }
+      insert_training_enrollment: {
+        Args: {
+          p_email: string
+          p_full_name: string
+          p_message: string
+          p_phone: string
         }
         Returns: string
       }

@@ -14,10 +14,7 @@ const Properties = () => {
   const [sortBy, setSortBy] = useState<string>("newest");
   const [filters, setFilters] = useState({
     location: searchParams.get("location") || "",
-    priceRange: searchParams.get("priceRange") || "",
     propertyType: searchParams.get("propertyType") || "",
-    bedrooms: searchParams.get("bedrooms") || "",
-    bathrooms: searchParams.get("bathrooms") || "",
   });
   const navigate = useNavigate();
 
@@ -29,15 +26,6 @@ const Properties = () => {
       result = result.filter(p => p.location === filters.location);
     }
 
-    if (filters.priceRange) {
-      if (filters.priceRange === "contact") {
-        result = result.filter(p => !p.priceValue);
-      } else {
-        const [min, max] = filters.priceRange.split("-").map(Number);
-        result = result.filter(p => p.priceValue && p.priceValue >= min && p.priceValue <= max);
-      }
-    }
-
     if (filters.propertyType) {
       result = result.filter(p => {
         if (["Studio", "1 Bedroom", "2 Bedroom", "3 Bedroom", "4 Bedroom", "5+ Bedroom"].includes(filters.propertyType)) {
@@ -46,16 +34,6 @@ const Properties = () => {
         }
         return p.propertyType === filters.propertyType;
       });
-    }
-
-    if (filters.bedrooms) {
-      const bedValue = parseInt(filters.bedrooms);
-      result = result.filter(p => p.bedrooms.includes(bedValue));
-    }
-
-    if (filters.bathrooms) {
-      const bathValue = parseInt(filters.bathrooms);
-      result = result.filter(p => p.bathrooms.some(b => b >= bathValue));
     }
 
     // Apply sorting
@@ -73,10 +51,7 @@ const Properties = () => {
   const clearFilters = () => {
     setFilters({
       location: "",
-      priceRange: "",
       propertyType: "",
-      bedrooms: "",
-      bathrooms: "",
     });
   };
 
@@ -107,7 +82,7 @@ const Properties = () => {
                 <span className="font-semibold">Filter Properties</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-3 w-full md:w-auto">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-full md:w-auto">
                 <Select value={filters.location} onValueChange={(value) => setFilters({...filters, location: value})}>
                   <SelectTrigger className="h-10">
                     <SelectValue placeholder="Location" />
@@ -119,17 +94,6 @@ const Properties = () => {
                   </SelectContent>
                 </Select>
 
-                <Select value={filters.priceRange} onValueChange={(value) => setFilters({...filters, priceRange: value})}>
-                  <SelectTrigger className="h-10">
-                    <SelectValue placeholder="Price" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background">
-                    {priceRangeOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
                 <Select value={filters.propertyType} onValueChange={(value) => setFilters({...filters, propertyType: value})}>
                   <SelectTrigger className="h-10">
                     <SelectValue placeholder="Type" />
@@ -137,28 +101,6 @@ const Properties = () => {
                   <SelectContent className="bg-background">
                     {propertyTypeOptions.map((type) => (
                       <SelectItem key={type} value={type}>{type}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filters.bedrooms} onValueChange={(value) => setFilters({...filters, bedrooms: value})}>
-                  <SelectTrigger className="h-10">
-                    <SelectValue placeholder="Beds" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background">
-                    {bedroomOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value.toString()}>{opt.label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={filters.bathrooms} onValueChange={(value) => setFilters({...filters, bathrooms: value})}>
-                  <SelectTrigger className="h-10">
-                    <SelectValue placeholder="Baths" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background">
-                    {bathroomOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value.toString()}>{opt.label}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
