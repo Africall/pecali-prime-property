@@ -50,6 +50,42 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          phone: string | null
+          status: string
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          phone?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       get_started_leads: {
         Row: {
           budget_range: string | null
@@ -429,6 +465,16 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      insert_contact_submission: {
+        Args: {
+          p_email: string
+          p_full_name: string
+          p_message: string
+          p_phone: string
+          p_subject: string
+        }
+        Returns: string
       }
       insert_get_started_lead: {
         Args: {

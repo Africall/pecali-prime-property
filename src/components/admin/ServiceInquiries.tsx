@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Eye } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 
 interface ServiceInquiry {
   id: string;
@@ -71,6 +71,24 @@ export const ServiceInquiries = () => {
     } catch (error) {
       console.error("Error updating inquiry:", error);
       toast.error("Failed to update status");
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this inquiry?")) return;
+
+    try {
+      const { error } = await supabase
+        .from('service_inquiries')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+      toast.success("Inquiry deleted successfully");
+      loadInquiries();
+    } catch (error: any) {
+      console.error("Error deleting inquiry:", error);
+      toast.error("Failed to delete inquiry");
     }
   };
 
@@ -129,11 +147,20 @@ export const ServiceInquiries = () => {
                     </Select>
                   </TableCell>
                   <TableCell>{new Date(inquiry.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell>
+                <TableCell>
+                  <div className="flex gap-2">
                     <Button variant="ghost" size="sm">
                       <Eye className="h-4 w-4" />
                     </Button>
-                  </TableCell>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(inquiry.id)}
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </div>
+                </TableCell>
                 </TableRow>
               ))
             )}

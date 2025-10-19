@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Eye, UserPlus } from "lucide-react";
+import { Eye, UserPlus, Trash2 } from "lucide-react";
 
 interface Lead {
   id: string;
@@ -78,6 +78,24 @@ const LeadsManagement = ({ userRole, userId }: LeadsManagementProps) => {
     } catch (error) {
       console.error("Error updating lead:", error);
       toast.error("Failed to update lead");
+    }
+  };
+
+  const handleDelete = async (leadId: string) => {
+    if (!confirm("Are you sure you want to delete this lead?")) return;
+
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .delete()
+        .eq('id', leadId);
+
+      if (error) throw error;
+      toast.success("Lead deleted successfully");
+      loadLeads();
+    } catch (error: any) {
+      console.error("Error deleting lead:", error);
+      toast.error("Failed to delete lead");
     }
   };
 
@@ -164,10 +182,21 @@ const LeadsManagement = ({ userRole, userId }: LeadsManagementProps) => {
                       <Button variant="ghost" size="sm">
                         <Eye className="h-4 w-4" />
                       </Button>
-                      {userRole === 'admin' && !lead.assigned_to && (
-                        <Button variant="ghost" size="sm">
-                          <UserPlus className="h-4 w-4" />
-                        </Button>
+                      {userRole === 'admin' && (
+                        <>
+                          {!lead.assigned_to && (
+                            <Button variant="ghost" size="sm">
+                              <UserPlus className="h-4 w-4" />
+                            </Button>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDelete(lead.id)}
+                          >
+                            <Trash2 className="h-4 w-4 text-destructive" />
+                          </Button>
+                        </>
                       )}
                     </div>
                   </TableCell>

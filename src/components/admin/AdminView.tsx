@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { LogOut, Users, Briefcase, FolderKanban, BarChart3, Settings, FileText, Building2, GraduationCap } from "lucide-react";
+import { LogOut, Users, Briefcase, FolderKanban, BarChart3, Settings, FileText, Building2, GraduationCap, Star, Mail } from "lucide-react";
 import UserManagement from "./UserManagement";
 import LeadsManagement from "./LeadsManagement";
 import ProjectsManagement from "./ProjectsManagement";
@@ -12,6 +12,8 @@ import ActivityLogs from "./ActivityLogs";
 import { PropertyManagement } from "./PropertyManagement";
 import { ServiceInquiries } from "./ServiceInquiries";
 import { TrainingEnrollments } from "./TrainingEnrollments";
+import GetStartedLeads from "./GetStartedLeads";
+import ContactSubmissions from "./ContactSubmissions";
 
 interface AdminViewProps {
   user: User;
@@ -32,22 +34,39 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
 
   const loadStats = async () => {
     try {
-      const [usersRes, leadsRes, projectsRes] = await Promise.all([
-        supabase.from('profiles').select('id', { count: 'exact', head: true }),
-        supabase.from('leads').select('id, created_at', { count: 'exact' }),
-        supabase.from('projects').select('id', { count: 'exact', head: true }),
-      ]);
+      // Get started leads
+      const { count: getStartedCount } = await supabase
+        .from('get_started_leads')
+        .select('*', { count: 'exact', head: true });
 
-      const today = new Date().toISOString().split('T')[0];
-      const newLeadsToday = leadsRes.data?.filter(
-        lead => lead.created_at?.startsWith(today)
-      ).length || 0;
+      // Property leads
+      const { count: propertyLeadsCount } = await supabase
+        .from('leads')
+        .select('*', { count: 'exact', head: true });
+
+      // Total users
+      const { count: usersCount } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+
+      // Total projects
+      const { count: projectsCount } = await supabase
+        .from('projects')
+        .select('*', { count: 'exact', head: true });
+
+      // New Get Started leads today
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const { count: newLeadsCount } = await supabase
+        .from('get_started_leads')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', today.toISOString());
 
       setStats({
-        totalUsers: usersRes.count || 0,
-        totalLeads: leadsRes.count || 0,
-        totalProjects: projectsRes.count || 0,
-        newLeadsToday,
+        totalUsers: usersCount || 0,
+        totalLeads: (getStartedCount || 0) + (propertyLeadsCount || 0),
+        totalProjects: projectsCount || 0,
+        newLeadsToday: newLeadsCount || 0,
       });
     } catch (error) {
       console.error("Error loading stats:", error);
@@ -106,11 +125,24 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
         </div>
       </div>
 
-      <Tabs defaultValue="inquiries" className="space-y-4">
-        <TabsList className="grid grid-cols-3 lg:grid-cols-7 w-full">
+      <Tabs defaultValue="get-started" className="space-y-4">
+        <TabsList className="grid grid-cols-3 lg:grid-cols-9 w-full">
+          <TabsTrigger value="get-started" className="relative">
+            <Star className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Get Started</span>
+            <Badge className="ml-2 bg-red-500 text-xs hidden md:inline">Priority</Badge>
+          </TabsTrigger>
+          <TabsTrigger value="appointments">
+            <Briefcase className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Appointments</span>
+          </TabsTrigger>
+          <TabsTrigger value="contact">
+            <Mail className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Contact</span>
+          </TabsTrigger>
           <TabsTrigger value="inquiries">
             <Briefcase className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Inquiries</span>
+            <span className="hidden sm:inline">Services</span>
           </TabsTrigger>
           <TabsTrigger value="training">
             <GraduationCap className="mr-2 h-4 w-4" />
@@ -118,7 +150,7 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
           </TabsTrigger>
           <TabsTrigger value="leads">
             <Users className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Leads</span>
+            <span className="hidden sm:inline">Prop Leads</span>
           </TabsTrigger>
           <TabsTrigger value="properties">
             <Building2 className="mr-2 h-4 w-4" />
@@ -132,11 +164,19 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
             <FolderKanban className="mr-2 h-4 w-4" />
             <span className="hidden sm:inline">Projects</span>
           </TabsTrigger>
-          <TabsTrigger value="logs">
-            <FileText className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Logs</span>
-          </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="get-started">
+          <GetStartedLeads />
+        </TabsContent>
+
+        <TabsContent value="appointments">
+          <ServiceInquiries />
+        </TabsContent>
+
+        <TabsContent value="contact">
+          <ContactSubmissions />
+        </TabsContent>
 
         <TabsContent value="inquiries">
           <ServiceInquiries />
@@ -160,10 +200,6 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
 
         <TabsContent value="projects">
           <ProjectsManagement userRole="admin" userId={user.id} />
-        </TabsContent>
-
-        <TabsContent value="logs">
-          <ActivityLogs />
         </TabsContent>
       </Tabs>
     </div>

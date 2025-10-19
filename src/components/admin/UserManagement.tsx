@@ -161,6 +161,42 @@ const UserManagement = () => {
     return matchesSearch && matchesRole;
   });
 
+  const handleRoleUpdate = async (userId: string, newRole: 'admin' | 'project_manager' | 'sales_team') => {
+    try {
+      const { error } = await supabase
+        .from('user_roles')
+        .update({ role: newRole })
+        .eq('user_id', userId);
+
+      if (error) throw error;
+      toast.success("Role updated successfully");
+      loadUsers();
+    } catch (error: any) {
+      console.error("Error updating role:", error);
+      toast.error("Failed to update role");
+    }
+  };
+
+  const handleDeleteUser = async (userId: string) => {
+    if (!confirm("Are you sure you want to delete this user? This action cannot be undone.")) return;
+
+    try {
+      // Delete profile and role (cascades will handle the rest)
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', userId);
+
+      if (profileError) throw profileError;
+
+      toast.success("User deleted successfully");
+      loadUsers();
+    } catch (error: any) {
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user");
+    }
+  };
+
   const getRoleBadgeColor = (role: string | null) => {
     switch (role) {
       case 'admin': return 'bg-red-500';
@@ -307,9 +343,40 @@ const UserManagement = () => {
                   <TableCell className="font-medium">{user.full_name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <Badge className={getRoleBadgeColor(user.role)}>
-                      {user.role?.replace('_', ' ').toUpperCase() || 'NO ROLE'}
-                    </Badge>
+                    <Select
+                      value={user.role || 'none'}
+                      onValueChange={(value) => {
+                        if (value !== 'none') {
+                          handleRoleUpdate(user.id, value as 'admin' | 'project_manager' | 'sales_team');
+                        }
+                      }}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue>
+                          <Badge className={getRoleBadgeColor(user.role)}>
+                            {user.role?.replace('_', ' ').toUpperCase() || 'NO ROLE'}
+                          </Badge>
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin">
+                          <span className="flex items-center gap-2">
+                            <Badge className="bg-red-500">ADMIN</Badge>
+                            (Full access)
+                          </span>
+                        </SelectItem>
+                        <SelectItem value="project_manager">
+                          <span className="flex items-center gap-2">
+                            <Badge className="bg-blue-500">PROJECT MANAGER</Badge>
+                          </span>
+                        </SelectItem>
+                        <SelectItem value="sales_team">
+                          <span className="flex items-center gap-2">
+                            <Badge className="bg-green-500">SALES TEAM</Badge>
+                          </span>
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                   </TableCell>
                   <TableCell>{user.department || '-'}</TableCell>
                   <TableCell>
@@ -322,11 +389,12 @@ const UserManagement = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex gap-2">
-                      <Button variant="ghost" size="sm">
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Trash2 className="h-4 w-4" />
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => handleDeleteUser(user.id)}
+                      >
+                        <Trash2 className="h-4 w-4 text-destructive" />
                       </Button>
                     </div>
                   </TableCell>

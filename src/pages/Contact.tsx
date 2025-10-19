@@ -39,7 +39,19 @@ const Contact = () => {
     e.preventDefault();
     
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+      // Save to database
+      const { error: dbError } = await supabase.rpc('insert_contact_submission', {
+        p_full_name: formData.name,
+        p_email: formData.email,
+        p_phone: formData.phone || null,
+        p_subject: formData.service || null,
+        p_message: formData.message
+      });
+
+      if (dbError) throw dbError;
+
+      // Send email notification
+      await supabase.functions.invoke('send-contact-email', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -48,16 +60,6 @@ const Contact = () => {
           message: formData.message
         }
       });
-
-      if (error) {
-        console.error('Error sending email:', error);
-        toast({
-          title: "Error",
-          description: "Failed to send message. Please try again.",
-          variant: "destructive",
-        });
-        return;
-      }
 
       toast({
         title: "Message Sent!",

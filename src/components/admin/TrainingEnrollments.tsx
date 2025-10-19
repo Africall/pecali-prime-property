@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Eye } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 
 interface TrainingEnrollment {
   id: string;
@@ -72,6 +72,24 @@ export const TrainingEnrollments = () => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this enrollment?")) return;
+
+    try {
+      const { error } = await supabase
+        .from('training_enrollments')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+      toast.success("Enrollment deleted successfully");
+      loadEnrollments();
+    } catch (error: any) {
+      console.error("Error deleting enrollment:", error);
+      toast.error("Failed to delete enrollment");
+    }
+  };
+
   return (
     <div className="space-y-4">
       <h3 className="text-xl font-semibold">Training Enrollments</h3>
@@ -120,11 +138,20 @@ export const TrainingEnrollments = () => {
                     </Select>
                   </TableCell>
                   <TableCell>{new Date(enrollment.created_at).toLocaleDateString()}</TableCell>
-                  <TableCell>
+                <TableCell>
+                  <div className="flex gap-2">
                     <Button variant="ghost" size="sm">
                       <Eye className="h-4 w-4" />
                     </Button>
-                  </TableCell>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(enrollment.id)}
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </div>
+                </TableCell>
                 </TableRow>
               ))
             )}
