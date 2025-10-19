@@ -2,14 +2,17 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
+import GetStartedWizard from "@/components/GetStartedWizard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Shield, Users, TrendingUp, FileText, Scale, CheckCircle, ArrowRight, Handshake, Calculator } from "lucide-react";
 import { AppointmentBookingModal } from "@/components/AppointmentBookingModal";
 
 const Services = () => {
+  const [isGetStartedOpen, setIsGetStartedOpen] = useState(false);
   const [activeService, setActiveService] = useState("sales");
   const [appointmentOpen, setAppointmentOpen] = useState(false);
   const [appointmentSource, setAppointmentSource] = useState("");
@@ -415,9 +418,7 @@ const Services = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6"
-                onClick={() => {
-                  window.location.href = '/#get-started-form';
-                }}
+                onClick={() => setIsGetStartedOpen(true)}
               >
                 Consult with Experts
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -437,6 +438,12 @@ const Services = () => {
       </main>
 
       <Footer />
+      
+      <Dialog open={isGetStartedOpen} onOpenChange={setIsGetStartedOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <GetStartedWizard />
+        </DialogContent>
+      </Dialog>
       
       <AppointmentBookingModal
         open={appointmentOpen}

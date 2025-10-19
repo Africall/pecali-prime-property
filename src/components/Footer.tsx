@@ -148,8 +148,8 @@ const Footer = () => {
               
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-accent" />
-                <a href="mailto:info@pecalirealestate.co.ke" className="text-primary-foreground/80 hover:text-accent transition-colors">
-                  info@pecalirealestate.co.ke
+                <a href="mailto:info@pecali.co.ke" className="text-primary-foreground/80 hover:text-accent transition-colors">
+                  info@pecali.co.ke
                 </a>
               </div>
 

@@ -161,41 +161,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Achievements */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-primary/10 text-primary">Our Achievements</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Proven Track Record
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Numbers that speak to our commitment and success in the real estate industry.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement, index) => (
-              <Card key={achievement.title} className="text-center group hover:shadow-luxury transition-all duration-300">
-                <CardContent className="p-8">
-                  <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <achievement.icon className="h-10 w-10 text-primary-foreground" />
-                  </div>
-                  <div className="text-4xl font-bold text-accent mb-2">
-                    {achievement.number}
-                  </div>
-                  <h3 className="text-lg font-semibold text-card-foreground mb-3">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {achievement.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Team Highlights */}
       <section className="py-20 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">

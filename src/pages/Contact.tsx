@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { MapPin, Phone, Mail, MessageCircle, Calendar, Clock, Users, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -34,43 +35,77 @@ const Contact = () => {
     setAppointmentOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message
+        }
+      });
+
+      if (error) {
+        console.error('Error sending email:', error);
+        toast({
+          title: "Error",
+          description: "Failed to send message. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const contactMethods = [
     {
       icon: MapPin,
       title: "Office Address",
-      info: "Nairobi Central Business District",
+      info: "Fedha, EMBAKASI, Nairobi, Kenya",
       description: "Visit us at our modern offices in the heart of Nairobi",
-      action: "Get Directions"
+      action: "Get Directions",
+      onClick: () => window.open('https://bit.ly/TSAVOFedha', '_blank')
     },
     {
       icon: Phone,
       title: "Phone",
       info: "+254 758 174718",
       description: "Call us during business hours for immediate assistance",
-      action: "Call Now"
+      action: "Call Now",
+      onClick: () => window.open('tel:+254758174718', '_self')
     },
     {
       icon: MessageCircle,
       title: "WhatsApp",
       info: "Instant click-to-chat",
       description: "Quick responses via WhatsApp for urgent inquiries",
-      action: "Chat Now"
+      action: "Chat Now",
+      onClick: () => window.open('https://wa.me/254758174718', '_blank')
     },
     {
       icon: Mail,
       title: "Email",
-      info: "info@pecalirealestate.co.ke",
+      info: "info@pecali.co.ke",
       description: "Send us detailed inquiries and we'll respond promptly",
-      action: "Send Email"
+      action: "Send Email",
+      onClick: () => window.open('mailto:info@pecali.co.ke', '_self')
     }
   ];
 
@@ -130,7 +165,11 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {method.description}
                   </p>
-                  <Button variant="ghost" className="p-0 h-auto text-primary hover:text-accent">
+                  <Button 
+                    variant="ghost" 
+                    className="p-0 h-auto text-primary hover:text-accent"
+                    onClick={method.onClick}
+                  >
                     {method.action} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
