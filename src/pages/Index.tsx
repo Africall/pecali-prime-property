@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -21,6 +21,10 @@ const Index = () => {
   const [contactSlug, setContactSlug] = useState<string | undefined>(undefined);
   const [serviceDialogOpen, setServiceDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  
+  const plugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
 
   useEffect(() => {
     (async () => {
@@ -30,12 +34,15 @@ const Index = () => {
         .select('slug, title, location, price_label, pdf_path, cover_page')
         .in('slug', slugs);
 
+      console.log('Fetched properties:', data);
+
       if (data && data.length > 0) {
         const out: any[] = [];
         for (const prop of data) {
           const pdfUrl = prop.pdf_path ? await resolvePdfUrl(prop.pdf_path) : null;
           out.push({ ...prop, pdfUrl });
         }
+        console.log('Properties with PDF URLs:', out);
         setProperties(out);
       }
     })();
@@ -199,12 +206,7 @@ const Index = () => {
                 align: "start",
                 loop: true,
               }}
-              plugins={[
-                Autoplay({
-                  delay: 4000,
-                  stopOnInteraction: true,
-                })
-              ]}
+              plugins={[plugin.current]}
               className="w-full"
             >
               <CarouselContent className="-ml-2 md:-ml-4">
