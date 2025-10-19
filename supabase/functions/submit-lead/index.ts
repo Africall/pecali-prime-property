@@ -55,7 +55,20 @@ function validateInput(data: any): { valid: boolean; errors: string[] } {
     errors.push('Message must be less than 1000 characters');
   }
 
-  if (!data.source || !['home_card', 'property_page'].includes(data.source)) {
+  const validSources = [
+    'home_card', 
+    'property_page',
+    'appointment_get_started',
+    'appointment_sales_team',
+    'appointment_management_quote',
+    'appointment_consulting',
+    'appointment_investment_consultation',
+    'appointment_valuation_request',
+    'appointment_legal_team',
+    'appointment_property_journey'
+  ];
+  
+  if (!data.source || !validSources.includes(data.source)) {
     errors.push('Invalid source');
   }
 
