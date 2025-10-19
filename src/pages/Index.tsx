@@ -9,9 +9,11 @@ import ContactModal from "@/components/ContactModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote, Eye, Phone } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
 import { resolvePdfUrl } from '@/lib/storage';
+import Autoplay from "embla-carousel-autoplay";
 const Index = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState<any[]>([]);
@@ -181,79 +183,90 @@ const Index = () => {
       {/* Featured Properties Section */}
       <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <Badge className="mb-4 bg-gradient-gold text-foreground">Featured Properties</Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Premium Properties
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl">
-                Explore our handpicked collection of premium developments
-              </p>
-            </div>
-            <Button 
-              onClick={() => navigate('/properties')}
-              variant="outline"
-              className="hidden md:flex items-center gap-2"
-            >
-              View all properties
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-gradient-gold text-foreground">Featured Properties</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Premium Properties
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Explore our handpicked collection of premium developments
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {properties.map((p) => (
-              <div 
-                key={p.slug} 
-                className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card"
-              >
-                <div className="relative overflow-hidden bg-muted" style={{ aspectRatio: '3 / 2' }}>
-                  <iframe
-                    src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    title={p.title}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
-                </div>
-                <div className="p-5 space-y-3">
-                  <h3 className="font-bold text-lg text-card-foreground line-clamp-1">
-                    {p.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-1">
-                    {p.location}
-                  </p>
-                  <p className="text-base font-semibold text-primary">
-                    {p.price_label}
-                  </p>
-                  <div className="flex gap-2 pt-2">
-                    <Button
-                      onClick={() => handleView(p.slug)}
-                      className="flex-1"
-                      size="sm"
-                    >
-                      <Eye className="w-4 h-4 mr-2" />
-                      View Property
-                    </Button>
-                    <Button
-                      onClick={() => openEnquiry(p.slug)}
-                      variant="outline"
-                      className="flex-1"
-                      size="sm"
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Enquire
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center md:hidden">
-            <Button 
-              onClick={() => navigate('/properties')}
-              variant="outline"
+          <div className="relative max-w-6xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 4000,
+                  stopOnInteraction: true,
+                })
+              ]}
               className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {properties.map((p) => (
+                  <CarouselItem key={p.slug} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="group rounded-2xl overflow-hidden border border-border hover:shadow-luxury transition-all duration-500 bg-card h-full">
+                      <div className="relative overflow-hidden bg-muted" style={{ aspectRatio: '3 / 2' }}>
+                        <iframe
+                          src={`${p.pdfUrl}#page=${p.cover_page ?? 1}&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          title={p.title}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-500" />
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <Badge className="mb-2 bg-accent/90 text-accent-foreground backdrop-blur-sm">Featured</Badge>
+                        </div>
+                      </div>
+                      <div className="p-6 space-y-3">
+                        <h3 className="font-bold text-xl text-card-foreground group-hover:text-primary transition-colors">
+                          {p.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-accent" />
+                          {p.location}
+                        </p>
+                        <p className="text-lg font-bold text-primary">
+                          {p.price_label}
+                        </p>
+                        <div className="flex gap-2 pt-3">
+                          <Button
+                            onClick={() => handleView(p.slug)}
+                            className="flex-1 group-hover:shadow-elegant transition-all"
+                            size="sm"
+                          >
+                            <Eye className="w-4 h-4 mr-2" />
+                            View
+                          </Button>
+                          <Button
+                            onClick={() => openEnquiry(p.slug)}
+                            variant="outline"
+                            className="flex-1"
+                            size="sm"
+                          >
+                            <Phone className="w-4 h-4 mr-2" />
+                            Enquire
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-4 lg:-left-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+              <CarouselNext className="hidden md:flex -right-4 lg:-right-12 bg-background/95 backdrop-blur-sm hover:bg-primary hover:text-primary-foreground border-2 transition-all" />
+            </Carousel>
+          </div>
+
+          <div className="text-center mt-12">
+            <Button 
+              onClick={() => navigate('/properties')}
+              variant="outline"
+              className="hover:bg-primary hover:text-primary-foreground transition-all"
             >
               View all properties
               <ArrowRight className="ml-2 h-4 w-4" />
