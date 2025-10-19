@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Session, User } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -11,37 +11,25 @@ import LogoRain from "@/components/LogoRain";
 import AdminView from "@/components/admin/AdminView";
 import ProjectManagerView from "@/components/admin/ProjectManagerView";
 import SalesTeamView from "@/components/admin/SalesTeamView";
+import { AuthGuard } from "@/components/AuthGuard";
 
 type UserRole = 'admin' | 'project_manager' | 'sales_team';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    // Get current user once on mount
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        setUser(user);
+        checkUserRole(user.id);
+      }
     });
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      checkUserRole(user.id);
-    } else {
-      navigate("/auth");
-    }
-  }, [user, navigate]);
 
   const checkUserRole = async (userId: string) => {
     try {
@@ -110,18 +98,20 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <LogoRain />
-      
-      <div className="container mx-auto px-4 py-8">
-        {userRole === 'admin' && <AdminView user={user!} onLogout={handleLogout} />}
-        {userRole === 'project_manager' && <ProjectManagerView user={user!} onLogout={handleLogout} />}
-        {userRole === 'sales_team' && <SalesTeamView user={user!} onLogout={handleLogout} />}
-      </div>
+    <AuthGuard>
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <LogoRain />
+        
+        <div className="container mx-auto px-4 py-8">
+          {userRole === 'admin' && <AdminView user={user!} onLogout={handleLogout} />}
+          {userRole === 'project_manager' && <ProjectManagerView user={user!} onLogout={handleLogout} />}
+          {userRole === 'sales_team' && <SalesTeamView user={user!} onLogout={handleLogout} />}
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </AuthGuard>
   );
 };
 

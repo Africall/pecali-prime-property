@@ -27,10 +27,10 @@ const Auth = () => {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
 
   useEffect(() => {
-    // Check if user is already logged in
+    // Check if user is already logged in and redirect
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/admin");
+        navigate("/admin", { replace: true });
       }
     });
   }, [navigate]);
@@ -87,7 +87,7 @@ const Auth = () => {
           title: "Welcome back!",
           description: "You've been successfully logged in.",
         });
-        navigate("/admin");
+        navigate("/admin", { replace: true });
       }
     } catch (error: any) {
       toast({
