@@ -93,7 +93,6 @@ const AdminDashboardContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <LogoRain />
       
       <div className="container mx-auto px-4 py-8">
         {userRole === 'admin' && <AdminView user={user} onLogout={handleLogout} />}

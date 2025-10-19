@@ -9,24 +9,24 @@ import { Shield, Heart, TrendingUp, Users, Target, Award, Building2, Globe, Arro
 const About = () => {
   const values = [
     {
+      icon: Users,
+      title: "Partnership",
+      description: "We view every client relationship as a true partnership, working collaboratively toward your real estate goals. Your success is our success, and we're committed to walking alongside you through every step of your property journey—from initial consultation to long-term wealth building."
+    },
+    {
+      icon: Award,
+      title: "Experience",
+      description: "With years of navigating Kenya's dynamic real estate landscape, our team brings proven expertise and market intelligence to every transaction. We leverage our deep industry knowledge, extensive networks, and hands-on experience to deliver results that matter."
+    },
+    {
       icon: Shield,
-      title: "Trust & Transparency",
-      description: "We believe in honest communication and transparent dealings in every transaction, building lasting relationships with our clients."
+      title: "Integrity",
+      description: "Honesty and transparency form the foundation of everything we do. We believe in ethical practices, clear communication, and doing what's right—even when no one is watching. Our clients trust us because we've earned it through consistent, principled action."
     },
     {
       icon: Heart,
-      title: "Client-Centric Service",
-      description: "Every decision we make is guided by our clients' best interests, ensuring personalized solutions that exceed expectations."
-    },
-    {
-      icon: TrendingUp,
-      title: "Market Expertise",
-      description: "Our deep understanding of the Kenyan real estate market enables us to provide informed guidance and strategic insights."
-    },
-    {
-      icon: Users,
-      title: "Growth & Learning",
-      description: "We continuously evolve and adapt to market changes, investing in our team's development and industry knowledge."
+      title: "Passion",
+      description: "Real estate is more than business to us—it's our calling. We're genuinely excited about helping people find their dream homes, build wealth, and achieve financial freedom. This enthusiasm drives us to go above and beyond in service delivery and client satisfaction."
     }
   ];
 

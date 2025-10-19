@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Upload, Loader2 } from "lucide-react";
+import { Plus, Upload, Loader2, X, Image as ImageIcon } from "lucide-react";
 
 export const PropertyManagement = () => {
   const [isAdding, setIsAdding] = useState(false);
@@ -22,6 +22,17 @@ export const PropertyManagement = () => {
     bathrooms: "",
   });
   const [coverImage, setCoverImage] = useState<File | null>(null);
+  const [galleryImages, setGalleryImages] = useState<File[]>([]);
+
+  const handleGalleryImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setGalleryImages(Array.from(e.target.files));
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setGalleryImages(prev => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,25 +42,41 @@ export const PropertyManagement = () => {
       return;
     }
 
+    if (!coverImage) {
+      toast.error("Please upload a cover image");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Upload cover image if provided
-      let coverImagePath = null;
-      if (coverImage) {
-        const fileExt = coverImage.name.split('.').pop();
-        const fileName = `${formData.slug}-cover.${fileExt}`;
-        const { error: uploadError } = await supabase.storage
-          .from('property_pdfs')
-          .upload(`covers/${fileName}`, coverImage, { upsert: true });
+      // Upload cover image - store in public folder structure
+      const coverExt = coverImage.name.split('.').pop();
+      const coverFileName = `${formData.slug}-cover.${coverExt}`;
+      
+      // Upload to property_pdfs bucket under properties folder
+      const { error: coverUploadError } = await supabase.storage
+        .from('property_pdfs')
+        .upload(`properties/${coverFileName}`, coverImage, { upsert: true });
 
-        if (uploadError) throw uploadError;
-        
-        const { data: { publicUrl } } = supabase.storage
-          .from('property_pdfs')
-          .getPublicUrl(`covers/${fileName}`);
-        
-        coverImagePath = publicUrl;
+      if (coverUploadError) throw coverUploadError;
+
+      // Upload gallery images if provided
+      const galleryPaths: string[] = [];
+      if (galleryImages.length > 0) {
+        for (let i = 0; i < galleryImages.length; i++) {
+          const img = galleryImages[i];
+          const ext = img.name.split('.').pop();
+          const fileName = `${formData.slug}-${i + 1}.${ext}`;
+          
+          const { error: galleryUploadError } = await supabase.storage
+            .from('property_pdfs')
+            .upload(`properties/${fileName}`, img, { upsert: true });
+
+          if (galleryUploadError) throw galleryUploadError;
+          
+          galleryPaths.push(fileName);
+        }
       }
 
       // Insert property into database
@@ -65,13 +92,13 @@ export const PropertyManagement = () => {
             property_type: formData.property_type,
             bedrooms: formData.bedrooms ? formData.bedrooms.split(',').map(b => parseInt(b.trim())) : [],
             bathrooms: formData.bathrooms ? formData.bathrooms.split(',').map(b => parseInt(b.trim())) : [],
-            cover_image: coverImagePath,
+            gallery: galleryPaths,
           },
         });
 
       if (insertError) throw insertError;
 
-      toast.success("Property added successfully!");
+      toast.success("Property added successfully! It will now appear in the properties page and home carousel.");
       setIsAdding(false);
       setFormData({
         title: "",
@@ -84,6 +111,10 @@ export const PropertyManagement = () => {
         bathrooms: "",
       });
       setCoverImage(null);
+      setGalleryImages([]);
+      
+      // Refresh the page to show the new property
+      window.location.reload();
     } catch (error: any) {
       console.error('Error adding property:', error);
       toast.error(error.message || "Failed to add property");
@@ -204,18 +235,62 @@ export const PropertyManagement = () => {
           </div>
 
           <div>
-            <Label htmlFor="cover_image">Cover Image</Label>
-            <div className="flex items-center gap-2">
-              <Input
-                id="cover_image"
-                type="file"
-                accept="image/*"
-                onChange={(e) => setCoverImage(e.target.files?.[0] || null)}
-              />
-              {coverImage && (
-                <span className="text-sm text-muted-foreground">{coverImage.name}</span>
-              )}
-            </div>
+            <Label htmlFor="cover_image">Cover Image *</Label>
+            <Input
+              id="cover_image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setCoverImage(e.target.files?.[0] || null)}
+              className="mt-2"
+              required
+            />
+            {coverImage && (
+              <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                <ImageIcon className="h-4 w-4" />
+                <span>{coverImage.name}</span>
+              </div>
+            )}
+            <p className="text-xs text-muted-foreground mt-1">
+              This will be the main image displayed in property listings
+            </p>
+          </div>
+
+          <div>
+            <Label htmlFor="gallery_images">Gallery Images (Optional)</Label>
+            <Input
+              id="gallery_images"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleGalleryImagesChange}
+              className="mt-2"
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Upload multiple images to showcase property features and interiors
+            </p>
+            {galleryImages.length > 0 && (
+              <div className="mt-3 space-y-2">
+                <p className="text-sm font-medium">{galleryImages.length} image(s) selected:</p>
+                <div className="space-y-1">
+                  {galleryImages.map((img, index) => (
+                    <div key={index} className="flex items-center justify-between bg-muted p-2 rounded">
+                      <span className="text-sm flex items-center gap-2">
+                        <ImageIcon className="h-4 w-4" />
+                        {img.name}
+                      </span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeGalleryImage(index)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-end gap-2">

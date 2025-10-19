@@ -1,157 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { CheckCircle2, User, Phone, Home, Check, Shield, Clock, Sparkles } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const STEPS = [
-  { id: 1, title: "Basic Info", icon: User },
-  { id: 2, title: "Contact & Intent", icon: Phone },
-  { id: 3, title: "Preferences", icon: Home },
-  { id: 4, title: "Confirmation", icon: Check },
-];
-
-const LOOKING_FOR_OPTIONS = [
-  "Property to Buy",
-  "Property to Rent",
-  "Property Investment",
-  "Other",
-];
-
-const BUDGET_OPTIONS = [
-  "Below Ksh 2M",
-  "Ksh 2M–5M",
-  "Ksh 5M–10M",
-  "Above Ksh 10M",
-];
-
-const CHANNEL_OPTIONS = [
-  { value: "Email", label: "📧 Email" },
-  { value: "Phone", label: "📞 Phone Call" },
-  { value: "WhatsApp", label: "💬 WhatsApp" },
-];
+import { toast } from "sonner";
 
 const GetStartedWizard = () => {
-  const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(1);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState<Date>();
+  const [lookingFor, setLookingFor] = useState("");
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    lookingFor: "",
-    budgetRange: "",
-    preferredLocation: "",
-    message: "",
-    channel: "Email",
-    consent: false,
-  });
 
-  const updateField = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const validateStep = (step: number): boolean => {
-    switch (step) {
-      case 1:
-        if (!formData.fullName.trim() || formData.fullName.trim().split(/\s+/).length < 2) {
-          toast({
-            title: "Full name required",
-            description: "Please enter your first and last name",
-            variant: "destructive",
-          });
-          return false;
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!formData.email || !emailRegex.test(formData.email)) {
-          toast({
-            title: "Valid email required",
-            description: "Please enter a valid email address",
-            variant: "destructive",
-          });
-          return false;
-        }
-        return true;
-      case 2:
-        if (!formData.lookingFor) {
-          toast({
-            title: "Selection required",
-            description: "Please tell us what you're looking for",
-            variant: "destructive",
-          });
-          return false;
-        }
-        return true;
-      case 3:
-        return true; // All optional
-      case 4:
-        if (!formData.consent) {
-          toast({
-            title: "Consent required",
-            description: "Please accept our privacy policy to continue",
-            variant: "destructive",
-          });
-          return false;
-        }
-        return true;
-      default:
-        return true;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!fullName.trim() || fullName.trim().length < 2) {
+      toast.error("Please enter a valid name (at least 2 characters)");
+      return;
     }
-  };
-
-  const nextStep = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, STEPS.length));
+    
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      toast.error("Please enter a valid email address");
+      return;
     }
-  };
-
-  const prevStep = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
-  };
-
-  const handleSubmit = async () => {
-    if (!validateStep(4)) return;
+    
+    if (!phone.trim() || phone.trim().length < 8) {
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+    
+    if (!lookingFor.trim()) {
+      toast.error("Please specify what you're looking for");
+      return;
+    }
+    
+    if (!date) {
+      toast.error("Please select a preferred date for consultation");
+      return;
+    }
 
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('submit-get-started', {
+      // Call the submit-service-inquiry edge function
+      const { data, error } = await supabase.functions.invoke("submit-service-inquiry", {
         body: {
-          full_name: formData.fullName,
-          email: formData.email,
-          phone: formData.phone || null,
-          looking_for: formData.lookingFor,
-          budget_range: formData.budgetRange || null,
-          preferred_location: formData.preferredLocation || null,
-          message: formData.message || null,
-          channel: formData.channel,
-          consent: formData.consent,
-          utm: {},
-          referrer: document.referrer || null,
-          page_url: window.location.href,
+          service_type: "Get Started - Property Consultation",
+          source: "get_started_form",
+          full_name: fullName.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          message: `Looking for: ${lookingFor}\nPreferred Date: ${format(date, "PPP")}\n\nAdditional Details: ${message.trim() || "No additional details"}`,
         },
       });
 
       if (error) throw error;
 
       setIsSuccess(true);
-      
-      toast({
-        title: "Success! 🎉",
-        description: "We've received your request and will contact you within 24 hours.",
-      });
-    } catch (error: any) {
-      console.error('Submission error:', error);
-      toast({
-        title: "Submission Failed",
-        description: error.message || "Please try again or contact us directly.",
-        variant: "destructive",
-      });
+      toast.success("Request submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting request:", error);
+      toast.error("Failed to submit request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -159,23 +80,13 @@ const GetStartedWizard = () => {
 
   if (isSuccess) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-16 px-6"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", delay: 0.2 }}
-        >
-          <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
-        </motion.div>
+      <div className="text-center py-16 px-6">
+        <CheckCircle2 className="w-20 h-20 text-green-500 mx-auto mb-6" />
         <h2 className="text-3xl font-bold text-foreground mb-4">
-          We've received your request! 🎉
+          Request Submitted Successfully! 🎉
         </h2>
         <p className="text-lg text-muted-foreground mb-8">
-          A property consultant will contact you within 24 hours via {formData.channel}.
+          Thank you for your interest. Our team will contact you within 24 hours to schedule your consultation.
         </p>
         <Button
           onClick={() => window.location.href = '/properties'}
@@ -184,280 +95,148 @@ const GetStartedWizard = () => {
         >
           Explore Properties
         </Button>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-2xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-        >
-          Get Started with Pecali Prime Property
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="text-muted-foreground text-lg mb-6"
-        >
-          Tell us a little about yourself and what you're looking for — we'll match you with the best options.
-        </motion.p>
-
-        {/* Trust Badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-6 mb-8"
-        >
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Shield className="w-4 h-4 text-primary" />
-            Data Protected (Kenya DPA)
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="w-4 h-4 text-primary" />
-            Fast Response (24h)
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Sparkles className="w-4 h-4 text-primary" />
-            Personalized Experience
-          </div>
-        </motion.div>
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          Get Started with PECALI
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Fill out the form below and let's begin your property journey together. Our team will contact you within 24 hours.
+        </p>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-3">
-          {STEPS.map((step, index) => {
-            const Icon = step.icon;
-            const isActive = currentStep === step.id;
-            const isCompleted = currentStep > step.id;
-            
-            return (
-              <div key={step.id} className="flex items-center flex-1">
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    animate={{
-                      scale: isActive ? 1.1 : 1,
-                      backgroundColor: isCompleted ? "hsl(var(--primary))" : isActive ? "hsl(var(--primary))" : "hsl(var(--muted))"
-                    }}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                      isCompleted || isActive ? 'text-primary-foreground' : 'text-muted-foreground'
-                    }`}
-                  >
-                    {isCompleted ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
-                  </motion.div>
-                  <span className={`text-xs mt-2 hidden sm:block ${isActive ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-                    {step.title}
-                  </span>
-                </div>
-                {index < STEPS.length - 1 && (
-                  <div className="flex-1 h-1 mx-2 bg-muted relative overflow-hidden rounded-full">
-                    <motion.div
-                      initial={{ width: "0%" }}
-                      animate={{ width: currentStep > step.id ? "100%" : "0%" }}
-                      transition={{ duration: 0.3 }}
-                      className="h-full bg-primary"
-                    />
-                  </div>
-                )}
-              </div>
-            );
-          })}
+      {/* Source Badge */}
+      <div className="mb-6 text-center">
+        <Badge variant="secondary" className="text-sm py-2 px-4">
+          Property Consultation Request
+        </Badge>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6 bg-card rounded-2xl p-8 shadow-lg border">
+        <div className="grid gap-6">
+          {/* Full Name */}
+          <div>
+            <Label htmlFor="fullName">Full Name *</Label>
+            <Input
+              id="fullName"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="John Doe"
+              required
+              className="mt-2"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <Label htmlFor="email">Email Address *</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="john@example.com"
+              required
+              className="mt-2"
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <Label htmlFor="phone">Phone Number *</Label>
+            <Input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+254 712 345 678"
+              required
+              className="mt-2"
+            />
+          </div>
+
+          {/* Looking For */}
+          <div>
+            <Label htmlFor="lookingFor">What are you looking for? *</Label>
+            <select
+              id="lookingFor"
+              value={lookingFor}
+              onChange={(e) => setLookingFor(e.target.value)}
+              required
+              className="mt-2 h-12 w-full rounded-md border border-input bg-background px-3 py-2"
+            >
+              <option value="">Select an option</option>
+              <option value="Property to Buy">Property to Buy</option>
+              <option value="Property to Rent">Property to Rent</option>
+              <option value="Property Investment">Property Investment</option>
+              <option value="Property Management">Property Management</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          {/* Preferred Date */}
+          <div>
+            <Label>Preferred Consultation Date *</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal mt-2",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : "Pick a date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(date) => date < new Date()}
+                  initialFocus
+                  className="pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          {/* Message */}
+          <div>
+            <Label htmlFor="message">Additional Details (Optional)</Label>
+            <Textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Any specific requirements or questions..."
+              rows={4}
+              className="mt-2"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Form Steps */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentStep}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3 }}
-          className="bg-card rounded-2xl p-8 shadow-lg border"
-        >
-          {/* Step 1: Basic Info */}
-          {currentStep === 1 && (
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="fullName" className="text-base">Full Name *</Label>
-                <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                  value={formData.fullName}
-                  onChange={(e) => updateField('fullName', e.target.value)}
-                  className="mt-2 h-12"
-                />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-base">Email Address *</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={(e) => updateField('email', e.target.value)}
-                  className="mt-2 h-12"
-                />
-              </div>
-            </div>
-          )}
+        <div className="flex gap-3 pt-4">
+          <Button
+            type="submit"
+            className="flex-1 bg-gradient-primary hover:opacity-90"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit Request"}
+          </Button>
+        </div>
 
-          {/* Step 2: Contact & Intent */}
-          {currentStep === 2 && (
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="phone" className="text-base">Phone Number</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="e.g., +2547XXXXXXXX"
-                  value={formData.phone}
-                  onChange={(e) => updateField('phone', e.target.value)}
-                  className="mt-2 h-12"
-                />
-              </div>
-              <div>
-                <Label htmlFor="lookingFor" className="text-base">What are you looking for? *</Label>
-                <select
-                  id="lookingFor"
-                  value={formData.lookingFor}
-                  onChange={(e) => updateField('lookingFor', e.target.value)}
-                  className="mt-2 h-12 w-full rounded-md border border-input bg-background px-3 py-2"
-                >
-                  <option value="">Select an option</option>
-                  {LOOKING_FOR_OPTIONS.map(option => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Preferences */}
-          {currentStep === 3 && (
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="budgetRange" className="text-base">Budget Range</Label>
-                <select
-                  id="budgetRange"
-                  value={formData.budgetRange}
-                  onChange={(e) => updateField('budgetRange', e.target.value)}
-                  className="mt-2 h-12 w-full rounded-md border border-input bg-background px-3 py-2"
-                >
-                  <option value="">Select a range (optional)</option>
-                  {BUDGET_OPTIONS.map(option => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <Label htmlFor="preferredLocation" className="text-base">Preferred Location</Label>
-                <Input
-                  id="preferredLocation"
-                  type="text"
-                  placeholder="e.g., Kilimani, Westlands, Lavington"
-                  value={formData.preferredLocation}
-                  onChange={(e) => updateField('preferredLocation', e.target.value)}
-                  className="mt-2 h-12"
-                />
-              </div>
-              <div>
-                <Label htmlFor="message" className="text-base">Additional Information</Label>
-                <Textarea
-                  id="message"
-                  placeholder="Anything else you'd like us to know?"
-                  value={formData.message}
-                  onChange={(e) => updateField('message', e.target.value)}
-                  className="mt-2 min-h-[100px]"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Step 4: Confirmation */}
-          {currentStep === 4 && (
-            <div className="space-y-6">
-              <div>
-                <Label className="text-base mb-3 block">Preferred Contact Method *</Label>
-                <div className="space-y-3">
-                  {CHANNEL_OPTIONS.map(option => (
-                    <label key={option.value} className="flex items-center space-x-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="channel"
-                        value={option.value}
-                        checked={formData.channel === option.value}
-                        onChange={(e) => updateField('channel', e.target.value)}
-                        className="w-4 h-4"
-                      />
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-              <div className="border-t pt-6">
-                <label className="flex items-start space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.consent}
-                    onChange={(e) => updateField('consent', e.target.checked)}
-                    className="w-5 h-5 mt-0.5"
-                  />
-                  <span className="text-sm text-muted-foreground">
-                    I agree to the processing of my information under the Kenya Data Protection Act (2019) and Pecali's Privacy Policy. *
-                  </span>
-                </label>
-              </div>
-            </div>
-          )}
-
-          {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8 pt-6 border-t">
-            {currentStep > 1 && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={prevStep}
-                disabled={isSubmitting}
-              >
-                ← Back
-              </Button>
-            )}
-            {currentStep < STEPS.length ? (
-              <Button
-                type="button"
-                onClick={nextStep}
-                className="ml-auto"
-              >
-                Continue →
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="ml-auto bg-gradient-primary hover:opacity-90"
-              >
-                {isSubmitting ? "Submitting..." : "Get Started →"}
-              </Button>
-            )}
-          </div>
-
-          {currentStep === 4 && (
-            <p className="text-center text-sm text-muted-foreground mt-4">
-              We'll get in touch within 24 hours.
-            </p>
-          )}
-        </motion.div>
-      </AnimatePresence>
+        <p className="text-center text-sm text-muted-foreground">
+          We'll get in touch within 24 hours to schedule your consultation.
+        </p>
+      </form>
     </div>
   );
 };
