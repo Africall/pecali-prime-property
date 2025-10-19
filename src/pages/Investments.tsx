@@ -4,8 +4,20 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Home, Store, MapPin, Calendar, TrendingUp, Shield, FileText, DollarSign } from "lucide-react";
+import { useState } from "react";
+import { AppointmentBookingModal } from "@/components/AppointmentBookingModal";
 
 const Investments = () => {
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [appointmentSource, setAppointmentSource] = useState("");
+  const [appointmentServiceType, setAppointmentServiceType] = useState("");
+
+  const openAppointment = (source: string, serviceType: string) => {
+    setAppointmentSource(source);
+    setAppointmentServiceType(serviceType);
+    setAppointmentOpen(true);
+  };
+  
   const featuredOpportunities = [
     {
       title: "Premium Apartments - Embakasi (Off-Plan)",
@@ -304,7 +316,11 @@ const Investments = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                size="lg" 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("investment_consultation", "Investment Consultation")}
+              >
                 Schedule Consultation
               </Button>
               <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
@@ -334,6 +350,13 @@ const Investments = () => {
         </section>
       </main>
       <Footer />
+      
+      <AppointmentBookingModal
+        open={appointmentOpen}
+        setOpen={setAppointmentOpen}
+        source={appointmentSource}
+        serviceType={appointmentServiceType}
+      />
     </>
   );
 };

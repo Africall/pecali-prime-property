@@ -7,9 +7,19 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Shield, Users, TrendingUp, FileText, Scale, CheckCircle, ArrowRight, Handshake, Calculator } from "lucide-react";
+import { AppointmentBookingModal } from "@/components/AppointmentBookingModal";
 
 const Services = () => {
   const [activeService, setActiveService] = useState("sales");
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [appointmentSource, setAppointmentSource] = useState("");
+  const [appointmentServiceType, setAppointmentServiceType] = useState("");
+
+  const openAppointment = (source: string, serviceType: string) => {
+    setAppointmentSource(source);
+    setAppointmentServiceType(serviceType);
+    setAppointmentOpen(true);
+  };
 
   const serviceNavItems = [
     { id: "sales", label: "Property Sales & Leasing" },
@@ -137,7 +147,10 @@ const Services = () => {
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Ready to Buy, Sell, or Lease?</h3>
               <p className="mb-6">Let's find your perfect property match today</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("sales_team", "Property Sales & Leasing Inquiry")}
+              >
                 Contact Our Sales Team
               </Button>
             </div>
@@ -188,7 +201,10 @@ const Services = () => {
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Let Us Manage Your Property</h3>
               <p className="mb-6">Experience stress-free property ownership with professional management</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("management_quote", "Property Management Quote Request")}
+              >
                 Get a Free Management Quote
               </Button>
             </div>
@@ -230,7 +246,10 @@ const Services = () => {
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Schedule Your Consultation</h3>
               <p className="mb-6">Get expert advice tailored to your real estate needs</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("consulting", "Real Estate Consulting Appointment")}
+              >
                 Book a Consultation
               </Button>
             </div>
@@ -288,7 +307,10 @@ const Services = () => {
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Start Building Your Real Estate Portfolio</h3>
               <p className="mb-6">Connect with our investment advisors today</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("investment_consultation", "Investment Advisory Consultation")}
+              >
                 Schedule Investment Consultation
               </Button>
             </div>
@@ -326,9 +348,12 @@ const Services = () => {
             </div>
 
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold mb-3">Get Your Property Valued</h3>
-              <p className="mb-6">Request a professional valuation today</p>
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <h3 className="text-2xl font-bold mb-3">Need a Property Valuation?</h3>
+              <p className="mb-6">Get accurate market-driven valuations for informed decisions</p>
+              <Button 
+                className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                onClick={() => openAppointment("valuation_request", "Property Valuation Request")}
+              >
                 Request Valuation
               </Button>
             </div>
@@ -367,12 +392,10 @@ const Services = () => {
 
             <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground p-8 rounded-lg text-center">
               <h3 className="text-2xl font-bold mb-3">Need Legal Support?</h3>
-              <p className="mb-6">Our legal partners are ready to assist</p>
+              <p className="mb-6">Expert legal documentation and advisory for smooth property transactions</p>
               <Button 
                 className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
-                onClick={() => {
-                  window.location.href = '/#get-started-form';
-                }}
+                onClick={() => openAppointment("legal_team", "Legal Documentation Consultation")}
               >
                 Contact Legal Team
               </Button>
@@ -408,6 +431,13 @@ const Services = () => {
       </main>
 
       <Footer />
+      
+      <AppointmentBookingModal
+        open={appointmentOpen}
+        setOpen={setAppointmentOpen}
+        source={appointmentSource}
+        serviceType={appointmentServiceType}
+      />
     </div>
   );
 };

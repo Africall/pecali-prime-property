@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LogoRain from "@/components/LogoRain";
 import GetStartedWizard from "@/components/GetStartedWizard";
+import { AppointmentBookingModal } from "@/components/AppointmentBookingModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +17,9 @@ import { useToast } from "@/hooks/use-toast";
 const Contact = () => {
   const { toast } = useToast();
   const [isGetStartedOpen, setIsGetStartedOpen] = useState(false);
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [appointmentSource, setAppointmentSource] = useState("");
+  const [appointmentServiceType, setAppointmentServiceType] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +27,12 @@ const Contact = () => {
     service: "",
     message: ""
   });
+
+  const openAppointment = (source: string, serviceType: string) => {
+    setAppointmentSource(source);
+    setAppointmentServiceType(serviceType);
+    setAppointmentOpen(true);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -312,7 +322,10 @@ const Contact = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Talk to us today and take the first step towards your property goals.
           </p>
-          <Button className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6">
+          <Button 
+            className="bg-gradient-primary hover:bg-gradient-luxury shadow-gold text-lg px-8 py-6"
+            onClick={() => openAppointment("property_journey", "Start Property Journey")}
+          >
             Start Your Property Journey
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -327,6 +340,13 @@ const Contact = () => {
           <GetStartedWizard />
         </DialogContent>
       </Dialog>
+      
+      <AppointmentBookingModal
+        open={appointmentOpen}
+        setOpen={setAppointmentOpen}
+        source={appointmentSource}
+        serviceType={appointmentServiceType}
+      />
     </div>
   );
 };
