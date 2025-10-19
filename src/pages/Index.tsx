@@ -13,9 +13,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { TrendingUp, Shield, Users, Award, ArrowRight, Star, CheckCircle, Quote, Eye, Phone } from "lucide-react";
 import { supabase } from '@/integrations/supabase/client';
 import Autoplay from "embla-carousel-autoplay";
-import elitzCover from "@/assets/elitz-cover.jpg";
-import azureSky from "@/assets/azure-sky-cover.jpg";
-import mangoTree from "@/assets/mango-tree-cover.jpg";
 const Index = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState<any[]>([]);
@@ -28,24 +25,17 @@ const Index = () => {
     Autoplay({ delay: 4000, stopOnInteraction: true })
   );
 
-  const imageMap: Record<string, string> = {
-    'elitz-residency': elitzCover,
-    'azure-sky-park': azureSky,
-    'mango-tree': mangoTree
-  };
-
   useEffect(() => {
     (async () => {
-      const slugs = ['elitz-residency', 'azure-sky-park', 'mango-tree'];
       const { data } = await supabase
         .from('properties')
         .select('slug, title, location, price_label')
-        .in('slug', slugs);
+        .order('created_at', { ascending: false });
 
       if (data && data.length > 0) {
         const out = data.map(prop => ({
           ...prop,
-          image: imageMap[prop.slug] || elitzCover
+          image: `/properties/${prop.slug}-cover.jpg`
         }));
         setProperties(out);
       }
