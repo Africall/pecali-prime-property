@@ -173,9 +173,7 @@ export default function PropertyDetail() {
     appleTreeAmenities,
   ];
 
-  const geminiImages = property?.slug === 'gemini-residency' && property?.meta?.gallery 
-    ? property.meta.gallery 
-    : [
+  const geminiImages = [
     geminiExteriorCourtyard,
     geminiPool1,
     geminiPool2,
@@ -191,9 +189,7 @@ export default function PropertyDetail() {
     geminiExteriorBuildings,
   ];
 
-  const azureSkyParkImages = property?.slug === 'azure-sky-park' && property?.meta?.gallery
-    ? property.meta.gallery
-    : [
+  const azureSkyParkImages = [
     azureSkyCover,
     azureSkyOverview,
     azureSkyAmenities,
@@ -206,9 +202,7 @@ export default function PropertyDetail() {
     azureSkyLocation,
   ];
 
-  const urbanParkImages = property?.slug === 'urban-park' && property?.meta?.gallery
-    ? property.meta.gallery
-    : [
+  const urbanParkImages = [
     urbanParkExteriorEntrance,
     urbanParkAerial1,
     urbanParkAerial2,
@@ -898,27 +892,154 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={geminiImages[0]}
-                      alt="Gemini Residency - Featured Image" 
+                      src={geminiExteriorCourtyard} 
+                      alt="Gemini Residency - Exterior Courtyard View" 
                       className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                    {geminiImages.slice(1).map((image: string, index: number) => (
-                      <div 
-                        key={index}
-                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
-                        onClick={() => setLightboxIndex(index + 1)}
-                      >
-                        <img 
-                          src={image}
-                          alt={`Gemini Residency - Image ${index + 2}`}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Pool images - spans 2 columns each */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={geminiPool1} 
+                        alt="Gemini Residency Pool & Amenities View 1" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={geminiPool2} 
+                        alt="Gemini Residency Pool & Amenities View 2" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Floor plans - Studio */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={geminiFloorplanStudio} 
+                        alt="Gemini Residency Studio 34m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 1 Bedroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={geminiFloorplan1br} 
+                        alt="Gemini Residency 1 Bedroom 53m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 2 Bedroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={geminiFloorplan2br} 
+                        alt="Gemini Residency 2 Bedroom 85m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Super 2 Bedroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={geminiFloorplanSuper2br} 
+                        alt="Gemini Residency Super 2 Bedroom 98m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 3 Bedroom - Large feature spanning 2 columns and 2 rows */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={geminiFloorplan3br} 
+                        alt="Gemini Residency 3 Bedroom 152m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Super 3 Bedroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={geminiFloorplanSuper3br} 
+                        alt="Gemini Residency Super 3 Bedroom 171m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 4 Bedroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={geminiFloorplan4br} 
+                        alt="Gemini Residency 4 Bedroom 216m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Additional exterior views - spanning full width */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={geminiCourtyardGarden} 
+                        alt="Gemini Residency Courtyard Garden View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={geminiCourtyardParking} 
+                        alt="Gemini Residency Courtyard & Parking Area" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(12)}
+                    >
+                      <img 
+                        src={geminiExteriorBuildings} 
+                        alt="Gemini Residency Exterior Buildings View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
               ) : property.slug === 'azure-sky-park' ? (
@@ -929,27 +1050,121 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={azureSkyParkImages[0]}
-                      alt="Azure Sky Park - Featured Image" 
+                      src={azureSkyCover} 
+                      alt="Azure Sky Park - Premium Apartments" 
                       className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                    {azureSkyParkImages.slice(1).map((image: string, index: number) => (
-                      <div 
-                        key={index}
-                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
-                        onClick={() => setLightboxIndex(index + 1)}
-                      >
-                        <img 
-                          src={image}
-                          alt={`Azure Sky Park - Image ${index + 2}`}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Overview - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={azureSkyOverview} 
+                        alt="Azure Sky Park Overview & Property Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Amenities - spans 2 columns */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={azureSkyAmenities} 
+                        alt="Azure Sky Park Amenities & Features" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 1 Bedroom Floor Plan - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={azureSky1br} 
+                        alt="Azure Sky Park 1 Bedroom 58.05m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 2 Bedroom Floor Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={azureSky2br} 
+                        alt="Azure Sky Park 2 Bedroom 76.08m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 3 Bedroom Floor Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={azureSky3br} 
+                        alt="Azure Sky Park 3 Bedroom 123.9m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* 4 Bedroom Floor Plan - Tall feature */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={azureSky4br} 
+                        alt="Azure Sky Park 4 Bedroom 189.64m² Floor Plan" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Floor Plans Overview */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={azureSkyFloorplansOverview} 
+                        alt="Azure Sky Park All Floor Plans Overview" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Features - Wide feature */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={azureSkyFeatures} 
+                        alt="Azure Sky Park Premium Features & Services" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Location Map - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={azureSkyLocation} 
+                        alt="Azure Sky Park Location Map - Near Nairobi National Park" 
+                        className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
               ) : property.slug === 'urban-park' ? (
@@ -960,58 +1175,229 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={urbanParkImages[0]}
-                      alt="Urban Park - Featured Image" 
+                      src={urbanParkExteriorEntrance} 
+                      alt="Urban Park - Modern Living For A Modern City" 
                       className="w-full h-full object-contain bg-muted"
                     />
                   </div>
                   
                   {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                    {urbanParkImages.slice(1).map((image: string, index: number) => (
-                      <div 
-                        key={index}
-                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
-                        onClick={() => setLightboxIndex(index + 1)}
-                      >
-                        <img 
-                          src={image}
-                          alt={`Urban Park - Image ${index + 2}`}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : property.meta?.gallery && property.meta.gallery.length > 0 ? (
-                <div className="space-y-4">
-                  {/* Featured Hero Image */}
-                  <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
-                    onClick={() => setLightboxIndex(0)}
-                  >
-                    <img 
-                      src={property.meta.gallery[0]} 
-                      alt={`${property.title} - Featured Image`}
-                      className="w-full h-full object-contain bg-muted"
-                    />
-                  </div>
-                  
-                  {/* Dynamic Grid Layout */}
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                    {property.meta.gallery.slice(1).map((image: string, index: number) => (
-                      <div 
-                        key={index}
-                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
-                        onClick={() => setLightboxIndex(index + 1)}
-                      >
-                        <img 
-                          src={image}
-                          alt={`${property.title} - Image ${index + 2}`}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Aerial View 1 - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={urbanParkAerial1} 
+                        alt="Urban Park Aerial View - Complete Development" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Aerial View 2 */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(2)}
+                    >
+                      <img 
+                        src={urbanParkAerial2} 
+                        alt="Urban Park Aerial View - Pool & Amenities" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Kitchen */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(3)}
+                    >
+                      <img 
+                        src={urbanParkKitchen} 
+                        alt="Urban Park Modern Kitchen Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living & Dining - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(4)}
+                    >
+                      <img 
+                        src={urbanParkLivingDining} 
+                        alt="Urban Park Living & Dining Room" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 1 - Tall feature */}
+                    <div 
+                      className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(5)}
+                    >
+                      <img 
+                        src={urbanParkBedroom1} 
+                        alt="Urban Park Master Bedroom Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 2 */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(6)}
+                    >
+                      <img 
+                        src={urbanParkBedroom2} 
+                        alt="Urban Park Bedroom Interior Design" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bathroom */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(7)}
+                    >
+                      <img 
+                        src={urbanParkBathroom} 
+                        alt="Urban Park Modern Bathroom Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Exterior Front View */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(8)}
+                    >
+                      <img 
+                        src={urbanParkExteriorFront} 
+                        alt="Urban Park Front Facade Architecture" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Exterior Street View - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(9)}
+                    >
+                      <img 
+                        src={urbanParkExteriorStreet} 
+                        alt="Urban Park Street View & Entrance" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Living Room - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(10)}
+                    >
+                      <img 
+                        src={urbanParkLivingModern} 
+                        alt="Urban Park Contemporary Living & Dining Space" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom 3 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(11)}
+                    >
+                      <img 
+                        src={urbanParkBedroom3} 
+                        alt="Urban Park Master Suite with City Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living Room Open Plan */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(12)}
+                    >
+                      <img 
+                        src={urbanParkLivingOpen} 
+                        alt="Urban Park Open Plan Living Space" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Final Exterior View - Wide feature */}
+                    <div 
+                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(13)}
+                    >
+                      <img 
+                        src={urbanParkExteriorFinal} 
+                        alt="Urban Park Complete Development View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Lighting 1 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(14)}
+                    >
+                      <img 
+                        src={urbanParkLighting1} 
+                        alt="Urban Park Modern Ceiling Fixture & Interior Design" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Living with Balcony */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(15)}
+                    >
+                      <img 
+                        src={urbanParkLivingBalcony} 
+                        alt="Urban Park Living Space with Balcony & City Views" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Furnished Living Room - Large feature */}
+                    <div 
+                      className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
+                      onClick={() => setLightboxIndex(16)}
+                    >
+                      <img 
+                        src={urbanParkLivingFurnished} 
+                        alt="Urban Park Furnished Living Room with Modern Amenities" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Bedroom with Wardrobe */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(17)}
+                    >
+                      <img 
+                        src={urbanParkBedroomWardrobe} 
+                        alt="Urban Park Bedroom with Built-in Wardrobes" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
+                    {/* Modern Lighting 2 */}
+                    <div 
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                      onClick={() => setLightboxIndex(18)}
+                    >
+                      <img 
+                        src={urbanParkLighting2} 
+                        alt="Urban Park LED Ceiling Fixture & Modern Interior" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -1063,14 +1449,6 @@ export default function PropertyDetail() {
       {property?.slug === 'apple-tree-phase-3' && (
         <ImageLightbox 
           images={appleTreeImages} 
-          index={lightboxIndex} 
-          setIndex={setLightboxIndex} 
-        />
-      )}
-
-      {property?.meta?.gallery && property.meta.gallery.length > 0 && (
-        <ImageLightbox 
-          images={property.meta.gallery} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
