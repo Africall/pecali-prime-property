@@ -1400,59 +1400,6 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
-              ) : property.meta?.gallery && Array.isArray(property.meta.gallery) && property.meta.gallery.length > 0 ? (
-                <div className="space-y-4">
-                  {/* Hero Image */}
-                  <div 
-                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
-                    onClick={() => setLightboxIndex(0)}
-                  >
-                    <img 
-                      src={property.meta.gallery[0]} 
-                      alt={property.title} 
-                      className="w-full h-full object-contain bg-muted"
-                    />
-                  </div>
-                  
-                  {/* Image Grid */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-                    {property.meta.gallery.slice(1).map((img: string, idx: number) => (
-                      <div 
-                        key={idx}
-                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                        onClick={() => setLightboxIndex(idx + 1)}
-                      >
-                        <img 
-                          src={img} 
-                          alt={`${property.title} - Image ${idx + 2}`}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  
-                  {/* Property Information */}
-                  {property.meta?.description && (
-                    <div className="mt-8 prose prose-slate max-w-none dark:prose-invert">
-                      <h2 className="text-2xl font-bold mb-4">About {property.title}</h2>
-                      <p className="text-muted-foreground whitespace-pre-line">{property.meta.description}</p>
-                    </div>
-                  )}
-                  
-                  {property.meta?.features && Array.isArray(property.meta.features) && (
-                    <div className="mt-8">
-                      <h3 className="text-xl font-bold mb-4">Key Features</h3>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {property.meta.features.map((feature: string, idx: number) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="text-primary mt-1">✓</span>
-                            <span className="text-muted-foreground">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -1526,15 +1473,6 @@ export default function PropertyDetail() {
       {property?.slug === 'urban-park' && (
         <ImageLightbox 
           images={urbanParkImages} 
-          index={lightboxIndex} 
-          setIndex={setLightboxIndex} 
-        />
-      )}
-
-      {property && property.meta?.gallery && Array.isArray(property.meta.gallery) && 
-       !['elitz-residency', 'mango-tree', 'apple-tree-phase-3', 'gemini-residency', 'azure-sky-park', 'urban-park'].includes(property.slug) && (
-        <ImageLightbox 
-          images={property.meta.gallery} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
