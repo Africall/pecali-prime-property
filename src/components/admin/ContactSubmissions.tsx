@@ -135,17 +135,18 @@ export const ContactSubmissions = () => {
     <div className="space-y-4">
       <h2 className="text-2xl font-bold">Contact Form Submissions</h2>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Subject</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Date & Time</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
+      <div className="overflow-x-auto border rounded-lg">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Contact</TableHead>
+              <TableHead className="hidden md:table-cell">Subject</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="hidden sm:table-cell">Date & Time</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
         <TableBody>
           {loading ? (
             <TableRow>
@@ -158,20 +159,20 @@ export const ContactSubmissions = () => {
           ) : (
             submissions.map((submission) => (
               <TableRow key={submission.id}>
-                <TableCell className="font-medium">{submission.full_name}</TableCell>
-                <TableCell>
+                <TableCell className="font-medium min-w-[120px]">{submission.full_name}</TableCell>
+                <TableCell className="min-w-[150px]">
                   <div className="text-sm">
-                    <div>{submission.email}</div>
+                    <div className="truncate max-w-[150px]">{submission.email}</div>
                     {submission.phone && <div className="text-muted-foreground">{submission.phone}</div>}
                   </div>
                 </TableCell>
-                <TableCell>{submission.subject || '-'}</TableCell>
+                <TableCell className="hidden md:table-cell">{submission.subject || '-'}</TableCell>
                 <TableCell>
                   <Select
                     value={submission.status}
                     onValueChange={(value) => handleStatusUpdate(submission.id, value)}
                   >
-                    <SelectTrigger className="w-32">
+                    <SelectTrigger className="w-28 sm:w-32">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -181,8 +182,8 @@ export const ContactSubmissions = () => {
                     </SelectContent>
                   </Select>
                 </TableCell>
-                <TableCell>
-                  <div className="text-sm">
+                <TableCell className="hidden sm:table-cell">
+                  <div className="text-sm whitespace-nowrap">
                     <div>{new Date(submission.created_at).toLocaleDateString()}</div>
                     <div className="text-muted-foreground">
                       {new Date(submission.created_at).toLocaleTimeString()}
@@ -190,7 +191,7 @@ export const ContactSubmissions = () => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-1">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -224,7 +225,8 @@ export const ContactSubmissions = () => {
             ))
           )}
         </TableBody>
-      </Table>
+        </Table>
+      </div>
 
       {/* View Dialog */}
       <Dialog open={viewOpen} onOpenChange={setViewOpen}>

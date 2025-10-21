@@ -129,19 +129,20 @@ export const GetStartedLeads = () => {
         <Badge className="bg-red-500 text-lg px-4 py-2">PRIORITY</Badge>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Looking For</TableHead>
-            <TableHead>Budget</TableHead>
-            <TableHead>Location</TableHead>
-            <TableHead>Channel</TableHead>
-            <TableHead>Date & Time</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
+      <div className="overflow-x-auto border rounded-lg">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Contact</TableHead>
+              <TableHead className="hidden md:table-cell">Looking For</TableHead>
+              <TableHead className="hidden lg:table-cell">Budget</TableHead>
+              <TableHead className="hidden lg:table-cell">Location</TableHead>
+              <TableHead className="hidden xl:table-cell">Channel</TableHead>
+              <TableHead className="hidden sm:table-cell">Date & Time</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
         <TableBody>
           {loading ? (
             <TableRow>
@@ -154,21 +155,21 @@ export const GetStartedLeads = () => {
           ) : (
             leads.map((lead) => (
               <TableRow key={lead.id}>
-                <TableCell className="font-medium">{lead.full_name}</TableCell>
-                <TableCell>
+                <TableCell className="font-medium min-w-[120px]">{lead.full_name}</TableCell>
+                <TableCell className="min-w-[150px]">
                   <div className="text-sm">
-                    <div>{lead.email}</div>
+                    <div className="truncate max-w-[150px]">{lead.email}</div>
                     {lead.phone && <div className="text-muted-foreground">{lead.phone}</div>}
                   </div>
                 </TableCell>
-                <TableCell>{lead.looking_for}</TableCell>
-                <TableCell>{lead.budget_range || '-'}</TableCell>
-                <TableCell>{lead.preferred_location || '-'}</TableCell>
-                <TableCell>
+                <TableCell className="hidden md:table-cell">{lead.looking_for}</TableCell>
+                <TableCell className="hidden lg:table-cell">{lead.budget_range || '-'}</TableCell>
+                <TableCell className="hidden lg:table-cell">{lead.preferred_location || '-'}</TableCell>
+                <TableCell className="hidden xl:table-cell">
                   <Badge variant="outline">{lead.channel || 'Email'}</Badge>
                 </TableCell>
-                <TableCell>
-                  <div className="text-sm">
+                <TableCell className="hidden sm:table-cell">
+                  <div className="text-sm whitespace-nowrap">
                     <div>{new Date(lead.created_at).toLocaleDateString()}</div>
                     <div className="text-muted-foreground">
                       {new Date(lead.created_at).toLocaleTimeString()}
@@ -176,7 +177,7 @@ export const GetStartedLeads = () => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-1">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -210,7 +211,8 @@ export const GetStartedLeads = () => {
             ))
           )}
         </TableBody>
-      </Table>
+        </Table>
+      </div>
 
       {/* View Dialog */}
       <Dialog open={viewOpen} onOpenChange={setViewOpen}>

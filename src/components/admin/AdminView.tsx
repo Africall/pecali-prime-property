@@ -75,12 +75,12 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+          <h1 className="text-2xl sm:text-4xl font-bold">Admin Dashboard</h1>
           <Badge className="mt-2 bg-red-500">ADMIN</Badge>
         </div>
-        <Button onClick={onLogout} variant="outline">
+        <Button onClick={onLogout} variant="outline" className="w-full sm:w-auto">
           <LogOut className="mr-2 h-4 w-4" />
           Logout
         </Button>
@@ -126,45 +126,47 @@ const AdminView = ({ user, onLogout }: AdminViewProps) => {
       </div>
 
       <Tabs defaultValue="get-started" className="space-y-4">
-        <TabsList className="grid grid-cols-3 lg:grid-cols-9 w-full">
-          <TabsTrigger value="get-started" className="relative">
-            <Star className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Get Started</span>
-            <Badge className="ml-2 bg-red-500 text-xs hidden md:inline">Priority</Badge>
-          </TabsTrigger>
-          <TabsTrigger value="appointments">
-            <Briefcase className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Appointments</span>
-          </TabsTrigger>
-          <TabsTrigger value="contact">
-            <Mail className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Contact</span>
-          </TabsTrigger>
-          <TabsTrigger value="inquiries">
-            <Briefcase className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Services</span>
-          </TabsTrigger>
-          <TabsTrigger value="training">
-            <GraduationCap className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Training</span>
-          </TabsTrigger>
-          <TabsTrigger value="leads">
-            <Users className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Prop Leads</span>
-          </TabsTrigger>
-          <TabsTrigger value="properties">
-            <Building2 className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Properties</span>
-          </TabsTrigger>
-          <TabsTrigger value="users">
-            <Users className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Users</span>
-          </TabsTrigger>
-          <TabsTrigger value="projects">
-            <FolderKanban className="mr-2 h-4 w-4" />
-            <span className="hidden sm:inline">Projects</span>
-          </TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="get-started" className="flex-shrink-0">
+              <Star className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Get Started</span>
+              <Badge className="ml-2 bg-red-500 text-xs hidden lg:inline">Priority</Badge>
+            </TabsTrigger>
+            <TabsTrigger value="appointments" className="flex-shrink-0">
+              <Briefcase className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Appointments</span>
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="flex-shrink-0">
+              <Mail className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Contact</span>
+            </TabsTrigger>
+            <TabsTrigger value="inquiries" className="flex-shrink-0">
+              <Briefcase className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Services</span>
+            </TabsTrigger>
+            <TabsTrigger value="training" className="flex-shrink-0">
+              <GraduationCap className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Training</span>
+            </TabsTrigger>
+            <TabsTrigger value="leads" className="flex-shrink-0">
+              <Users className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Prop Leads</span>
+            </TabsTrigger>
+            <TabsTrigger value="properties" className="flex-shrink-0">
+              <Building2 className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Properties</span>
+            </TabsTrigger>
+            <TabsTrigger value="users" className="flex-shrink-0">
+              <Users className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Users</span>
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="flex-shrink-0">
+              <FolderKanban className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Projects</span>
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="get-started">
           <GetStartedLeads />

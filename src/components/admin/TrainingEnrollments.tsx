@@ -93,15 +93,15 @@ export const TrainingEnrollments = () => {
   return (
     <div className="space-y-4">
       <h3 className="text-xl font-semibold">Training Enrollments</h3>
-      <div className="border rounded-lg">
+      <div className="overflow-x-auto border rounded-lg">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Phone</TableHead>
+              <TableHead className="hidden md:table-cell">Phone</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
+              <TableHead className="hidden sm:table-cell">Date</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -117,15 +117,15 @@ export const TrainingEnrollments = () => {
             ) : (
               enrollments.map((enrollment) => (
                 <TableRow key={enrollment.id}>
-                  <TableCell className="font-medium">{enrollment.full_name}</TableCell>
-                  <TableCell>{enrollment.email}</TableCell>
-                  <TableCell>{enrollment.phone || "-"}</TableCell>
+                  <TableCell className="font-medium min-w-[120px]">{enrollment.full_name}</TableCell>
+                  <TableCell className="min-w-[150px] truncate max-w-[200px]">{enrollment.email}</TableCell>
+                  <TableCell className="hidden md:table-cell">{enrollment.phone || "-"}</TableCell>
                   <TableCell>
                     <Select
                       value={enrollment.status}
                       onValueChange={(value) => handleStatusUpdate(enrollment.id, value)}
                     >
-                      <SelectTrigger className="w-[140px]">
+                      <SelectTrigger className="w-28 sm:w-[140px]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -137,9 +137,9 @@ export const TrainingEnrollments = () => {
                       </SelectContent>
                     </Select>
                   </TableCell>
-                  <TableCell>{new Date(enrollment.created_at).toLocaleDateString()}</TableCell>
+                  <TableCell className="hidden sm:table-cell whitespace-nowrap">{new Date(enrollment.created_at).toLocaleDateString()}</TableCell>
                 <TableCell>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-1">
                     <Button variant="ghost" size="sm">
                       <Eye className="h-4 w-4" />
                     </Button>
