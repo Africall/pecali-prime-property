@@ -21,7 +21,7 @@ export default function ContactModal({
   source,
   propertySlug,
   defaultMessage = '',
-  phoneFallback = '+254712345678'
+  phoneFallback = '+254758174718'
 }: ContactModalProps) {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');

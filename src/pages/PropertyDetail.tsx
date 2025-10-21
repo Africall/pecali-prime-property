@@ -1524,7 +1524,7 @@ export default function PropertyDetail() {
         source="property_page"
         propertySlug={property?.slug}
         defaultMessage={property ? `I'm interested in ${property.title}.` : ''}
-        phoneFallback="+254712345678"
+        phoneFallback="+254758174718"
       />
 
       {property?.slug === 'elitz-residency' && (

@@ -281,7 +281,7 @@ const Index = () => {
         source="home_card"
         propertySlug={contactSlug}
         defaultMessage={contactSlug ? `I'm interested in ${contactSlug}.` : ''}
-        phoneFallback="+254712345678"
+        phoneFallback="+254758174718"
       />
 
       <Dialog open={serviceDialogOpen} onOpenChange={setServiceDialogOpen}>
