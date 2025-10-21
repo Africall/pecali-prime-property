@@ -1400,6 +1400,39 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.meta?.gallery && property.meta.gallery.length > 0 ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={property.meta.gallery[0]} 
+                      alt={`${property.title} - Featured Image`}
+                      className="w-full h-full object-contain bg-muted"
+                    />
+                  </div>
+                  
+                  {/* Remaining Images in Responsive Grid */}
+                  {property.meta.gallery.length > 1 && (
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                      {property.meta.gallery.slice(1).map((imagePath: string, idx: number) => (
+                        <div 
+                          key={idx}
+                          className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
+                          onClick={() => setLightboxIndex(idx + 1)}
+                        >
+                          <img 
+                            src={imagePath} 
+                            alt={`${property.title} - Image ${idx + 2}`}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <p className="text-lg text-muted-foreground">
@@ -1473,6 +1506,23 @@ export default function PropertyDetail() {
       {property?.slug === 'urban-park' && (
         <ImageLightbox 
           images={urbanParkImages} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {/* Default lightbox for properties using meta.gallery */}
+      {property && 
+        property.slug !== 'elitz-residency' && 
+        property.slug !== 'mango-tree' && 
+        property.slug !== 'apple-tree-phase-3' && 
+        property.slug !== 'gemini-residency' && 
+        property.slug !== 'azure-sky-park' && 
+        property.slug !== 'urban-park' && 
+        property.meta?.gallery && 
+        property.meta.gallery.length > 0 && (
+        <ImageLightbox 
+          images={property.meta.gallery} 
           index={lightboxIndex} 
           setIndex={setLightboxIndex} 
         />
