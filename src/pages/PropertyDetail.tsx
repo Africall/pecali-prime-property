@@ -173,56 +173,108 @@ export default function PropertyDetail() {
     appleTreeAmenities,
   ];
 
-  const geminiImages = [
-    geminiExteriorCourtyard,
-    geminiPool1,
-    geminiPool2,
-    geminiFloorplanStudio,
-    geminiFloorplan1br,
-    geminiFloorplan2br,
-    geminiFloorplanSuper2br,
-    geminiFloorplan3br,
-    geminiFloorplanSuper3br,
-    geminiFloorplan4br,
-    geminiCourtyardGarden,
-    geminiCourtyardParking,
-    geminiExteriorBuildings,
-  ];
+  const geminiImages = property?.meta?.gallery?.[0]
+    ? [
+        property.meta.gallery[0],
+        geminiPool1,
+        geminiPool2,
+        geminiFloorplanStudio,
+        geminiFloorplan1br,
+        geminiFloorplan2br,
+        geminiFloorplanSuper2br,
+        geminiFloorplan3br,
+        geminiFloorplanSuper3br,
+        geminiFloorplan4br,
+        geminiCourtyardGarden,
+        geminiCourtyardParking,
+        geminiExteriorBuildings,
+      ]
+    : [
+        geminiExteriorCourtyard,
+        geminiPool1,
+        geminiPool2,
+        geminiFloorplanStudio,
+        geminiFloorplan1br,
+        geminiFloorplan2br,
+        geminiFloorplanSuper2br,
+        geminiFloorplan3br,
+        geminiFloorplanSuper3br,
+        geminiFloorplan4br,
+        geminiCourtyardGarden,
+        geminiCourtyardParking,
+        geminiExteriorBuildings,
+      ];
 
-  const azureSkyParkImages = [
-    azureSkyCover,
-    azureSkyOverview,
-    azureSkyAmenities,
-    azureSky1br,
-    azureSky2br,
-    azureSky3br,
-    azureSky4br,
-    azureSkyFloorplansOverview,
-    azureSkyFeatures,
-    azureSkyLocation,
-  ];
+  const azureSkyParkImages = property?.meta?.gallery?.[1] && property?.meta?.gallery?.[0] 
+    ? [
+        property.meta.gallery[1],
+        property.meta.gallery[0],
+        azureSkyAmenities,
+        azureSky1br,
+        azureSky2br,
+        azureSky3br,
+        azureSky4br,
+        azureSkyFloorplansOverview,
+        azureSkyFeatures,
+        azureSkyLocation,
+      ]
+    : [
+        azureSkyCover,
+        azureSkyOverview,
+        azureSkyAmenities,
+        azureSky1br,
+        azureSky2br,
+        azureSky3br,
+        azureSky4br,
+        azureSkyFloorplansOverview,
+        azureSkyFeatures,
+        azureSkyLocation,
+      ];
 
-  const urbanParkImages = [
-    urbanParkExteriorEntrance,
-    urbanParkAerial1,
-    urbanParkAerial2,
-    urbanParkKitchen,
-    urbanParkLivingDining,
-    urbanParkBedroom1,
-    urbanParkBedroom2,
-    urbanParkBathroom,
-    urbanParkExteriorFront,
-    urbanParkExteriorStreet,
-    urbanParkLivingModern,
-    urbanParkBedroom3,
-    urbanParkLivingOpen,
-    urbanParkExteriorFinal,
-    urbanParkLighting1,
-    urbanParkLivingBalcony,
-    urbanParkLivingFurnished,
-    urbanParkBedroomWardrobe,
-    urbanParkLighting2,
-  ];
+  const urbanParkImages = property?.meta?.gallery?.[0]
+    ? [
+        property.meta.gallery[0],
+        urbanParkExteriorEntrance,
+        urbanParkAerial1,
+        urbanParkAerial2,
+        urbanParkKitchen,
+        urbanParkLivingDining,
+        urbanParkBedroom1,
+        urbanParkBedroom2,
+        urbanParkBathroom,
+        urbanParkExteriorFront,
+        urbanParkExteriorStreet,
+        urbanParkLivingModern,
+        urbanParkBedroom3,
+        urbanParkLivingOpen,
+        urbanParkExteriorFinal,
+        urbanParkLighting1,
+        urbanParkLivingBalcony,
+        urbanParkLivingFurnished,
+        urbanParkBedroomWardrobe,
+        urbanParkLighting2,
+      ]
+    : [
+        urbanParkExteriorEntrance,
+        urbanParkAerial1,
+        urbanParkAerial2,
+        urbanParkKitchen,
+        urbanParkLivingDining,
+        urbanParkBedroom1,
+        urbanParkBedroom2,
+        urbanParkBathroom,
+        urbanParkExteriorFront,
+        urbanParkExteriorStreet,
+        urbanParkLivingModern,
+        urbanParkBedroom3,
+        urbanParkLivingOpen,
+        urbanParkExteriorFinal,
+        urbanParkLighting1,
+        urbanParkLivingBalcony,
+        urbanParkLivingFurnished,
+        urbanParkBedroomWardrobe,
+        urbanParkLighting2,
+      ];
 
   useEffect(() => {
     let cancelled = false;
@@ -892,7 +944,7 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={geminiExteriorCourtyard} 
+                      src={property.meta?.gallery?.[0] || geminiExteriorCourtyard} 
                       alt="Gemini Residency - Exterior Courtyard View" 
                       className="w-full h-full object-contain bg-muted"
                     />
@@ -1050,7 +1102,7 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={azureSkyCover} 
+                      src={property.meta?.gallery?.[1] || azureSkyCover} 
                       alt="Azure Sky Park - Premium Apartments" 
                       className="w-full h-full object-contain bg-muted"
                     />
@@ -1064,7 +1116,7 @@ export default function PropertyDetail() {
                       onClick={() => setLightboxIndex(1)}
                     >
                       <img 
-                        src={azureSkyOverview} 
+                        src={property.meta?.gallery?.[0] || azureSkyOverview} 
                         alt="Azure Sky Park Overview & Property Views" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
@@ -1175,7 +1227,7 @@ export default function PropertyDetail() {
                     onClick={() => setLightboxIndex(0)}
                   >
                     <img 
-                      src={urbanParkExteriorEntrance} 
+                      src={property.meta?.gallery?.[0] || urbanParkExteriorEntrance} 
                       alt="Urban Park - Modern Living For A Modern City" 
                       className="w-full h-full object-contain bg-muted"
                     />
@@ -1183,10 +1235,22 @@ export default function PropertyDetail() {
                   
                   {/* Dynamic Grid Layout */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                    {/* Original Entrance Image - Now 2nd in gallery */}
+                    <div 
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      onClick={() => setLightboxIndex(1)}
+                    >
+                      <img 
+                        src={urbanParkExteriorEntrance} 
+                        alt="Urban Park Entrance View" 
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                    
                     {/* Aerial View 1 - Large feature */}
                     <div 
                       className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(1)}
+                      onClick={() => setLightboxIndex(2)}
                     >
                       <img 
                         src={urbanParkAerial1} 
@@ -1198,7 +1262,7 @@ export default function PropertyDetail() {
                     {/* Aerial View 2 */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(2)}
+                      onClick={() => setLightboxIndex(3)}
                     >
                       <img 
                         src={urbanParkAerial2} 
@@ -1210,7 +1274,7 @@ export default function PropertyDetail() {
                     {/* Kitchen */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(3)}
+                      onClick={() => setLightboxIndex(4)}
                     >
                       <img 
                         src={urbanParkKitchen} 
@@ -1222,7 +1286,7 @@ export default function PropertyDetail() {
                     {/* Living & Dining - Wide feature */}
                     <div 
                       className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(4)}
+                      onClick={() => setLightboxIndex(5)}
                     >
                       <img 
                         src={urbanParkLivingDining} 
@@ -1234,7 +1298,7 @@ export default function PropertyDetail() {
                     {/* Bedroom 1 - Tall feature */}
                     <div 
                       className="row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(5)}
+                      onClick={() => setLightboxIndex(6)}
                     >
                       <img 
                         src={urbanParkBedroom1} 
@@ -1246,7 +1310,7 @@ export default function PropertyDetail() {
                     {/* Bedroom 2 */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(6)}
+                      onClick={() => setLightboxIndex(7)}
                     >
                       <img 
                         src={urbanParkBedroom2} 
@@ -1258,7 +1322,7 @@ export default function PropertyDetail() {
                     {/* Bathroom */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(7)}
+                      onClick={() => setLightboxIndex(8)}
                     >
                       <img 
                         src={urbanParkBathroom} 
@@ -1270,7 +1334,7 @@ export default function PropertyDetail() {
                     {/* Exterior Front View */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(8)}
+                      onClick={() => setLightboxIndex(9)}
                     >
                       <img 
                         src={urbanParkExteriorFront} 
@@ -1282,7 +1346,7 @@ export default function PropertyDetail() {
                     {/* Exterior Street View - Wide feature */}
                     <div 
                       className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(9)}
+                      onClick={() => setLightboxIndex(10)}
                     >
                       <img 
                         src={urbanParkExteriorStreet} 
@@ -1294,7 +1358,7 @@ export default function PropertyDetail() {
                     {/* Modern Living Room - Large feature */}
                     <div 
                       className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(10)}
+                      onClick={() => setLightboxIndex(11)}
                     >
                       <img 
                         src={urbanParkLivingModern} 
@@ -1306,7 +1370,7 @@ export default function PropertyDetail() {
                     {/* Bedroom 3 */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(11)}
+                      onClick={() => setLightboxIndex(12)}
                     >
                       <img 
                         src={urbanParkBedroom3} 
@@ -1318,7 +1382,7 @@ export default function PropertyDetail() {
                     {/* Living Room Open Plan */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(12)}
+                      onClick={() => setLightboxIndex(13)}
                     >
                       <img 
                         src={urbanParkLivingOpen} 
@@ -1330,7 +1394,7 @@ export default function PropertyDetail() {
                     {/* Final Exterior View - Wide feature */}
                     <div 
                       className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(13)}
+                      onClick={() => setLightboxIndex(14)}
                     >
                       <img 
                         src={urbanParkExteriorFinal} 
@@ -1342,7 +1406,7 @@ export default function PropertyDetail() {
                     {/* Modern Lighting 1 */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(14)}
+                      onClick={() => setLightboxIndex(15)}
                     >
                       <img 
                         src={urbanParkLighting1} 
@@ -1354,7 +1418,7 @@ export default function PropertyDetail() {
                     {/* Living with Balcony */}
                     <div 
                       className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
-                      onClick={() => setLightboxIndex(15)}
+                      onClick={() => setLightboxIndex(16)}
                     >
                       <img 
                         src={urbanParkLivingBalcony} 
@@ -1366,7 +1430,7 @@ export default function PropertyDetail() {
                     {/* Furnished Living Room - Large feature */}
                     <div 
                       className="col-span-2 row-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-64 md:h-96"
-                      onClick={() => setLightboxIndex(16)}
+                      onClick={() => setLightboxIndex(17)}
                     >
                       <img 
                         src={urbanParkLivingFurnished} 
@@ -1378,7 +1442,7 @@ export default function PropertyDetail() {
                     {/* Bedroom with Wardrobe */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(17)}
+                      onClick={() => setLightboxIndex(18)}
                     >
                       <img 
                         src={urbanParkBedroomWardrobe} 
@@ -1390,7 +1454,7 @@ export default function PropertyDetail() {
                     {/* Modern Lighting 2 */}
                     <div 
                       className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
-                      onClick={() => setLightboxIndex(18)}
+                      onClick={() => setLightboxIndex(19)}
                     >
                       <img 
                         src={urbanParkLighting2} 
