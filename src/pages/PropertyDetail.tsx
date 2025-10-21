@@ -884,6 +884,37 @@ export default function PropertyDetail() {
                     </div>
                   </div>
                 </div>
+              ) : property.meta?.gallery && property.meta.gallery.length > 0 ? (
+                <div className="space-y-4">
+                  {/* Featured Hero Image */}
+                  <div 
+                    className="relative overflow-hidden rounded-xl shadow-luxury cursor-pointer max-w-5xl mx-auto h-[400px] md:h-[600px] lg:h-[700px]"
+                    onClick={() => setLightboxIndex(0)}
+                  >
+                    <img 
+                      src={property.meta.gallery[0]} 
+                      alt={`${property.title} - Featured Image`}
+                      className="w-full h-full object-contain bg-muted"
+                    />
+                  </div>
+                  
+                  {/* Dynamic Grid Layout */}
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                    {property.meta.gallery.slice(1).map((image: string, index: number) => (
+                      <div 
+                        key={index}
+                        className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-48 md:h-64"
+                        onClick={() => setLightboxIndex(index + 1)}
+                      >
+                        <img 
+                          src={image}
+                          alt={`${property.title} - Image ${index + 2}`}
+                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ) : property.slug === 'gemini-residency' ? (
                 <div className="space-y-4">
                   {/* Featured Hero Image */}
@@ -1002,14 +1033,14 @@ export default function PropertyDetail() {
                     >
                       <img 
                         src={geminiFloorplan4br} 
-                        alt="Gemini Residency 4 Bedroom 216m² Floor Plan" 
+                        alt="Gemini Residency 4 Bedroom 158m² Floor Plan" 
                         className="w-full h-full object-contain bg-white transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
-                    {/* Additional exterior views - spanning full width */}
+                    {/* Courtyard Images */}
                     <div 
-                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      className="relative overflow-hidden rounded-lg shadow-card cursor-pointer h-32 md:h-44"
                       onClick={() => setLightboxIndex(10)}
                     >
                       <img 
@@ -1025,13 +1056,13 @@ export default function PropertyDetail() {
                     >
                       <img 
                         src={geminiCourtyardParking} 
-                        alt="Gemini Residency Courtyard & Parking Area" 
+                        alt="Gemini Residency Courtyard Parking View" 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
                     
                     <div 
-                      className="col-span-2 lg:col-span-4 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
+                      className="col-span-2 relative overflow-hidden rounded-lg shadow-card cursor-pointer h-40 md:h-56"
                       onClick={() => setLightboxIndex(12)}
                     >
                       <img 
@@ -1454,7 +1485,15 @@ export default function PropertyDetail() {
         />
       )}
 
-      {property?.slug === 'gemini-residency' && (
+      {property?.meta?.gallery && property.meta.gallery.length > 0 && (
+        <ImageLightbox 
+          images={property.meta.gallery} 
+          index={lightboxIndex} 
+          setIndex={setLightboxIndex} 
+        />
+      )}
+
+      {property?.slug === 'gemini-residency' && !property?.meta?.gallery && (
         <ImageLightbox 
           images={geminiImages} 
           index={lightboxIndex} 
@@ -1462,7 +1501,7 @@ export default function PropertyDetail() {
         />
       )}
 
-      {property?.slug === 'azure-sky-park' && (
+      {property?.slug === 'azure-sky-park' && !property?.meta?.gallery && (
         <ImageLightbox 
           images={azureSkyParkImages} 
           index={lightboxIndex} 
@@ -1470,7 +1509,7 @@ export default function PropertyDetail() {
         />
       )}
 
-      {property?.slug === 'urban-park' && (
+      {property?.slug === 'urban-park' && !property?.meta?.gallery && (
         <ImageLightbox 
           images={urbanParkImages} 
           index={lightboxIndex} 
