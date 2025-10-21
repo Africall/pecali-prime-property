@@ -29,14 +29,18 @@ const Index = () => {
     (async () => {
       const { data } = await supabase
         .from('properties')
-        .select('slug, title, location, price_label')
+        .select('slug, title, location, price_label, meta')
         .order('created_at', { ascending: false });
 
       if (data && data.length > 0) {
-        const out = data.map(prop => ({
-          ...prop,
-          image: `/properties/${prop.slug}-cover.jpg`
-        }));
+        const out = data.map(prop => {
+          const meta = prop.meta as any;
+          const coverImage = meta?.gallery?.[0] || `/properties/${prop.slug}-cover.jpg`;
+          return {
+            ...prop,
+            image: coverImage
+          };
+        });
         setProperties(out);
       }
     })();

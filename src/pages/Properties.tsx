@@ -6,47 +6,76 @@ import LogoRain from "@/components/LogoRain";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, ArrowRight, SlidersHorizontal } from "lucide-react";
-import { propertiesData, locationOptions, priceRangeOptions, propertyTypeOptions, bedroomOptions, bathroomOptions, type Property } from "@/data/properties";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Property {
+  id: string;
+  slug: string;
+  title: string;
+  location: string;
+  price_label: string;
+  meta: {
+    description?: string;
+    property_type?: string;
+    bedrooms?: string;
+    bathrooms?: string;
+    gallery?: string[];
+  };
+}
 
 const Properties = () => {
   const [searchParams] = useSearchParams();
-  const [filteredProperties, setFilteredProperties] = useState<Property[]>(propertiesData);
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [sortBy, setSortBy] = useState<string>("newest");
   const [filters, setFilters] = useState({
     location: searchParams.get("location") || "",
     propertyType: searchParams.get("propertyType") || "",
   });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // Fetch properties from database
   useEffect(() => {
-    let result = [...propertiesData];
+    const fetchProperties = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('properties')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        setProperties((data || []) as Property[]);
+      } catch (error) {
+        console.error('Error fetching properties:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchProperties();
+  }, []);
+
+  // Filter and sort properties
+  useEffect(() => {
+    let result = [...properties];
 
     // Apply filters
     if (filters.location) {
-      result = result.filter(p => p.location === filters.location);
+      result = result.filter(p => p.location.toLowerCase().includes(filters.location.toLowerCase()));
     }
 
     if (filters.propertyType) {
-      result = result.filter(p => {
-        if (["Studio", "1 Bedroom", "2 Bedroom", "3 Bedroom", "4 Bedroom", "5+ Bedroom"].includes(filters.propertyType)) {
-          const bedValue = filters.propertyType === "Studio" ? 0 : parseInt(filters.propertyType);
-          return p.bedrooms.includes(bedValue);
-        }
-        return p.propertyType === filters.propertyType;
-      });
+      result = result.filter(p => p.meta?.property_type === filters.propertyType);
     }
 
     // Apply sorting
-    if (sortBy === "price-asc") {
-      result.sort((a, b) => (a.priceValue || 0) - (b.priceValue || 0));
-    } else if (sortBy === "price-desc") {
-      result.sort((a, b) => (b.priceValue || 0) - (a.priceValue || 0));
-    } else if (sortBy === "location") {
+    if (sortBy === "location") {
       result.sort((a, b) => a.location.localeCompare(b.location));
     }
 
     setFilteredProperties(result);
-  }, [filters, sortBy]);
+  }, [properties, filters, sortBy]);
 
   const clearFilters = () => {
     setFilters({
@@ -88,9 +117,10 @@ const Properties = () => {
                     <SelectValue placeholder="Location" />
                   </SelectTrigger>
                   <SelectContent className="bg-background">
-                    {locationOptions.map((loc) => (
-                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                    ))}
+                    <SelectItem value="Nairobi">Nairobi</SelectItem>
+                    <SelectItem value="Kileleshwa">Kileleshwa</SelectItem>
+                    <SelectItem value="South C">South C</SelectItem>
+                    <SelectItem value="Syokimau">Syokimau</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -99,9 +129,9 @@ const Properties = () => {
                     <SelectValue placeholder="Type" />
                   </SelectTrigger>
                   <SelectContent className="bg-background">
-                    {propertyTypeOptions.map((type) => (
-                      <SelectItem key={type} value={type}>{type}</SelectItem>
-                    ))}
+                    <SelectItem value="Apartment">Apartment</SelectItem>
+                    <SelectItem value="Villa">Villa</SelectItem>
+                    <SelectItem value="Penthouse">Penthouse</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -134,7 +164,11 @@ const Properties = () => {
         {/* Properties Grid */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            {filteredProperties.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-20">
+                <p className="text-lg text-muted-foreground">Loading properties...</p>
+              </div>
+            ) : filteredProperties.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-lg text-muted-foreground">No properties match your filters.</p>
                 <Button variant="outline" onClick={clearFilters} className="mt-4">
@@ -143,42 +177,43 @@ const Properties = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProperties.map((p) => (
-                  <div 
-                    key={p.id} 
-                    className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
-                    onClick={() => navigate(`/properties/${p.slug}`)}
-                  >
-                    <div className="relative overflow-hidden" style={{ aspectRatio: '3 / 2' }}>
-                      <img 
-                        src={p.image} 
-                        alt={p.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      {p.status === "For Sale" && (
+                {filteredProperties.map((p) => {
+                  const coverImage = p.meta?.gallery?.[0] || '/properties/placeholder.jpg';
+                  return (
+                    <div 
+                      key={p.id} 
+                      className="group rounded-2xl overflow-hidden border border-border hover:shadow-xl transition-all duration-300 bg-card cursor-pointer"
+                      onClick={() => navigate(`/properties/${p.slug}`)}
+                    >
+                      <div className="relative overflow-hidden" style={{ aspectRatio: '3 / 2' }}>
+                        <img 
+                          src={coverImage} 
+                          alt={p.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
                         <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
                           FOR SALE
                         </div>
-                      )}
+                      </div>
+                      <div className="p-5 space-y-3">
+                        <h3 className="font-bold text-xl text-card-foreground line-clamp-1">
+                          {p.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground flex items-center gap-2">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          <span className="line-clamp-1">{p.location}</span>
+                        </p>
+                        <p className="text-base font-semibold text-primary">
+                          {p.price_label}
+                        </p>
+                        <Button className="w-full mt-3" size="sm">
+                          View Details
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
                     </div>
-                    <div className="p-5 space-y-3">
-                      <h3 className="font-bold text-xl text-card-foreground line-clamp-1">
-                        {p.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground flex items-center gap-2">
-                        <MapPin className="w-4 h-4 flex-shrink-0" />
-                        <span className="line-clamp-1">{p.location}</span>
-                      </p>
-                      <p className="text-base font-semibold text-primary">
-                        {p.price}
-                      </p>
-                      <Button className="w-full mt-3" size="sm">
-                        View Details
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
